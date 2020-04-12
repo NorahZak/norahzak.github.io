@@ -64,6 +64,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python如何在运行时确定调用函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/12/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%A1%AE%E5%AE%9A%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0/" class="article-date">
+  <time datetime="2020-04-12T02:16:22.000Z" itemprop="datePublished">2020-04-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%A1%AE%E5%AE%9A%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0/">Python如何在运行时动态地调用函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>可以通过<code>getattr</code><em>(object, attr)<em>获取函数，这个函数的功能是从对象</em>object<em>中获取名为</em>attr<em>的成员。当我们想要调用本模块下的一个名为</em>func*的函数时，可以通过<code>getattr</code></em>(sys.modules[__name__], func)<em>的方式来获取这个函数对象，其中</em>sys.modules[__name__]*是本模块对象。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">'Hello.'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span></span><br><span class="line">  print(<span class="string">'Bye.'</span>)</span><br><span class="line">func_name = input()	<span class="comment"># 获取函数名</span></span><br><span class="line">func = getattr(sys.modules[__name__], func_name)	<span class="comment"># 根据函数名获取函数对象</span></span><br><span class="line">func()	<span class="comment"># 调用函数</span></span><br></pre></td></tr></table></figure>
+
+<p>同理，当我们想调用<em>mod<em>模块下的</em>func*函数，可以用<code>getattr</code></em>(mod, func)*来获取该函数对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foo</span><br><span class="line">func_name = <span class="string">'foo'</span></span><br><span class="line">func = getattr(Foo, func_name)</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://norahzak.github.io/2020/04/12/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%A1%AE%E5%AE%9A%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0/" data-id="ck8wfsogs0000xapj2u435t0l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Python" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/11/Python/" class="article-date">
@@ -889,9 +934,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Python/" style="font-size: 10px;">Python</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -908,6 +967,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/04/12/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%A1%AE%E5%AE%9A%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0/">Python如何在运行时动态地调用函数</a>
+          </li>
         
           <li>
             <a href="/2020/04/11/Python/">Python</a>
