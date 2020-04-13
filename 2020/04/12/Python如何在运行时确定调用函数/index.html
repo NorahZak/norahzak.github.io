@@ -7,15 +7,15 @@
   
   <title>Python如何在运行时动态地调用函数 | Welcome to nowhere.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题描述有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？ 解决方法可以通过getattr(object, attr) 获取函数，这个函数的功能是从对象object 中获取名为attr 的成员。当我们想要调用本模块下的一个名为func 的函数时，可以通过getattr(sys.modules[__name__]">
+  <meta name="description" content="问题描述有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？ 解决方法可以通过getattr (object, attr) 获取函数，这个函数的功能是从对象object 中获取名为attr 的成员。当我们想要调用本模块下的一个名为func 的函数时，可以通过getattr (sys.modules[__name_">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python如何在运行时动态地调用函数">
 <meta property="og:url" content="http://norahzak.github.io/2020/04/12/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E7%A1%AE%E5%AE%9A%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Welcome to nowhere.">
-<meta property="og:description" content="问题描述有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？ 解决方法可以通过getattr(object, attr) 获取函数，这个函数的功能是从对象object 中获取名为attr 的成员。当我们想要调用本模块下的一个名为func 的函数时，可以通过getattr(sys.modules[__name__]">
+<meta property="og:description" content="问题描述有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？ 解决方法可以通过getattr (object, attr) 获取函数，这个函数的功能是从对象object 中获取名为attr 的成员。当我们想要调用本模块下的一个名为func 的函数时，可以通过getattr (sys.modules[__name_">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-12T02:16:22.000Z">
-<meta property="article:modified_time" content="2020-04-13T10:39:18.077Z">
+<meta property="article:modified_time" content="2020-04-13T10:44:24.774Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -90,10 +90,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>可以通过<code>getattr</code><em>(object, attr)</em> 获取函数，这个函数的功能是从对象<em>object</em> 中获取名为<em>attr</em> 的成员。当我们想要调用本模块下的一个名为<em>func</em> 的函数时，可以通过<code>getattr</code><em>(sys.modules[__name__], func)</em> 的方式来获取这个函数对象，其中<em>sys.modules[__name__]</em> 是本模块对象。例如：</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>可以通过<code>getattr</code> <em>(object, attr)</em> 获取函数，这个函数的功能是从对象<em>object</em> 中获取名为<em>attr</em> 的成员。当我们想要调用本模块下的一个名为<em>func</em> 的函数时，可以通过<code>getattr</code> <em>(sys.modules[__name__], func)</em> 的方式来获取这个函数对象，其中<em>sys.modules[__name__]</em> 是本模块对象。例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">'Hello.'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span></span><br><span class="line">  print(<span class="string">'Bye.'</span>)</span><br><span class="line">func_name = input()	<span class="comment"># 获取函数名</span></span><br><span class="line">func = getattr(sys.modules[__name__], func_name)	<span class="comment"># 根据函数名获取函数对象</span></span><br><span class="line">func()	<span class="comment"># 调用函数</span></span><br></pre></td></tr></table></figure>
 
-<p>同理，当我们想调用<em>mod</em> 模块下的<em>func</em> 函数，可以用<code>getattr</code><em>(mod, func)</em> 来获取该函数对象。</p>
+<p>同理，当我们想调用<em>mod</em> 模块下的<em>func</em> 函数，可以用<code>getattr</code> <em>(mod, func)</em> 来获取该函数对象。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foo</span><br><span class="line">func_name = <span class="string">'foo'</span></span><br><span class="line">func = getattr(Foo, func_name)</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
 
 
