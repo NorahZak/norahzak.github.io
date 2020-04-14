@@ -10,18 +10,12 @@
 
     <!--Description-->
     
-        <meta name="description" content="Python[TOC]
-1.基本用法基本数据类型数字(number)
+        <meta name="description" content="Python1.基本用法在Python中，一切数据都以对象的形式存在。因此在使用Python之前，有必要了解Python的几种常用数据类型和它们的方法。
+数字(number)
 
-用科学计数法给一个对象赋以常数值时，默认数据类型为浮点数float. 比如a=1e2 -&amp;gt; a=100.0
-
-字符串(string)
-
-Attributes
-
-Methods
-
-replace(oldstr, newstr">
+数字是不可变对象，即它的值是不能修改的。
+包括整型int，浮点型float等等。它们的最常用的方法就是各种代数运算。
+可以">
     
 
     <!--Author-->
@@ -154,201 +148,177 @@ replace(oldstr, newstr">
                 <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
                     <!-- Tags Vertical -->
                     
+                        <div class="tags-container-vertical">
+                            <div class="tags-sub-container">
+                                <a class="fw3 ph1 dib" href="/tags/Python/">#Python</a>
+                            </div>
+                        </div>
+                    
 
                     <!-- Main Post Content -->
-                    <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>[TOC]</p>
-<h2 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1.基本用法"></a>1.基本用法</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p><strong><em>数字(number)</em></strong></p>
+                    <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><h2 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1.基本用法"></a>1.基本用法</h2><p>在Python中，一切数据都以对象的形式存在。因此在使用Python之前，有必要了解Python的几种常用数据类型和它们的方法。</p>
+<p><strong><em>数字(number)</em></strong></p>
 <ul>
-<li>用科学计数法给一个对象赋以常数值时，默认数据类型为浮点数<em>float</em>. 比如<code>a=1e2 -&gt; a=100.0</code></li>
+<li>数字是不可变对象，即它的值是不能修改的。</li>
+<li>包括整型<code>int</code>，浮点型<code>float</code>等等。它们的最常用的方法就是各种代数运算。</li>
+<li>可以用科学计数法来创建数字对象，此时默认的数据类型为浮点数<code>float</code>. 比如<code>a=1e2 -&gt; a=100.0</code></li>
 </ul>
 <p><strong><em>字符串(string)</em></strong></p>
 <ul>
-<li><p><strong><code>Attributes</code></strong></p>
+<li><p>与C/C++不同，在Python中没有字符类型，只有字符串类型。字符串是一种不可变对象。</p>
 </li>
-<li><p><strong><code>Methods</code></strong></p>
-<ul>
-<li><code>replace</code><em>(oldstr, newstr[, max])</em>：将字符串中的所有old子串替换为new，如果指定了max参数，则最大替换次数不超过max。</li>
-<li><code>split</code><em>(str)</em>：将字符串用分隔符str分割成若干子串，返回子串组成的列表</li>
-<li><code>re.split</code><em>(str, srcstr)</em>：同样是分割字符串，但re模块中的split函数支持多个分隔符，只需在str中用’|’隔开即可，而python内置的split仅支持一个分隔符</li>
-<li><code>startswith</code><em>(str)</em>: Return True if <code>string</code>  starts with <code>str</code> else False.</li>
-<li><code>join</code><em>(seq)</em> : Concatenate strings in <em>seq</em> using <em>self</em>. e.g. <code>&#39;-&#39;.join(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;) = &#39;a-b-c&#39;</code></li>
-<li><code>operator&#39;[start:end:step]&#39;</code>: Return a subsequence. Be aware that <em>end</em>&gt;=0. For example, <code>s=abc</code>, then <code>s[2:-1:-1]</code> results in <code>cb</code>, not <code>cba</code>. If you want to get <code>cba</code>, use <code>s[2::-1]</code> instead.</li>
-</ul>
+<li><p><code>operator&#39;[start:end:step]&#39;</code> -&gt; <em>str</em> : Return a subsequence. Be aware that <em>end</em>&gt;=0. For example, <code>s=abc</code>, then <code>s[2:-1:-1]</code> results in <code>cb</code>, not <code>cba</code>. If you want to get <code>cba</code>, use <code>s[2::-1]</code> instead</p>
 </li>
-<li><p><strong><code>格式化</code></strong></p>
-<p>Python支持三种字符串格式化方法。</p>
+<li><p><code>replace</code><em>(oldstr, newstr[, max])</em> -&gt; <em>str<em>：将所有</em>oldstr<em>的出现替换为</em>newstr<em>，返回替换后的新子串。如果指定了</em>max<em>参数，则最大替换次数不超过</em>max</em></p>
+</li>
+<li><p><code>split</code><em>(str=’ ‘)</em> -&gt; <em>list</em>：将字符串用分隔符<em>str</em>分割成若干子串，返回子串组成的列表</p>
+</li>
+<li><p><code>re.split</code><em>(str, srcstr)</em>：同样是分割字符串，但<code>re.split</code>支持多个分隔符，只需在<em>str</em>中用’|’隔开即可，而Python内置函数<code>split</code>仅支持一个分隔符</p>
+</li>
+<li><p><code>startswith</code><em>(str)</em> -&gt; <em>bool</em> : Return True if <code>string</code>  starts with <code>str</code> else False.</p>
+</li>
+<li><p><code>join</code><em>(seq)</em> -&gt; <em>str</em> : Concatenate strings in <em>seq</em> using <em>self</em>. e.g. <code>&#39;-&#39;.join(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;) = &#39;a-b-c&#39;</code></p>
+</li>
+<li><p><strong><code>格式化</code></strong>：Python支持三种字符串格式化方法。</p>
 <ol>
-<li><code>%</code>操作符：<code>%</code>[name][width].[precision]typecode<code>，格式化字符串之后，用</code>%<code>引导的单个变量或者元组来依次给每个格式化字符赋值。</code></li>
+<li><code>%</code>操作符：用<code>%</code>引导的格式化字符表示字符串中待替换的部分，用<code>%</code>引导的单个变量或者元组来依次给每个格式化字符赋值，格式为<code>&#39;%[flag][width].[precision]typecode&#39; % var</code>。格式化字符的各部分作用如下：</li>
 </ol>
 <ul>
-<li><p><code>(name)</code>为命名</p>
-</li>
-<li><p><code>flags</code>可以有<code>+</code>,<code>-</code>,<code>&#39; &#39;</code>或<code>0</code>。<code>+</code>表示右对齐。<code>-</code>表示左对齐。<code>&#39; &#39;</code>为一个空格，表示在正数的左侧填充一个空格，从而与负数对齐。<code>0</code>表示使用0填充。</p>
-</li>
-<li><p><code>width</code>表示显示宽度</p>
+<li><p><code>width</code>表示显示宽度，<code>flag</code>表示当实际值的宽度不足<code>width</code>时的行为，<code>flag=None</code>表示在前面补空格，<code>flag=0</code>表示在前面补0，<code>flag=-</code>表示在后面补空格。</p>
 </li>
 <li><p><code>precision</code>表示小数点后精度</p>
 </li>
-<li><p>示例：<code>print(&#39;%s, %.3f&#39; % (&#39;ahahha&#39;, 0.56923))</code> &gt;&gt;&gt; <code>ahahha, 0.569</code></p>
+<li><p>示例：<code>print(&#39;%04d, %.3f&#39; % (23, 0.56923))</code> &gt;&gt;&gt; <code>0023, 0.569</code></p>
 </li>
 </ul>
+<ol start="2">
+<li><code>f-string</code>：以 <code>f</code> 或 <code>F</code> 修饰符引领的字符串（<code>f&#39;xxx&#39;</code> 或 <code>F&#39;xxx&#39;</code>），以大括号 <code>{}</code> 标明被替换的字段</li>
+<li><code>format</code><em>()</em></li>
+</ol>
 </li>
-</ul>
-<p>  2.f-string：以 <code>f</code> 或 <code>F</code> 修饰符引领的字符串（<code>f&#39;xxx&#39;</code> 或 <code>F&#39;xxx&#39;</code>），以大括号 <code>{}</code> 标明被替换的字段</p>
-<p>  3.<code>format</code>()</p>
-<ul>
 <li><p><strong><code>正则表达式</code></strong></p>
-<ul>
-<li><p><strong>regular expression</strong>:</p>
 <p>A regular expression (or RE) specifies a set of strings that matches it. The characters in RE can be divided into 2 categories: normal characters and special characters. Some of the special characters are :</p>
 <ul>
-<li><code>&#39;.&#39;</code>: matches any character except a newline.</li>
-<li><code>&#39;^&#39;</code>: matches the start of the string.</li>
-<li><code>&#39;*&#39;</code>: match 0 or more repetitions of the preceding RE, as many repetitions as are possible.</li>
-<li><code>&#39;+&#39;</code>: match 1 or more repetitions of the preceding RE.</li>
-<li><code>&#39;?&#39;</code>: match 0 or 1 repetitions of the preceding RE</li>
-<li><code>&#39;\&#39;</code>: escapes special characters</li>
-<li><code>&#39;[]&#39;</code>: indicate a set of characters.</li>
-<li><code>&#39;|&#39;</code>: <code>A|B</code>, where A and B can be arbitrary REs, creates a regular expression that will match either A or B</li>
+<li><p><code>&#39;.&#39;</code>: matches any character except a newline.</p>
+</li>
+<li><p><code>&#39;^&#39;</code>: matches the start of the string.</p>
+</li>
+<li><p><code>&#39;*&#39;</code>: match 0 or more repetitions of the preceding RE, as many repetitions as are possible.</p>
+</li>
+<li><p><code>&#39;+&#39;</code>: match 1 or more repetitions of the preceding RE.</p>
+</li>
+<li><p><code>&#39;?&#39;</code>: match 0 or 1 repetitions of the preceding RE</p>
+</li>
+<li><p><code>&#39;\&#39;</code>: escapes special characters</p>
+</li>
+<li><p><code>&#39;[]&#39;</code>: indicate a set of characters.</p>
+</li>
+<li><p><code>&#39;|&#39;</code>: <code>A|B</code>, where A and B can be arbitrary REs, creates a regular expression that matches either A or B</p>
+</li>
+<li><p>Python support for regular expression operations : <a href="https://docs.python.org/2/library/re.html" target="_blank" rel="noopener">module <code>re</code></a></p>
+</li>
 </ul>
 </li>
-<li><p><strong>Python support for regular expression operations : module <code>re</code></strong></p>
+</ul>
+<p><strong><em>元组(tuple)</em></strong></p>
 <ul>
-<li><p><a href="https://docs.python.org/2/library/re.html" target="_blank" rel="noopener">https://docs.python.org/2/library/re.html</a></p>
-</li>
-<li><p><strong>Classes</strong></p>
-<ul>
-<li><p><code>MatchObject</code></p>
-<ul>
-<li><p><strong><code>Attributes</code></strong></p>
-</li>
-<li><p><strong><code>Methods</code></strong></p>
-<ul>
-<li><p><code>group</code>([<em>group1</em>, <em>…</em>])</p>
-<p>Returns one or more subgroups of the match. If there is a single argument, the result is a single string; if there are multiple arguments, the result is a tuple with one item per argument. Without arguments, <em>group1</em> defaults to zero (the whole match is returned).</p>
-</li>
-<li><p><code>start</code>([<em>group</em>])</p>
-<p>Return the indices of the start of the substring matched by <em>group</em></p>
-</li>
-<li><p><code>end</code>([<em>group</em>])</p>
-<p>Return the indices of the end of the substring matched by <em>group</em></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>Functions</strong></p>
-<ul>
-<li><p><code>search</code>(<em>pattern</em>, <em>string</em>, <em>flags=0</em>)</p>
-<p>Scan through <em>string</em> looking for the first location where the regular expression <em>pattern</em> produces a match, and return a corresponding <a href="https://docs.python.org/2/library/re.html#re.MatchObject" target="_blank" rel="noopener"><code>MatchObject</code></a> instance. Return <code>None</code> if no position in the string matches the pattern</p>
-</li>
-<li><p><code>match</code>(<em>pattern</em>, <em>string</em>, <em>flags=0</em>)</p>
-<p>If zero or more characters at the <strong>beginning</strong> of <em>string</em> match the regular expression <em>pattern</em>, return a corresponding <a href="https://docs.python.org/2/library/re.html#re.MatchObject" target="_blank" rel="noopener"><code>MatchObject</code></a> instance. Return <code>None</code> if the string does not match the pattern</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>线性数组。元组是不可变对象。</li>
+<li>创建元组：<code>t = ()</code> or <code>t = (e1, e2)</code> or <code>t = tuple</code> <em>(object)</em></li>
+<li><code>[i]</code>: 返回下标为<em>i</em>的元素 </li>
 </ul>
 <p><strong><em>列表(list)</em></strong></p>
-<p>与元组的区别在于，列表的值可以修改，元组不可以。</p>
 <ul>
-<li><code>&gt;/&lt;/==</code> : 比较两个列表的大小，方法是从第一个元素开始，依次比较相同位置上的元素大小，直到两个元素不同或者其中一个列表为空（此时非空的那个列表更大）</li>
-<li><code>in</code> / <code>not in</code>：用来判断一个元素是否存在于列表中</li>
-<li><code>index</code><em>(element)</em> -&gt; <em>int</em> : 用来查找特定元素在列表中第一次出现的位置</li>
-<li><code>pop</code><em>(index=-1)</em> -&gt; <em>object</em> : 删除列表的第<em>index</em>个元素并将其返回</li>
-<li><code>sort</code><em>(key=None, reverse=False)</em> -&gt; <em>None</em> : 对列表排序<ul>
+<li><p>与元组的区别在于，列表是可变对象，元组是不可变对象。</p>
+</li>
+<li><p>创建列表：<code>l = []</code> or <code>l = [e1, e2, ...]</code> or <code>l = list</code> <em>(object)</em></p>
+</li>
+<li><p><code>append</code> <em>(e)</em> : 向列表末尾插入元素<em>e</em>.</p>
+</li>
+<li><p><code>pop</code><em>(index=-1)</em> -&gt; <em>object</em> : 删除列表的第<em>index</em>个元素并将其返回</p>
+</li>
+<li><p><code>&gt;/&lt;/==</code> : 比较两个列表的大小，方法是从第一个元素开始，依次比较相同位置上的元素大小，直到两个元素不同或者其中一个列表为空（此时非空的那个列表更大）</p>
+</li>
+<li><p><code>in</code> / <code>not in</code>：用来判断一个元素是否存在于列表中</p>
+</li>
+<li><p><code>index</code><em>(element)</em> -&gt; <em>int</em> : 用来查找特定元素在列表中第一次出现的位置，若不存在会报错</p>
+</li>
+<li><p><code>sort</code><em>(key=None, reverse=False)</em> -&gt; <em>None</em> : 对列表进行原地排序</p>
+<ul>
 <li><em>key</em> : A function that map an element to its key. The sorting is based on the value of key.</li>
 <li><em>reverse</em> : True when sort in descending order.</li>
 </ul>
 </li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [(<span class="number">1</span>, <span class="string">'a'</span>), (<span class="number">2</span>, <span class="string">'b'</span>), (<span class="number">3</span>, <span class="string">'c'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.sort(key=<span class="keyword">lambda</span> item:item[<span class="number">0</span>], reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[(<span class="number">3</span>, <span class="string">'c'</span>), (<span class="number">2</span>, <span class="string">'b'</span>), (<span class="number">1</span>, <span class="string">'a'</span>)]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>[i:j]</code>:取出列表中下标为<code>[i, j-1]</code>的元素组成的列表。其中<code>i</code>和<code>j</code>可以是负值，表示倒数第…个元素。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>:<span class="number">-2</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><code>*</code> : 将一个列表复制若干次来获得一个新链表</p>
-<p>但要注意，当列表的元素还是列表时，’*‘运算符进行的是<strong><em>浅复制</em></strong>，也就是只复制子列表的引用，复制出来的所有引用其实指向同一个列表。这意味着，如果修改其中一个引用，那么会影响其他的引用。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [[<span class="number">1</span>,<span class="number">2</span>], <span class="number">1</span>] * <span class="number">3</span>  <span class="comment"># a = [[1, 2], 1, [1, 2], 1, [1, 2], 1]</span></span><br><span class="line">a[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span> 			  <span class="comment"># a = [[0, 2], 1, [0, 2], 1, [0, 2], 1]</span></span><br></pre></td></tr></table></figure>
-
+<li><p><code>[i:j]</code> -&gt; <em>list</em> :返回子列表<code>[i, j-1]</code>。其中<code>i</code>和<code>j</code>可以是负值，表示元素的倒序。</p>
+</li>
+<li><p><code>*</code> : 将一个列表复制若干次来获得一个新链表。但要注意，<code>*</code>运算符进行的是浅复制，也就是只复制元素的引用。这意味着，如果一个元素是可变对象（比如列表），那么对该元素的其中一个引用进行操作，会修改该对象的值，从而影响其他的引用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [[<span class="number">1</span>,<span class="number">2</span>]] * <span class="number">3</span>  <span class="comment"># a = [[1, 2], [1, 2], [1, 2]]</span></span><br><span class="line">  a[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span> 		 <span class="comment"># a = [[0, 2], [0, 2], [0, 2]]</span></span><br></pre></td></tr></table></figure>
 
 
 </li>
 </ul>
-<p><strong><em>字典(dict)</em></strong>  <a href="https://www.runoob.com/python/att-dictionary-keys.html" target="_blank" rel="noopener">参考网址</a></p>
+<p><strong><em><a href="https://www.runoob.com/python/att-dictionary-keys.html" target="_blank" rel="noopener">字典(dict)</a></em></strong> </p>
 <ul>
-<li><strong><code>Attributes</code></strong></li>
-<li><strong><code>Methods</code></strong><ul>
-<li><code>keys</code>()：Returns a <code>dict_keys</code> object consists of all keys in <code>dict</code>.</li>
-<li><code>values</code><em>()</em>: Returns a <code>dict_values</code> object (a kind of list) consists of all values in <code>dict</code>.</li>
-<li><code>get</code><em>(key, default=None)</em>: If <em>key</em> exists, then return a reference to dict[<em>key<em>], otherwise *</em>return** *default</em>.</li>
-<li><code>setdefault</code><em>(key, default=None)</em>: If <em>key</em> exists, then return a reference to dict[<em>key<em>], otherwise *</em>add a new element** (*key, default</em>) to dict and return a reference to <em>default</em>.</li>
-<li><code>pop</code><em>(key)</em> : Remove an element.</li>
-<li><code>update</code><em>(new_dict)</em>: Update dict with <em>new_dict</em>. For each <code>(k, v)</code> in <em>new_dict</em>, if <code>k</code> is not in dict, then add <code>(k, v)</code> to dict; else change the value of <code>k</code> to <code>v</code>.</li>
-<li><code>items</code>() : Return a list of tuples representing each <code>(k, v)</code> pair in <em>dict</em>.</li>
-</ul>
+<li><p>一个能够存储键值对的无序集合</p>
 </li>
-<li><strong><code>Tips</code></strong><ul>
-<li>The <em>key</em> value in a dict could be a <strong><em>tuple</em></strong>, but could not be a <strong><em>list</em></strong>.</li>
-</ul>
+<li><p>创建：<code>d = {}</code></p>
+</li>
+<li><p>添加元素：<code>d[key]=value</code></p>
+</li>
+<li><p><code>keys</code>()：Returns a <code>dict_keys</code> object consists of all keys in <code>dict</code>.</p>
+</li>
+<li><p><code>values</code><em>()</em>: Returns a <code>dict_values</code> object (a kind of list) consists of all values in <code>dict</code>.</p>
+</li>
+<li><p><code>get</code><em>(key, default=None)</em>: If <em>key</em> exists, then return a reference to dict[<em>key<em>], otherwise *</em>return** *default</em>.</p>
+</li>
+<li><p><code>setdefault</code><em>(key, default=None)</em>: If <em>key</em> exists, then return a reference to dict[<em>key<em>], otherwise *</em>add a new element** (*key, default</em>) to dict and return a reference to <em>default</em>.</p>
+</li>
+<li><p><code>pop</code><em>(key)</em> : Remove an element.</p>
+</li>
+<li><p><code>update</code><em>(new_dict)</em>: Update dict with <em>new_dict</em>. For each <code>(k, v)</code> in <em>new_dict</em>, if <code>k</code> is not in dict, then add <code>(k, v)</code> to dict; else change the value of <code>k</code> to <code>v</code>.</p>
+</li>
+<li><p><code>items</code>() : Return a list of tuples representing each <code>(k, v)</code> pair in <em>dict</em>.</p>
+</li>
+<li><p>字典中的关键字必须是不可变对象。</p>
 </li>
 </ul>
+<p><strong><em>集合(set)</em></strong></p>
+<ul>
+<li>用于存储元素的无序集合</li>
+<li>创建集合: <code>s=set()</code>  <code>s=set(e1, e2, ...)</code> <code>s=set</code> <em>(object)</em></li>
+<li><code>add</code><em>(value)</em></li>
+<li><code>remove</code><em>(value)</em></li>
+<li>operator: <code>in</code></li>
+</ul>
+<p>除了Python内置的常用数据类型之外，有许多Python第三方库提供了其他有用的数据类型。</p>
 <p><strong><em>默认字典(defaultdict)</em></strong></p>
 <ul>
 <li><code>defaultdict</code>类是Python内置字典<code>dict</code>类的子类，定义在<code>collections</code>模块中。它们的基本用法相似，不同的是，<code>defaultdict</code>类可以更方便地在访问不存在的元素时插入新元素并进行初始化。</li>
 <li><code>defaultdict</code><em>(default_factory)</em>: <code>defaultdict</code>类的构造函数，<em>default_factory</em>是默认的mapped value的类型，比如：<em>default_factory=int</em>意味着新元素会自动被初始化为0，<em>default_factory=list</em>意味着新元素会自动被初始化为空列表。</li>
 </ul>
-<p><a href="https://blog.csdn.net/u014755493/article/details/69812244" target="_blank" rel="noopener"><strong><em>计数器(counter)</em></strong></a></p>
+<p><a href="https://blog.csdn.net/u014755493/article/details/69812244" target="_blank" rel="noopener"><strong><em>计数器(Counter)</em></strong></a></p>
 <ul>
 <li><code>Counter</code>类是<code>collections</code>模块中定义的<code>dict</code>类的子类，用于对集合（如列表、字符串）中的元素进行计数。</li>
 </ul>
-<hr>
-<h3 id="进阶数据类型"><a href="#进阶数据类型" class="headerlink" title="进阶数据类型"></a>进阶数据类型</h3><p><strong>优先队列</strong> </p>
-<p>1.<code>queue</code> module -&gt; <code>class PriorityQueue()</code> </p>
+<p><strong><em>优先队列(PriorityQueue)</em></strong> </p>
 <ul>
-<li>Member attributes:<ul>
-<li><code>queue</code>: A list consisting all elements in the queue.</li>
-</ul>
+<li><p>定义在<code>queue</code>模块中。推荐使用<a href="https://docs.python.org/zh-cn/3/library/heapq.html" target="_blank" rel="noopener">heapq</a>模块，比<code>PriorityQueue</code>更有效率。</p>
 </li>
-<li>Member functions:<ul>
-<li><code>put</code><em>(e)</em></li>
-<li><code>get</code><em>()</em></li>
-</ul>
-</li>
-</ul>
-<p>2.<code>heapq</code> module -&gt; Provides functions that transfer a list into priority queue.<strong>比<code>PriorityQueue</code>更有效率。</strong><a href="https://docs.python.org/zh-cn/3/library/heapq.html" target="_blank" rel="noopener">reference</a></p>
+<li><p>Attributes:</p>
 <ul>
-<li>Functions:<ul>
-<li><code>heapq.heapify</code><em>(list)</em></li>
-<li><code>heapq.heappush</code><em>(heap, item)</em></li>
-<li><code>heapq.heappop</code><em>(heap)</em></li>
+<li><p><code>queue</code>: A list consisting all elements in the queue.</p>
+</li>
+<li><p><code>put</code><em>(e)</em></p>
+</li>
+<li><p><code>get</code><em>()</em></p>
+</li>
 </ul>
 </li>
 </ul>
-<p><strong>集合</strong></p>
+<p><strong><em>命名元组(namedtuple)</em></strong></p>
 <ul>
-<li>Create a set: <code>s=set(value)</code>, where <em>value</em> can be a scalar, list, dict, etc.</li>
-<li>Member functions:<ul>
-<li><code>add</code><em>(value)</em></li>
-<li><code>remove</code><em>(value)</em></li>
-<li><code>operator:&#39;in&#39;</code></li>
+<li>用于保存结构化数据，相当于C/C++中的结构体，但是不可修改。定义在<code>collections</code>中。</li>
 </ul>
-</li>
-</ul>
-<p><strong>命名元组（相当于C/C++中的结构体）</strong></p>
-<ul>
-<li>Defined in <code>collections</code> module.</li>
-<li>Create a namedtuple class: <code>collections.namedtuple</code><em>(name: str, attribute_names: list)</em></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="comment"># create a namedtuple class 'Student'</span></span><br><span class="line">Student = collections.namedtuple(<span class="string">'Student'</span>,[<span class="string">'name'</span>,<span class="string">'age'</span>,<span class="string">'sex'</span>])</span><br><span class="line"><span class="comment"># create an instance of Student</span></span><br><span class="line">stu = Student(name=<span class="string">'Zhang'</span>, age=<span class="number">23</span>, sex=<span class="string">'Unknown'</span>)</span><br><span class="line"><span class="comment"># refer to its attributes using '.' operator</span></span><br><span class="line">print(stu.name)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="comment"># create a namedtuple class 'Student'</span></span><br><span class="line">Student = collections.namedtuple(<span class="string">'Student'</span>,[<span class="string">'name'</span>,<span class="string">'age'</span>,<span class="string">'sex'</span>])</span><br><span class="line"><span class="comment"># create an instance of class Student</span></span><br><span class="line">stu = Student(name=<span class="string">'Zhang'</span>, age=<span class="number">23</span>, sex=<span class="string">'Unknown'</span>)</span><br><span class="line"><span class="comment"># refer to its attributes using '.' operator</span></span><br><span class="line">print(stu.name)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -939,6 +909,10 @@ replace(oldstr, newstr">
                     
                     <!-- Tags Bottom -->
                     
+                        <div class="tags-container-bottom">
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/Python/">#Python</a>
+                        </div>
+                    
 
                     <!-- Comments -->
                     
@@ -970,6 +944,10 @@ replace(oldstr, newstr">
                     <!-- Widget 3: Recent Posts -->
                     <div class="mt5 tc tl-l">
     <h3>Recent Posts</h3>
+    
+        <p>
+            <a href="/2020/04/14/Python%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Python常用数据类型</a>
+        </p>
     
         <p>
             <a href="/2020/04/13/PyTorch%E5%A6%82%E4%BD%95%E4%B8%BA%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E5%B1%82%E5%88%86%E5%88%AB%E8%AE%BE%E7%BD%AE%E5%AD%A6%E4%B9%A0%E7%8E%87/">PyTorch如何为不同网络层分别设置学习率</a>
