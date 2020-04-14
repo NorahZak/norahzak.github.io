@@ -10,8 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？
-解决方法可以通过getattr (object, attr) 获取函数，这个函数的功能是从对象object 中获取名为attr 的成员。当我们想要调用本">
+        <meta name="description" content="问题描述Supervin is a librarian handling an ancient book with N pages, numbered from 1 to N. Since the book is too old, unfortunately M pages are torn out">
     
 
     <!--Author-->
@@ -21,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Python如何在运行时动态地调用函数"/>
+        <meta property="og:title" content="Kick Start 2019 G round question1: Book reading"/>
     
 
     <!--Open Graph Description-->
@@ -43,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>Python如何在运行时动态地调用函数 - Welcome to nowhere.</title>
+    <title>Kick Start 2019 G round question1: Book reading - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -125,8 +124,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Python如何在运行时动态地调用函数</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-12</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Kick Start 2019 G round question1: Book reading</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-14</p>
         </div>
     </div>
 
@@ -146,25 +145,26 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/Python/">#Python</a>
+                                <a class="fw3 ph1 dib" href="/tags/kickstart/">#kickstart</a> <a class="fw3 ph1 dib" href="/tags/programming/">#programming</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>可以通过<code>getattr</code> <em>(object, attr)</em> 获取函数，这个函数的功能是从对象<em>object</em> 中获取名为<em>attr</em> 的成员。当我们想要调用本模块下的一个名为<em>func</em> 的函数时，可以通过<code>getattr</code> <em>(sys.modules[__name__], func)</em> 的方式来获取这个函数对象，其中<em>sys.modules[__name__]</em> 是本模块对象。例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">'Hello.'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span></span><br><span class="line">  print(<span class="string">'Bye.'</span>)</span><br><span class="line">func_name = input()	<span class="comment"># 获取函数名</span></span><br><span class="line">func = getattr(sys.modules[__name__], func_name)	<span class="comment"># 根据函数名获取函数对象</span></span><br><span class="line">func()	<span class="comment"># 调用函数</span></span><br></pre></td></tr></table></figure>
-
-<p>同理，当我们想调用<em>mod</em> 模块下的<em>func</em> 函数，可以用<code>getattr</code> <em>(mod, func)</em> 来获取该函数对象。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foo</span><br><span class="line">func_name = <span class="string">'foo'</span></span><br><span class="line">func = getattr(Foo, func_name)</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Supervin is a librarian handling an ancient book with <strong>N</strong> pages, numbered from 1 to <strong>N</strong>. Since the book is too old, unfortunately <strong>M</strong> pages are torn out: page number <strong>P1</strong>, <strong>P2</strong>, …, <strong>PM</strong>.</p>
+<p>Today, there are <strong>Q</strong> lazy readers who are interested in reading the ancient book. Since they are lazy, each reader will not necessarily read all the pages. Instead, the i-th reader will only read the pages that are numbered multiples of <strong>Ri</strong> and not torn out. Supervin would like to know the sum of the number of pages read by each reader.</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
+<li>对每个Ri，遍历它的所有倍数，并判断其是否在P中，如果不在则<code>ans+=1</code>。时间复杂度<code>O(Q*N)</code>，TLE.</li>
+<li>对每个i，1&lt;=i&lt;=N，依次求出i的所有不超过N且不在P中的倍数，记为<code>f(i)</code>。对每个Ri，<code>ans+=f(Ri)</code>.时间复杂度<code>O(NlogN+Q)</code>，passed.</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">T = int(input())</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(T):</span><br><span class="line">    N, M, Q = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    P = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    R = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    P = set(P)</span><br><span class="line">    x = [<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1</span>, N+<span class="number">1</span>):</span><br><span class="line">        temp = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> range(n, N+<span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> P:</span><br><span class="line">                temp += <span class="number">1</span></span><br><span class="line">        x.append(temp)</span><br><span class="line">    ans = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> R:</span><br><span class="line">        ans += x[r]</span><br><span class="line">    print(<span class="string">'Case #%d: %d'</span> % (t+<span class="number">1</span>, ans))</span><br></pre></td></tr></table></figure>
 
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/Python/">#Python</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/kickstart/">#kickstart</a> <a class="fw3 ph1 dib" href="/tags/programming/">#programming</a>
                         </div>
                     
 
@@ -198,7 +198,7 @@
     <h3>Categories</h3>
     
         <p>
-            <a href="/categories/Python/">Python</a>
+            <a href="/categories/kickstart/">kickstart</a>
         </p>
     
 </div>
