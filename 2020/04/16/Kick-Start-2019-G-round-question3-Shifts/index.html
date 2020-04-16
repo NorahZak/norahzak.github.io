@@ -10,8 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述The laws of the universe can be represented by an array of N non-negative integers. The i-th of these integers is Ai.
-The universe is good if ther">
+        <meta name="description" content="问题描述Aninda and Boon-Nam are security guards at a small art museum. Their job consists of N shifts. During each shift, at least one of the two guards m">
     
 
     <!--Author-->
@@ -21,7 +20,7 @@ The universe is good if ther">
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Kick Start 2019 G round question2: The equation"/>
+        <meta property="og:title" content="Kick Start 2019 G round question3: Shifts"/>
     
 
     <!--Open Graph Description-->
@@ -43,7 +42,7 @@ The universe is good if ther">
 
     <!-- Title -->
     
-    <title>Kick Start 2019 G round question2: The equation - Welcome to nowhere.</title>
+    <title>Kick Start 2019 G round question3: Shifts - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -125,8 +124,8 @@ The universe is good if ther">
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Kick Start 2019 G round question2: The equation</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-15</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Kick Start 2019 G round question3: Shifts</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-16</p>
         </div>
     </div>
 
@@ -152,14 +151,17 @@ The universe is good if ther">
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>The laws of the universe can be represented by an array of <strong>N</strong> non-negative integers. The i-th of these integers is <strong>Ai</strong>.</p>
-<p>The universe is <em>good</em> if there is a non-negative integer k such that the following equation is satisfied: (<strong>A1</strong> xor k) + (<strong>A2</strong> xor k) + … (<strong>A\</strong>N*<strong>* xor k) ≤ **M</strong>, where xor denotes the <a href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR" target="_blank" rel="noopener">bitwise exclusive or</a>.</p>
-<p>What is the largest value of k for which the universe is good?</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>由于<code>Ai&lt;=10^15,M&lt;=10^15</code>，因此一定有<code>k&lt;2^50</code>，否则k的最高位超过了<code>Ai</code>和<code>M</code>的最高位，异或之后的和一定是大于<code>M</code>的。对k的第i位，它对总和的贡献与其他位无关，因此我们可以分别考虑每一位对总和的贡献。</p>
-<p>假设有<code>zeros[i]</code>个<code>Aj</code>，它们在第i位上是0；有<code>ones[i]</code>个<code>Aj</code>，它们在第i位上是0。那么，k的第i位对总和的贡献就可以求出来了：当它是1时，这个贡献是<code>2^i*zeros[i]</code>，当它是0时，这个贡献是<code>2^i*ones[i]</code>。时间复杂度：<code>O(N*log(max(A)))</code></p>
-<p>接下来，为了使k最大化，我们可以从k的最高位开始，先看能不能将这一位设置为1。如果设置为1，那么它的贡献是<code>2^i*zeros[i]</code>。而对于剩下的位（从i-1到1），我们可以求出它们的和的最小值f(i-1)，只需对一切1&lt;=j&lt;i，比较<code>zeros[j]</code>与<code>ones[j]</code>的大小，就可以确定第j位。那么，如果<code>2^i*zeros[i]+f(i-1)&gt;M</code>，我们就必须将第i位设置为0，否则就将第i位设为1，然后令<code>M=M-2^i*zeros[i]</code>，再重复上述过程决定第i-1位……直到所有位都被确定。时间复杂度：<code>O(N)</code></p>
-<p>总的时间复杂度：<code>O(N*log(max(A)))</code></p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">T = int(input())</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(T):</span><br><span class="line">    N, M = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    A = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    maxb = <span class="number">50</span>	<span class="comment"># k的二进制最多有50位</span></span><br><span class="line">    zeros, ones = [<span class="number">0</span>]*maxb, [<span class="number">0</span>]*maxb</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(maxb):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(N):</span><br><span class="line">            <span class="keyword">if</span> A[j] % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">                ones[i] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                zeros[i] += <span class="number">1</span></span><br><span class="line">            A[j] &gt;&gt;= <span class="number">1</span></span><br><span class="line">    f = [<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(maxb<span class="number">-1</span>):</span><br><span class="line">        f.append(f[<span class="number">-1</span>]+(min(zeros[i], ones[i])&lt;&lt;i))</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(maxb<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> (zeros[i]&lt;&lt;i)+f[i] &lt;= M:</span><br><span class="line">            k += (<span class="number">1</span>&lt;&lt;i)</span><br><span class="line">            M -= (zeros[i]&lt;&lt;i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            M -= (ones[i]&lt;&lt;i)</span><br><span class="line">    <span class="keyword">if</span> M &lt; <span class="number">0</span>:	<span class="comment"># 不存在合法的k</span></span><br><span class="line">        k = <span class="number">-1</span></span><br><span class="line">    print(<span class="string">'Case #%d: %ld'</span> % (t+<span class="number">1</span>, k))</span><br></pre></td></tr></table></figure>
+                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Aninda and Boon-Nam are security guards at a small art museum. Their job consists of <strong>N</strong> shifts. During each shift, at least one of the two guards must work.</p>
+<p>The two guards have different preferences for each shift. For the i-th shift, Aninda will gain <strong>Ai</strong> happiness points if he works, while Boon-Nam will gain <strong>Bi</strong> happiness points if she works.</p>
+<p>The two guards will be happy if both of them receive at least <strong>H</strong> happiness points. How many different assignments of shifts are there where the guards will be happy?</p>
+<p>Two assignments are considered different if there is a shift where Aninda works in one assignment but not in the other, or there is a shift where Boon-Nam works in one assignment but not in the other.</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>考虑到N的取值范围较小(N&lt;=20)，可以用回溯法来遍历所有可能的方案。</p>
+<p>但直接遍历在test set2上会超时，因此需要在回溯的过程中进行剪枝。剪枝可以从两个角度进行：</p>
+<ol>
+<li>如果在排完前k个排班后，A和B的幸福值已经&gt;=H，那么剩下的N-k个排班就可以随便排了，由于每班至少有一个人，因此每班共有三种排法（只有A，只有B，AB都有），因此N-k个排班共有pow(3, N-k)种方案。</li>
+<li>如果在排完前k个排班后，对A或B来说，至少有一人，即使之后每天都排班，其幸福值也不能达到H，那么这就是不可行的方案，可以直接返回0.</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">T = int(input())</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(T):</span><br><span class="line">    N, H = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    A = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    B = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    asum = [<span class="number">0</span>] * (N+<span class="number">1</span>)</span><br><span class="line">    bsum = [<span class="number">0</span>] * (N+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        asum[i] = asum[i+<span class="number">1</span>] + A[i]</span><br><span class="line">        bsum[i] = bsum[i+<span class="number">1</span>] + B[i]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">solve</span><span class="params">(k, i, j)</span>:</span></span><br><span class="line">      	<span class="comment"># 剪枝情况1</span></span><br><span class="line">        <span class="keyword">if</span> i &gt;= H <span class="keyword">and</span> j &gt;= H:</span><br><span class="line">            <span class="keyword">return</span> pow(<span class="number">3</span>, N-k)</span><br><span class="line">        <span class="keyword">elif</span> k == N:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># 剪枝情况2</span></span><br><span class="line">        <span class="keyword">if</span> asum[k] + i &lt; H <span class="keyword">or</span> bsum[k] + j &lt; H:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        ans += solve(k+<span class="number">1</span>, i+A[k], j)</span><br><span class="line">        ans += solve(k+<span class="number">1</span>, i, j+B[k])</span><br><span class="line">        ans += solve(k+<span class="number">1</span>, i+A[k], j+B[k])</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">    ans = solve(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    print(<span class="string">'Case #%d: %d'</span> % (t+<span class="number">1</span>, ans))</span><br></pre></td></tr></table></figure>
 
 
                     
