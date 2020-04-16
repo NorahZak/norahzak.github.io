@@ -10,8 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？
-解决方法可以通过getattr (object, attr) 获取函数，这个函数的功能是从对象object 中获取名为attr 的成员。当我们想要调用本">
+        <meta name="description" content="问题描述The laws of the universe can be represented by an array of N non-negative integers. The i-th of these integers is Ai.
+The universe is good if ther">
     
 
     <!--Author-->
@@ -21,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Python如何在运行时动态地调用函数"/>
+        <meta property="og:title" content="Kick Start 2019 G round question2: The equation"/>
     
 
     <!--Open Graph Description-->
@@ -43,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Python如何在运行时动态地调用函数 - Welcome to nowhere.</title>
+    <title>Kick Start 2019 G round question2: The equation - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -125,8 +125,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Python如何在运行时动态地调用函数</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-12</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Kick Start 2019 G round question2: The equation</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-15</p>
         </div>
     </div>
 
@@ -146,25 +146,27 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/Python/">#Python</a>
+                                <a class="fw3 ph1 dib" href="/tags/kickstart/">#kickstart</a> <a class="fw3 ph1 dib" href="/tags/programming/">#programming</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有时在程序中预先不知道将要调用哪个函数，只能在运行时确定，这时就不能直接通过静态函数名来调用函数了，那么该如何根据动态函数名来调用函数呢？</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>可以通过<code>getattr</code> <em>(object, attr)</em> 获取函数，这个函数的功能是从对象<em>object</em> 中获取名为<em>attr</em> 的成员。当我们想要调用本模块下的一个名为<em>func</em> 的函数时，可以通过<code>getattr</code> <em>(sys.modules[__name__], func)</em> 的方式来获取这个函数对象，其中<em>sys.modules[__name__]</em> 是本模块对象。例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">'Hello.'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span></span><br><span class="line">  print(<span class="string">'Bye.'</span>)</span><br><span class="line">func_name = input()	<span class="comment"># 获取函数名</span></span><br><span class="line">func = getattr(sys.modules[__name__], func_name)	<span class="comment"># 根据函数名获取函数对象</span></span><br><span class="line">func()	<span class="comment"># 调用函数</span></span><br></pre></td></tr></table></figure>
-
-<p>同理，当我们想调用<em>mod</em> 模块下的<em>func</em> 函数，可以用<code>getattr</code> <em>(mod, func)</em> 来获取该函数对象。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foo</span><br><span class="line">func_name = <span class="string">'foo'</span></span><br><span class="line">func = getattr(Foo, func_name)</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>The laws of the universe can be represented by an array of <strong>N</strong> non-negative integers. The i-th of these integers is <strong>Ai</strong>.</p>
+<p>The universe is <em>good</em> if there is a non-negative integer k such that the following equation is satisfied: (<strong>A1</strong> xor k) + (<strong>A2</strong> xor k) + … (<strong>A\</strong>N*<strong>* xor k) ≤ **M</strong>, where xor denotes the <a href="https://en.wikipedia.org/wiki/Bitwise_operation#XOR" target="_blank" rel="noopener">bitwise exclusive or</a>.</p>
+<p>What is the largest value of k for which the universe is good?</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>由于<code>Ai&lt;=10^15,M&lt;=10^15</code>，因此一定有<code>k&lt;2^50</code>，否则k的最高位超过了<code>Ai</code>和<code>M</code>的最高位，异或之后的和一定是大于<code>M</code>的。对k的第i位，它对总和的贡献与其他位无关，因此我们可以分别考虑每一位对总和的贡献。</p>
+<p>假设有<code>zeros[i]</code>个<code>Aj</code>，它们在第i位上是0；有<code>ones[i]</code>个<code>Aj</code>，它们在第i位上是0。那么，k的第i位对总和的贡献就可以求出来了：当它是1时，这个贡献是<code>2^i*zeros[i]</code>，当它是0时，这个贡献是<code>2^i*ones[i]</code>。时间复杂度：<code>O(N*log(max(A)))</code></p>
+<p>接下来，为了使k最大化，我们可以从k的最高位开始，先看能不能将这一位设置为1。如果设置为1，那么它的贡献是<code>2^i*zeros[i]</code>。而对于剩下的位（从i-1到1），我们可以求出它们的和的最小值f(i-1)，只需对一切1&lt;=j&lt;i，比较<code>zeros[j]</code>与<code>ones[j]</code>的大小，就可以确定第j位。那么，如果<code>2^i*zeros[i]+f(i-1)&gt;M</code>，我们就必须将第i位设置为0，否则就将第i位设为1，然后令<code>M=M-2^i*zeros[i]</code>，再重复上述过程决定第i-1位……直到所有位都被确定。时间复杂度：<code>O(N)</code></p>
+<p>总的时间复杂度：<code>O(N*log(max(A)))</code></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">T = int(input())</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(T):</span><br><span class="line">    N, M = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    A = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    maxb = <span class="number">50</span>	<span class="comment"># k的二进制最多有50位</span></span><br><span class="line">    zeros, ones = [<span class="number">0</span>]*maxb, [<span class="number">0</span>]*maxb</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(maxb):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(N):</span><br><span class="line">            <span class="keyword">if</span> A[j] % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">                ones[i] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                zeros[i] += <span class="number">1</span></span><br><span class="line">            A[j] &gt;&gt;= <span class="number">1</span></span><br><span class="line">    f = [<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(maxb<span class="number">-1</span>):</span><br><span class="line">        f.append(f[<span class="number">-1</span>]+(min(zeros[i], ones[i])&lt;&lt;i))</span><br><span class="line">    k = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(maxb<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> (zeros[i]&lt;&lt;i)+f[i] &lt;= M:</span><br><span class="line">            k += (<span class="number">1</span>&lt;&lt;i)</span><br><span class="line">            M -= (zeros[i]&lt;&lt;i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            M -= (ones[i]&lt;&lt;i)</span><br><span class="line">    <span class="keyword">if</span> M &lt; <span class="number">0</span>:	<span class="comment"># 不存在合法的k</span></span><br><span class="line">        k = <span class="number">-1</span></span><br><span class="line">    print(<span class="string">'Case #%d: %ld'</span> % (t+<span class="number">1</span>, k))</span><br></pre></td></tr></table></figure>
 
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/Python/">#Python</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/kickstart/">#kickstart</a> <a class="fw3 ph1 dib" href="/tags/programming/">#programming</a>
                         </div>
                     
 
@@ -198,7 +200,7 @@
     <h3>Categories</h3>
     
         <p>
-            <a href="/categories/Python/">Python</a>
+            <a href="/categories/kickstart/">kickstart</a>
         </p>
     
 </div>
