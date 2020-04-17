@@ -10,9 +10,9 @@
 
     <!--Description-->
     
-        <meta name="description" content="保存模型：torch.save(state_dict: dict, path)，将模型状态（以字典形式存储）保存为.pth文件
-
-123456model = net()state = &amp;#123;	&#39;params&#39;:model.state_dict(), #	保存模型参数	&#39;epoch&#39;:epoch">
+        <meta name="description" content="决策树是一种机器学习算法，用于解决分类问题。它采用if-else式的分类方法，分类过程非常直观，类似于人的思维过程。
+决策树的模型决策树的模型类似于树结构，树中每一个内部节点代表对样本的一个属性的判断，内部节点的每一个分支代表样本在该属性上的值，每个叶子节点代表一个类别。
+对样本进行分类的过程，就是">
     
 
     <!--Author-->
@@ -22,7 +22,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="PyTorch保存和加载模型"/>
+        <meta property="og:title" content="决策树"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>PyTorch保存和加载模型 - Welcome to nowhere.</title>
+    <title>决策树 - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -126,8 +126,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch保存和加载模型</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-15</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">决策树</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-17</p>
         </div>
     </div>
 
@@ -147,31 +147,40 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
+                                <a class="fw3 ph1 dib" href="/tags/machinelearning/">#machinelearning</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <ol>
-<li>保存模型：<code>torch.save</code><em>(state_dict: dict, path)</em>，将模型状态（以字典形式存储）保存为.pth文件</li>
+                    <p>决策树是一种机器学习算法，用于解决分类问题。它采用if-else式的分类方法，分类过程非常直观，类似于人的思维过程。</p>
+<h4 id="决策树的模型"><a href="#决策树的模型" class="headerlink" title="决策树的模型"></a>决策树的模型</h4><p>决策树的模型类似于树结构，树中每一个内部节点代表对样本的一个属性的判断，内部节点的每一个分支代表样本在该属性上的值，每个叶子节点代表一个类别。</p>
+<p>对样本进行分类的过程，就是从根节点开始，检查样本在该节点的分裂属性上的值，并根据该属性的值决定进入哪个分支，重复此过程直到到达叶节点，将叶节点的类别作为该样本的类别。</p>
+<p>比如，判断泰坦尼克号上的乘客是否能够生还的决策过程，可以用如下所示的决策树来表示（图片来自维基百科）：</p>
+<p><img src="" alt="/images/CART_tree_titanic_survivors.png"></p>
+<h4 id="决策树的构建"><a href="#决策树的构建" class="headerlink" title="决策树的构建"></a>决策树的构建</h4><p>那么，如何构建一颗决策树呢？既然推断的过程是从上而下的，那么构造决策树的过程也是从上而下的。从根节点开始，我们选择当前节点的分裂属性，按照此属性将训练集分成若干子集，然后对每个子集，如果它已经是纯净的（也就是只包含一个类的样本），那么就不用继续分裂下去了，否则选择一个新的分裂属性，重复这样的过程直到所有的叶节点对应的子集都是纯净的（如果当前子集不是纯净的，但已经没有可选的分裂属性时，就将子集中元素类别的众数作为该节点的类别），我们就得到了一颗决策树。</p>
+<p>问题的关键在于如何选择每个节点的分裂属性。一个直觉的想法是，我们应该选择能够最好地区分当前子集中所有样本的那个属性。那么，这个“好”的程度该如何度量呢？按照这个度量方法的不同，决策树可以分为若干变种。</p>
+<h5 id="ID3算法"><a href="#ID3算法" class="headerlink" title="ID3算法"></a>ID3算法</h5><p>一个集合的混乱度，与该集合中元素的种类数目及元素在各类中分布的均匀程度呈正相关。一个“好”的划分，应该能够使划分之后，集合的混乱度有所下降。那么如何定量描述一个集合的混乱程度？从信息论的角度来说，一个集合D的混乱程度可以用熵来描述，其中 $p_i$为集合中第i类元素出现的概率：</p>
+<p>$E(D)=-\sum_{i=1}^np_ilog(p_i)$</p>
+<p>假设训练集D的熵为E(D)，现在用属性A将D分为若干子集D1,…,Dv。划分之后的集合混乱度，可以用这些子集的熵的加权平均值来描述：</p>
+<p>$E_A(D)=\sum_{j=1}^v\frac {|D_j|}{|D|}E(D_j)$</p>
+<p>于是，问题转化为寻找属性A，使混乱度的下降（称作信息增益） $gain(A)=E(D)-E_A(D)$达到最大。</p>
+<h5 id="C4-5算法"><a href="#C4-5算法" class="headerlink" title="C4.5算法"></a>C4.5算法</h5><p>ID3算法的缺点在于：它偏向于选择那些可取值较多的属性。比如说，每个样本都有唯一的标志ID，那么如果将它作为分裂特征，则分裂之后每个子集中只含有一个元素（当然是纯净的），但这样的分裂对分类没有任何帮助。</p>
+<p>可以认为，ID3算法中定义的划分后集合D的混乱度 $E_A(D)$ ，只考虑了所有子集D1,…,Dv内部的混乱度。但除了子集内部的混乱度，子集间的混乱度也应该考虑进来。如果我们的子集分得过多过细，那么子集间的混乱度就会过大，这同样不是一种好的分裂方式。子集间的混乱度（称作分类信息）可以用下式定义：</p>
+<p>$E’<em>{A}(D)=-\sum</em>{j=1}^v\frac {|D_j|}{|D|}log(\frac {|D_j|}{|D|})$</p>
+<p>于是为了选择最好的分裂属性，可以将信息增益 $gain(A)$与分类信息 $E’_A(D)$ 的比值（称作信息增益比）作为衡量标准：</p>
+<p>$gainratio(A)=\frac {gain(A)} {E’_A(D)}$</p>
+<h4 id="防止决策树过拟合"><a href="#防止决策树过拟合" class="headerlink" title="防止决策树过拟合"></a>防止决策树过拟合</h4><p>如果训练样本中存在噪声数据和不相关的特征，那么训练过程中就有可能发生过拟合。防止过拟合的方法主要有两种：</p>
+<ol>
+<li>剪枝（可以在构造过程中剪枝，也可以在构造完成后剪枝）</li>
+<li>随机森林：训练多颗决策树，每颗决策树的训练样本是随机选择的，在选择分裂属性时，也是从所有属性的一个随机子集中进行选择，推断时将所有决策树的分类结果的众数作为最终结果。</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = &#123;</span><br><span class="line">	<span class="string">'params'</span>:model.state_dict(), <span class="comment">#	保存模型参数</span></span><br><span class="line">	<span class="string">'epoch'</span>:epoch	<span class="comment"># 保存其他信息，比如训练的epoch数</span></span><br><span class="line">&#125;</span><br><span class="line">torch.save(state, <span class="string">'model.pth'</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>加载预训练模型：<code>torch.load</code><em>(path, map_location)</em>：从.pth文件中读取模型参数.<ul>
-<li><strong><code>map_location</code></strong>:指定将模型加载到哪个设备上运行。默认为GPU，如果要使用CPU，那么需要 <code>map_location=torch.device(&#39;cpu&#39;)</code></li>
-</ul>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = torch.load(<span class="string">'model.pth'</span>)</span><br><span class="line">model.load_state_dict(state[<span class="string">'params'</span>])</span><br><span class="line">epoch = state[<span class="string">'epoch'</span>]</span><br></pre></td></tr></table></figure>
-
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/machinelearning/">#machinelearning</a>
                         </div>
                     
 
@@ -205,7 +214,7 @@
     <h3>Categories</h3>
     
         <p>
-            <a href="/categories/PyTorch/">PyTorch</a>
+            <a href="/categories/machinelearning/">machinelearning</a>
         </p>
     
 </div>
