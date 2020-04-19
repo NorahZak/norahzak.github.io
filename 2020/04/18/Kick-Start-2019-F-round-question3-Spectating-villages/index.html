@@ -10,8 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述给定若干1-9的数字，其中i的数目为A[i]，问如何排列这些数字，使得它们的alternative sum能够整除11？一列数的alternative sum定义为：a1-a2+a3-a4+...，比如81743的alternative sum为8-1+7-4+3=13。
-解决方案这个问题等">
+        <meta name="description" content="问题描述
+The countryside of Kickstartia consists of V villages (labelled from 1 to V), connected by V-1 bidirectional roads (labelled from 1 to V-1). The ">
     
 
     <!--Author-->
@@ -21,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Kick Start 2019 H round question3: Elevanagram"/>
+        <meta property="og:title" content="Kick Start 2019 F round question3: Spectating villages"/>
     
 
     <!--Open Graph Description-->
@@ -43,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>Kick Start 2019 H round question3: Elevanagram - Welcome to nowhere.</title>
+    <title>Kick Start 2019 F round question3: Spectating villages - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -126,8 +126,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Kick Start 2019 H round question3: Elevanagram</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-14</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Kick Start 2019 F round question3: Spectating villages</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-18</p>
         </div>
     </div>
 
@@ -153,19 +153,32 @@
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定若干1-9的数字，其中i的数目为A[i]，问如何排列这些数字，使得它们的alternative sum能够整除11？一列数的alternative sum定义为：<code>a1-a2+a3-a4+...</code>，比如81743的alternative sum为8-1+7-4+3=13。</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>这个问题等价于将所有数字等分为两部分：正集合P与负集合N，其中P中的元素个数为 <code>ceil(sum(A)/2)​</code>，使得P中所有数的和与N中所有数的和之差能够整除11。</p>
-<p>当所有A[i]都很小时，可以用动态规划来解决这个问题。<code>dp[i][j][k]</code>表示：当只考虑1-i的数字时，如果在P中放入j个数字，是否能使 <code>(sum(P)-sum(N))%11=k</code> . </p>
+                    <h3 id="问题描述"><a class="markdownIt-Anchor" href="#问题描述"></a> 问题描述</h3>
+<p>The countryside of Kickstartia consists of <strong>V</strong> villages (labelled from 1 to <strong>V</strong>), connected by <strong>V</strong>-1 bidirectional roads (labelled from 1 to <strong>V</strong>-1). The i-th road connects village <strong>Xi</strong> to village <strong>Yi</strong>. Each road connects exactly two villages, and no two roads connect the same two villages. Furthermore, there is exactly one sequence of roads that connects any two villages in Kickstartia.</p>
+<p>Some villages are more beautiful than others. The i-th village has a beauty value of <strong>Bi</strong>. Note that it is possible for a village to have a negative beauty value!</p>
+<p>You are going to build lighthouses in some of the villages. A village is <em>illuminated</em> if there is a lighthouse built in it, or there is a lighthouse built in a village that is directly connected to it by a road.</p>
+<p>You may build as many or as few (even zero) lighthouses as you like. What is the maximum possible sum of beauty values of illuminated villages you can obtain?</p>
+<h3 id="解决方案"><a class="markdownIt-Anchor" href="#解决方案"></a> 解决方案</h3>
+<p>所有城市和它们之间的通路共同构成一张图，城市是图的节点，通路则是图的边。由于图是全连通的，而且只有<code>V-1</code>条边，因此这个图其实是一颗树。我们可以选择任意一个节点作为树的根节点，比如1号节点。</p>
+<p>定义<code>f(k, p, q)</code>为以<code>k</code>号节点为根的子树的最大beauty value，<code>p</code>和<code>q</code>都是布尔值，分别表示<code>k</code>号节点是否放置了灯塔以及<code>k</code>的父节点是否放置了灯塔。这样，<code>max(f(1, 1, 0), f(1, 0, 0))</code>就是所求答案。</p>
+<p>这个函数可以递归地求解，递归的情况分为以下三种：</p>
 <ol>
-<li>初始化：i=0，此时只有<code>dp[0][0][0]=True</code>，其他所有<code>dp[0][j][k]=False</code>.</li>
-<li>递推：为了求出<code>dp[i+1]</code>(i&gt;0)，首先将所有<code>dp[i+1][j][k]</code>初始化为<code>False</code>。对一切<code>dp[i][j][k]=True</code>，试着将A[i+1]个(i+1)分配到P和N中。如果将p个(i+1)分配到了A[i+1]中，那么就会有A[i+1]-p个(i+1)被分配到N中，此时P中就有j+p个元素，而模11的余数为 <code>mod=(k+p*(i+1)-(A[i+1]-p)*(i+1))%11</code>，因此<code>dp[i+1][j+p][mod]=True</code>。</li>
+<li>
+<p><code>p=0,q=1</code>：此时，<code>k</code>被它的父节点照亮，而<code>k</code>自己没有灯塔，因此不会影响它的子节点。所以此时<code>f(k, 0, 1) = Bk + sum(max(f(c, 1, 0), f(c, 0, 0))) for all k's child c</code></p>
+</li>
+<li>
+<p><code>p=1</code>：此时<code>f(k, 1, q) = Bk + sum(max(f(c, 1, 1),f(c, 0, 1))) for all k's child c</code></p>
+</li>
+<li>
+<p><code>p=0,q=0</code>：这种情况比较复杂，不仅要考虑到每颗子树的最大beauty value，还要考虑<code>k</code>是否会被它的某一个子节点照亮。我们想要知道，当<code>k</code>的所有孩子都没有灯塔，以及当<code>k</code>的至少一个孩子节点有灯塔，这两种情况下子树的beauty value之和的最大值。可以用动态规划的方法求解：设<code>dp(i, j)</code>表示当<code>k</code>的前<code>i</code>个孩子都没有灯塔<code>(j=0)</code>，以及当<code>k</code>的前<code>i</code>个节点中至少一个有灯塔<code>(j=1)</code>时，前<code>i</code>棵子树的beauty value之和的最大值。则递推关系如下，其中<code>c[i]</code>是<code>k</code>的第<code>i</code>个子节点：</p>
+<ul>
+<li><code>dp(i, 0) = dp(i-1, 0)+f(c[i], 0, 0),</code></li>
+<li><code>dp(i, 1) = max(dp(i-1, 1)+f(c[i], 0, 0), max(dp(i-1, 0), dp(i-1, 1))+f(c[i], 1, 0))</code></li>
+</ul>
+<p>则最终<code>f(k, 0, 0)=max(dp(m, 0), dp(m, 1)+Bk)</code>，其中<code>m</code>是<code>k</code>的子节点数目.</p>
+</li>
 </ol>
-<p>动态规划的时间复杂度为<code>O(9*sum(A)*11*max(A))</code>，空间复杂度为<code>O(11*sum(A))</code>（如果采用轮换法）。</p>
-<p>进一步地，当A[i]很大时（test set 2中A[i]&lt;=10^9），动态规划的复杂度也会很大，此时该怎么做呢？我们需要借助于以下引理：当至少2个A[i]&gt;=10时，解一定是存在的。</p>
-<p>证明：假设1&lt;i&lt;j&lt;10，且A[i]&gt;=10，A[j]&gt;=10，那么取10个i和10个j组成集合S，将剩下的所有元素随意均分为两半。接下来从S中选p个i和10-p个j放入P中，将S中剩下的10-p个i和p个j放入N中（0&lt;=p&lt;=10）。在p从0遍历到10的过程中，<code>sum(P)-sum(N)</code>每次都增加<code>(j-i)*2</code>，由于<code>(j-i)*2</code>与11是互素的，因此<code>[sum(P)-sum(N)]%11</code>遍历了0到10的所有值。</p>
-<p>这样，当有两个A[i]&gt;=10时，我们可以直接得出结果。而当只有1个A[i]&gt;=10时（有可能很大，因此直接动态规划会内存爆炸），我们可以先对除了i之外的其余8个数进行动态规划（其余8个数的数目之和m不会大于72），最后对i单独处理。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python3</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">T = int(input())</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(T):</span><br><span class="line">  </span><br><span class="line">    A = list(map(int, input().split()))</span><br><span class="line">    l10 = <span class="number">0</span>		<span class="comment"># 满足A[i]&gt;=10的i的数目</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">        <span class="keyword">if</span> A[i] &gt;= <span class="number">10</span>:</span><br><span class="line">            l10 += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> l10 &gt;= <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">'Case #%d: Yes'</span> % (t+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">        </span><br><span class="line">    x = <span class="number">0</span>		<span class="comment"># 求最大的A[i]</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">9</span>):</span><br><span class="line">        <span class="keyword">if</span> A[i] &gt; A[x]:</span><br><span class="line">            x = i</span><br><span class="line">    <span class="comment"># 除了最大值外剩余的8个数</span></span><br><span class="line">    B = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>) <span class="keyword">if</span> i != x]		</span><br><span class="line">    </span><br><span class="line">    maxn = sum([A[i] <span class="keyword">for</span> i <span class="keyword">in</span> B])</span><br><span class="line">    dp = [[<span class="literal">False</span>] * <span class="number">11</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(maxn+<span class="number">1</span>)]</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):		<span class="comment"># 对这8个数进行动态规划</span></span><br><span class="line">        temp = [[<span class="literal">False</span>] * <span class="number">11</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(maxn+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(maxn+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">11</span>):</span><br><span class="line">                <span class="keyword">if</span> dp[j][k] == <span class="literal">False</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">for</span> p <span class="keyword">in</span> range(min(A[B[i]], maxn-j)+<span class="number">1</span>):</span><br><span class="line">                    mod = (k + (p*<span class="number">2</span>-A[B[i]])*(B[i]+<span class="number">1</span>)) % <span class="number">11</span></span><br><span class="line">                    temp[j+p][mod] = <span class="literal">True</span></span><br><span class="line">        dp = temp</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 单独处理最大的A[i]</span></span><br><span class="line">    m = math.ceil(sum(A) / <span class="number">2</span>)</span><br><span class="line">    ans = <span class="string">'No'</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> range(max(<span class="number">0</span>, m-maxn), min(A[x], m)+<span class="number">1</span>):</span><br><span class="line">        mod = ((A[x]-p*<span class="number">2</span>) * (x+<span class="number">1</span>)) % <span class="number">11</span></span><br><span class="line">        <span class="keyword">if</span> dp[m-p][mod] == <span class="literal">True</span>:</span><br><span class="line">            ans = <span class="string">'Yes'</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    print(<span class="string">'Case #%d: %s'</span> % (t+<span class="number">1</span>, ans))</span><br></pre></td></tr></table></figure>
-
+<p><strong>复杂度分析</strong>：如果在递归过程中，将递归的解记录下来，那么每个节点只会被求解一次。在对每个节点<code>k</code>求解时，需花费<code>O(m)</code>的时间，其中<code>m</code>是<code>k</code>的子节点数目。所有节点的子节点数目之和为<code>V-1</code>，因此总的时间复杂度为<code>O(V)</code>.</p>
 
                     
                     <!-- Tags Bottom -->
