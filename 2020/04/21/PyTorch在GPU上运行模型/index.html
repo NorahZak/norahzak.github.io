@@ -10,9 +10,10 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述在训练神经网络时，有时需要为不同的网络层设置不同的学习率。比如在训练目标检测模型时，backbone网络使用了预训练参数，为了不破坏预训练参数，在训练时需要给backbone网络以相对较小的学习率。
-那么在PyTorch框架下，如何给不同网络层设置不同的学习率呢？
-解决方法假设我们的模型名为">
+        <meta name="description" content="PyTorch模型既可以在CPU上运行，也可以在GPU上运行。默认的运行设备是CPU，但为了加速模型训练和推断，经常要使用GPU。
+要在GPU上运行模型，首先要判断当前环境中是否有可用的GPU：
+1torch.cuda.is_available()
+当环境中存在多块可用的GPU时，默认只使用第一块G">
     
 
     <!--Author-->
@@ -22,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="PyTorch如何为不同网络层分别设置学习率"/>
+        <meta property="og:title" content="PyTorch在GPU上运行模型"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +45,7 @@
 
     <!-- Title -->
     
-    <title>PyTorch如何为不同网络层分别设置学习率 - Welcome to nowhere.</title>
+    <title>PyTorch在GPU上运行模型 - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -127,8 +128,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch如何为不同网络层分别设置学习率</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-13</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch在GPU上运行模型</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-21</p>
         </div>
     </div>
 
@@ -148,23 +149,37 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a> <a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a>
+                                <a class="fw3 ph1 dib" href="/tags/pytorch/">#pytorch</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在训练神经网络时，有时需要为不同的网络层设置不同的学习率。比如在训练目标检测模型时，backbone网络使用了预训练参数，为了不破坏预训练参数，在训练时需要给backbone网络以相对较小的学习率。</p>
-<p>那么在PyTorch框架下，如何给不同网络层设置不同的学习率呢？</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>假设我们的模型名为<code>net</code>，其中有一个模块<code>net.backbone</code>。我们希望<code>backbone</code>的参数与<code>net</code>的其他参数的学习率不同。示例代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">net</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, ...)</span>:</span></span><br><span class="line">    self.backbone = ...</span><br><span class="line">    ...	<span class="comment"># 其他参数</span></span><br><span class="line">model = net()</span><br><span class="line">backbone_params = [id(param) <span class="keyword">for</span> param <span class="keyword">in</span> model.backbone.parameters()]</span><br><span class="line">params = [</span><br><span class="line">  &#123;<span class="string">'params'</span>: model.backbone.parameters(), <span class="string">'lr'</span>: <span class="number">1e-6</span>&#125;,	<span class="comment"># backbone参数</span></span><br><span class="line">  &#123;<span class="string">'params'</span>: [param <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters() <span class="keyword">if</span> id(param) <span class="keyword">not</span> <span class="keyword">in</span> backbone_params], <span class="string">'lr'</span>: <span class="number">1e-4</span>&#125;	<span class="comment"># 其他参数</span></span><br><span class="line">]</span><br><span class="line">optimizer = torch.optim.Adam(params)</span><br></pre></td></tr></table></figure>
-
+                    <p>PyTorch模型既可以在CPU上运行，也可以在GPU上运行。默认的运行设备是CPU，但为了加速模型训练和推断，经常要使用GPU。</p>
+<p>要在GPU上运行模型，首先要判断当前环境中是否有可用的GPU：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.cuda.is_available()</span><br></pre></td></tr></table></figure>
+<p>当环境中存在多块可用的GPU时，默认只使用第一块GPU（编号为0）。如果要使用其他的GPU，可以通过以下方法指定要使用的GPU：</p>
+<p>(1)在终端中设置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=1 python my_script.py	# 使用1号GPU</span><br></pre></td></tr></table></figure>
+<p>(2)在Python脚本中设置：</p>
+<p><em><strong>注意，这种方式不能在Jupyter notebook中使用</strong></em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1,2"</span></span><br></pre></td></tr></table></figure>
+<p>(3)在IPython脚本或Jupyter notebook中设置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%env CUDA_VISIBLE_DEVICES=<span class="number">1</span>,<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>在GPU上运行模型，只需把模型和输入数据转换为GPU格式，其他部分和在CPU上运行无异。有以下两种方法将模型和输入数据转换为GPU格式：</p>
+<p>（1）<code>cuda()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model = net().cuda()</span><br><span class="line">x = x.cuda()</span><br></pre></td></tr></table></figure>
+<p>（2）<code>to</code> <em>(device)</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">"cuda"</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">"cpu"</span>)</span><br><span class="line">model.to(device)</span><br><span class="line">batch_input = batch[<span class="string">'img'</span>].to(device)</span><br><span class="line">output = model(batch_input)</span><br></pre></td></tr></table></figure>
+<p>注： <code>Module.to</code>()是in-place方法，会将模型转换为GPU格式<code>(torch.cuda.FloatTensor)</code>；<code>Tensor.to</code>()不是in-place方法，它不会将<code>Tensor</code>转换为GPU格式，而是创造并返回一个GPU格式的副本。</p>
+<p>在模型训练结束后，有时为了对输出数据（GPU格式）进行处理，需要将输出数据转换回CPU格式。这使用<code>Tensor.cpu</code>()即可。注意，在旧版本的Pytorch中，模型参数和数据都是<code>Variable</code>（封装了数据和梯度等信息），不能直接转换为numpy数组，需要先用<code>detach()</code>方法将数据从<code>Variable</code>中分离出来，再转换为numpy数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">output = model(batch_input).cpu().detach().numpy()	<span class="comment"># old</span></span><br><span class="line">output = model(batch_input).cpu().numpy()	<span class="comment"># new</span></span><br></pre></td></tr></table></figure>
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a> <a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/pytorch/">#pytorch</a>
                         </div>
                     
 
@@ -193,18 +208,6 @@
                     <hr class="dn-l mw4 black-50 mt5" />
                     
                     <!-- Widget 2: Categories -->
-                    
-                        <div class="mt5 tc tl-l">
-    <h3>Categories</h3>
-    
-        <p>
-            <a href="/categories/PyTorch/">PyTorch</a>
-        </p>
-    
-</div>
-
-
-                        <hr class="dn-l mw4 black-50 mt5" />
                     
 
                     <!-- Widget 3: Recent Posts -->
