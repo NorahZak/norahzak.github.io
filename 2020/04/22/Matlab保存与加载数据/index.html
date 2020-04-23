@@ -10,7 +10,10 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述Here at Google we love teaching new skills to each other! There are N employees at Google, numbered from 1 to N. There are a total of S different ">
+        <meta name="description" content="保存数据
+1save savePath.mat A B	% 将变量A和B保存到savePath.mat中
+ 加载数据
+1A, B = importdata(savePath.mat)	% 将变量A和B从文件加载到工作区">
     
 
     <!--Author-->
@@ -20,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Kick Start 2019 F round question2: Teach me"/>
+        <meta property="og:title" content="Matlab保存与加载数据"/>
     
 
     <!--Open Graph Description-->
@@ -42,7 +45,7 @@
 
     <!-- Title -->
     
-    <title>Kick Start 2019 F round question2: Teach me - Welcome to nowhere.</title>
+    <title>Matlab保存与加载数据 - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -125,8 +128,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Kick Start 2019 F round question2: Teach me</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-16</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Matlab保存与加载数据</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-22</p>
         </div>
     </div>
 
@@ -146,30 +149,22 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/kickstart/">#kickstart</a> <a class="fw3 ph1 dib" href="/tags/programming/">#programming</a>
+                                <a class="fw3 ph1 dib" href="/tags/matlab/">#matlab</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Here at Google we love teaching new skills to each other! There are <strong>N</strong> employees at Google, numbered from 1 to <strong>N</strong>. There are a total of <strong>S</strong> different skills, numbered from 1 to <strong>S</strong>. Each employee knows up to 5 different skills.</p>
-<p>The i-th employee can <em>mentor</em> the j-th employee if there is a skill that the i-th employee knows that the j-th employee does not know. How many ordered pairs (i, j) are there where the i-th employee can mentor the j-th employee?</p>
-<p>Limits:</p>
-<p>1 ≤ <strong>T</strong> ≤ 100.<br>1 ≤ <strong>S</strong> ≤ 1000.<br>1 ≤ <strong>Ci</strong> ≤ 5 for all i.<br>1 ≤ <strong>Aij</strong> ≤ <strong>S</strong> for all i and j.<br><strong>Aij</strong> ≠ <strong>Aik</strong> for all j ≠ k.</p>
-<h4 id="Test-set-1-Visible"><a href="#Test-set-1-Visible" class="headerlink" title="Test set 1 (Visible)"></a>Test set 1 (Visible)</h4><p>2 ≤ <strong>N</strong> ≤ 500.</p>
-<h4 id="Test-set-2-Hidden"><a href="#Test-set-2-Hidden" class="headerlink" title="Test set 2 (Hidden)"></a>Test set 2 (Hidden)</h4><p>2 ≤ <strong>N</strong> ≤ 5 × 104.</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
-<li>对每个(i, j)对，检查i能否教j，也就是i是否有j没有的技能。由于每个人最多掌握5种技能，因此这个算法的时间复杂度为<code>O(5^2*N^2)</code></li>
-<li>对员工i，假设能教他的人数为m(i)，那么最终的答案就是所有m(i)的和。而求m(i)，可以通过反过来求不能教员工i的人数，也就是那些掌握的技能是员工i技能的子集的人数。考虑到每个人最多只有5种技能，因此员工i技能集的子集B最多只有32个。为了求出技能集恰好等于B的员工人数，可以在预处理时，先将所有人以其掌握的技能集为键值插入哈希表中，这样就能在常数时间内求出恰好具有某一技能集B的人数。总的时间复杂度为<code>O(2^5*N)</code></li>
-</ol>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">T = int(input())</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(T):</span><br><span class="line">    N, S = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()]</span><br><span class="line">    hashmap = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(N):	<span class="comment"># 建立哈希表，表示从技能集到人数的映射</span></span><br><span class="line">        x = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input().split()][<span class="number">1</span>:]</span><br><span class="line">        x.sort()</span><br><span class="line">        x = tuple(x)</span><br><span class="line">        hashmap[x] = hashmap.get(x, <span class="number">0</span>)+<span class="number">1</span></span><br><span class="line">    ans = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> hashmap:	<span class="comment"># 对每个人，计算技能等于其子集的人数</span></span><br><span class="line">        skills = list(i)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(k, l)</span>:</span>	<span class="comment"># 递归遍历每个子集</span></span><br><span class="line">            <span class="keyword">if</span> k == len(skills):</span><br><span class="line">                <span class="keyword">return</span> hashmap.get(tuple(l), <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> f(k+<span class="number">1</span>, l) + f(k+<span class="number">1</span>, l+[skills[k]])</span><br><span class="line">        ans += (N-f(<span class="number">0</span>, [])) * hashmap[i]</span><br><span class="line">    print(<span class="string">'Case #%d: %d'</span> % (t+<span class="number">1</span>, ans))</span><br></pre></td></tr></table></figure>
-
+                    <h3 id="保存数据"><a class="markdownIt-Anchor" href="#保存数据"></a> 保存数据</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save savePath.mat A B	<span class="comment">% 将变量A和B保存到savePath.mat中</span></span><br></pre></td></tr></table></figure>
+<h3 id="加载数据"><a class="markdownIt-Anchor" href="#加载数据"></a> 加载数据</h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A, B = importdata(savePath.mat)	<span class="comment">% 将变量A和B从文件加载到工作区</span></span><br></pre></td></tr></table></figure>
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/kickstart/">#kickstart</a> <a class="fw3 ph1 dib" href="/tags/programming/">#programming</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/matlab/">#matlab</a>
                         </div>
                     
 
@@ -203,7 +198,7 @@
     <h3>Categories</h3>
     
         <p>
-            <a href="/categories/kickstart/">kickstart</a>
+            <a href="/categories/matlab/">matlab</a>
         </p>
     
 </div>

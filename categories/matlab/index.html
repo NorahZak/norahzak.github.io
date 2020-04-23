@@ -10,10 +10,6 @@
 
     <!--Description-->
     
-        <meta name="description" content="保存模型：torch.save(state_dict: dict, path)，将模型状态（以字典形式存储）保存为.pth文件
-
-123456model = net()state = &amp;#123;	&#39;params&#39;:model.state_dict(), #	保存模型参数	&#39;epoch&#39;:epoch">
-    
 
     <!--Author-->
     
@@ -22,7 +18,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="PyTorch保存和加载模型"/>
+        <meta property="og:title" content="Welcome to nowhere."/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +29,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="article" />
+        <meta property="og:type" content="website" />
     
 
     <!--Page Cover-->
@@ -44,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>PyTorch保存和加载模型 - Welcome to nowhere.</title>
+    <title>matlab - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -75,6 +71,8 @@
 <body>
 
 <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Main Content -->
+
+
 <!-- Banner -->
 <!-- Banner -->
 <div class="w-100 bg-1 ph5-ns ph3 text-light">
@@ -127,125 +125,50 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch保存和加载模型</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-15</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">matlab</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns"></p>
         </div>
     </div>
 
     <!-- Icon -->
     <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa-file-text-o"></i>
+        <i class="header-icon fa fa-folder-open"></i>
     </div>
 </div>
 
-<!-- Content -->
 <div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
     <div class="content">
         <div class="mw8 center">
-            <div class="cf">
-                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
-                    <!-- Tags Vertical -->
-                    
-                        <div class="tags-container-vertical">
-                            <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
-                            </div>
-                        </div>
-                    
-
-                    <!-- Main Post Content -->
-                    <ol>
-<li>保存模型：<code>torch.save</code><em>(state_dict: dict, path)</em>，将模型状态（以字典形式存储）保存为.pth文件</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = &#123;</span><br><span class="line">	<span class="string">'params'</span>:model.state_dict(), <span class="comment">#	保存模型参数</span></span><br><span class="line">	<span class="string">'epoch'</span>:epoch	<span class="comment"># 保存其他信息，比如训练的epoch数</span></span><br><span class="line">&#125;</span><br><span class="line">torch.save(state, <span class="string">'model.pth'</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>加载预训练模型：<code>torch.load</code><em>(path, map_location)</em>：从.pth文件中读取模型参数.<ul>
-<li><strong><code>map_location</code></strong>:指定将模型加载到哪个设备上运行。默认为GPU，如果要使用CPU，那么需要 <code>map_location=torch.device(&#39;cpu&#39;)</code></li>
-</ul>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = torch.load(<span class="string">'model.pth'</span>)</span><br><span class="line">model.load_state_dict(state[<span class="string">'params'</span>])</span><br><span class="line">epoch = state[<span class="string">'epoch'</span>]</span><br></pre></td></tr></table></figure>
-
-
-                    
-                    <!-- Tags Bottom -->
-                    
-                        <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
-                        </div>
-                    
-
-                    <!-- Comments -->
-                    
-
-
-
-                </div>
-                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
-                    
-                    <hr class="dn-l mw4 black-50 mt5" />
-                    
-                    <!-- Widget 1: About -->
-                    <div class="mt5 mt0-l">
-    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
-        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
-            <img src="https://norahzak.github.io/tomcat.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="Norah Zhang">
+            
+                <a href="/2020/04/22/Matlab%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE/">
+    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
+        <div class="dtc v-mid w-20 black-50">
+            
+                <span class="f4 fw3 lh-copy">Apr 2020</span> 
+            
         </div>
-        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
-            Welcome to my blog!<br>I'm a postgraduate student majored in computer science. My main interest is in machine learning and computer vision.<br>If you have any questions or advices about this blog, please feel free to contact me by sending email to norahz1997@gmail.com.
+        <div class="dtc v-mid w-80 black-70">
+            <span class="f4 fw3 lh-copy">Matlab保存与加载数据<span>
         </div>
-    </article>
-</div>
-
-                    <hr class="dn-l mw4 black-50 mt5" />
-                    
-                    <!-- Widget 2: Categories -->
-                    
-                        <div class="mt5 tc tl-l">
-    <h3>Categories</h3>
-    
-        <p>
-            <a href="/categories/PyTorch/">PyTorch</a>
-        </p>
-    
-</div>
-
-
-                        <hr class="dn-l mw4 black-50 mt5" />
-                    
-
-                    <!-- Widget 3: Recent Posts -->
-                    <div class="mt5 tc tl-l">
-    <h3>Recent Posts</h3>
-    
-        <p>
-            <a href="/2020/04/22/Matlab%E4%BD%BF%E7%94%A8GPU%E8%AE%A1%E7%AE%97/">Matlab使用GPU计算</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/22/Matlab%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE/">Matlab保存与加载数据</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/21/Kick-Start-2019-E-round-question3-Street-checkers/">Kick Start 2019 E round question3: Street checkers</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/21/PyTorch%E5%9C%A8GPU%E4%B8%8A%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%9E%8B/">PyTorch在GPU上运行模型</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/20/Kick-Start-2019-E-round-question2-Code-Eat-Switcher/">Kick Start 2019 E round question2: Code-Eat Switch</a>
-        </p>
-    
-</div>
-                </div>
-            </div>
+    </div>
+</a>
+            
+                <a href="/2020/04/22/Matlab%E4%BD%BF%E7%94%A8GPU%E8%AE%A1%E7%AE%97/">
+    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
+        <div class="dtc v-mid w-20 black-50">
+            
+                <span class="f4 fw3 lh-copy">Apr 2020</span> 
+            
+        </div>
+        <div class="dtc v-mid w-80 black-70">
+            <span class="f4 fw3 lh-copy">Matlab使用GPU计算<span>
+        </div>
+    </div>
+</a>
+            
         </div>
     </div>
 </div>
-
 
 <!-- Footer -->
 <div class="bg-1 ph2 ph5-ns pv5">
