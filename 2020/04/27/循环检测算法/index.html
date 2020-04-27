@@ -10,9 +10,14 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述在训练神经网络时，有时需要为不同的网络层设置不同的学习率。比如在训练目标检测模型时，backbone网络使用了预训练参数，为了不破坏预训练参数，在训练时需要给backbone网络以相对较小的学习率。
-那么在PyTorch框架下，如何给不同网络层设置不同的学习率呢？
-解决方法假设我们的模型名为">
+        <meta name="description" content="问题说明
+
+给定一个单向链表L，如何判断链表中是否存在环路？
+若存在环路，如何确定环路的起点？
+
+ 解决方法
+
+为了确定链表中是否存在环路，可以用两个指针分别从头遍历链表。其中一个指针，每次迭代向前走1步，另一个指针，每次迭代向前走两步。可以证明：如果链表中存在环路，那么至多经过N步，两个指针便会在">
     
 
     <!--Author-->
@@ -22,7 +27,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="PyTorch如何为不同网络层分别设置学习率"/>
+        <meta property="og:title" content="循环检测算法"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +49,7 @@
 
     <!-- Title -->
     
-    <title>PyTorch如何为不同网络层分别设置学习率 - Welcome to nowhere.</title>
+    <title>循环检测算法 - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -127,8 +132,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch如何为不同网络层分别设置学习率</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-13</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">循环检测算法</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-27</p>
         </div>
     </div>
 
@@ -148,23 +153,28 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a> <a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a>
+                                <a class="fw3 ph1 dib" href="/tags/algorithm/">#algorithm</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在训练神经网络时，有时需要为不同的网络层设置不同的学习率。比如在训练目标检测模型时，backbone网络使用了预训练参数，为了不破坏预训练参数，在训练时需要给backbone网络以相对较小的学习率。</p>
-<p>那么在PyTorch框架下，如何给不同网络层设置不同的学习率呢？</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>假设我们的模型名为<code>net</code>，其中有一个模块<code>net.backbone</code>。我们希望<code>backbone</code>的参数与<code>net</code>的其他参数的学习率不同。示例代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">net</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, ...)</span>:</span></span><br><span class="line">    self.backbone = ...</span><br><span class="line">    ...	<span class="comment"># 其他参数</span></span><br><span class="line">model = net()</span><br><span class="line">backbone_params = [id(param) <span class="keyword">for</span> param <span class="keyword">in</span> model.backbone.parameters()]</span><br><span class="line">params = [</span><br><span class="line">  &#123;<span class="string">'params'</span>: model.backbone.parameters(), <span class="string">'lr'</span>: <span class="number">1e-6</span>&#125;,	<span class="comment"># backbone参数</span></span><br><span class="line">  &#123;<span class="string">'params'</span>: [param <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters() <span class="keyword">if</span> id(param) <span class="keyword">not</span> <span class="keyword">in</span> backbone_params], <span class="string">'lr'</span>: <span class="number">1e-4</span>&#125;	<span class="comment"># 其他参数</span></span><br><span class="line">]</span><br><span class="line">optimizer = torch.optim.Adam(params)</span><br></pre></td></tr></table></figure>
-
+                    <h3 id="问题说明"><a class="markdownIt-Anchor" href="#问题说明"></a> 问题说明</h3>
+<ol>
+<li>给定一个单向链表L，如何判断链表中是否存在环路？</li>
+<li>若存在环路，如何确定环路的起点？</li>
+</ol>
+<h3 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法</h3>
+<ol>
+<li>为了确定链表中是否存在环路，可以用两个指针分别从头遍历链表。其中一个指针，每次迭代向前走1步，另一个指针，每次迭代向前走两步。可以证明：如果链表中存在环路，那么至多经过<code>N</code>步，两个指针便会在第一个环路中相遇；否则，经过<code>ceil(N/2)</code>步，快指针将到达链表末尾。这样我们便能在<code>O(N)</code>时间内确定链表中是否存在环路。</li>
+<li>为了确定环路的起点，假设链表头部到环路起点的距离为<code>K</code>步，而环路的长度为<code>S</code>。那么，当慢指针从头出发，经过<code>K</code>步走到环路起点时，快指针已经在环路中走了<code>K</code>步，因此它现在相对于环路起点的位置为 <code>K%S</code>。接下来，由于快指针每次迭代都比慢指针多走1步，因此在经过<code>S-K%S</code>步后，快指针将首次追上慢指针，此时两个指针相对于环路起点的位置为<code>S-K%S</code>。接下来，让慢指针继续往前走，同时让另一个慢指针从链表头部出发，在经过<code>K</code>步之后，后者将位于环路起点，而前者相对于环路起点的位置为<code>(S-K%S+K)%S=0</code>，即也位于环路起点，也就是说两个慢指针经过<code>K</code>步之后在环路的起点相遇了。这样我们就确定了环路的起点。</li>
+</ol>
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a> <a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/algorithm/">#algorithm</a>
                         </div>
                     
 
@@ -198,7 +208,7 @@
     <h3>Categories</h3>
     
         <p>
-            <a href="/categories/PyTorch/">PyTorch</a>
+            <a href="/categories/algorithm/">algorithm</a>
         </p>
     
 </div>

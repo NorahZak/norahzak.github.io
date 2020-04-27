@@ -10,9 +10,11 @@
 
     <!--Description-->
     
-        <meta name="description" content="问题描述在训练神经网络时，有时需要为不同的网络层设置不同的学习率。比如在训练目标检测模型时，backbone网络使用了预训练参数，为了不破坏预训练参数，在训练时需要给backbone网络以相对较小的学习率。
-那么在PyTorch框架下，如何给不同网络层设置不同的学习率呢？
-解决方法假设我们的模型名为">
+        <meta name="description" content="概述
+人脸识别，就是通过待识别人的一张面部图像，确认待识别人的身份。它包括两个步骤：
+
+从待识别人的面部图像中，提取面部特征
+将待识别人的面部特征与数据库中已知身份者的面部特征作对比，确定待识别人的身份">
     
 
     <!--Author-->
@@ -22,7 +24,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="PyTorch如何为不同网络层分别设置学习率"/>
+        <meta property="og:title" content="人脸识别学习笔记"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +46,7 @@
 
     <!-- Title -->
     
-    <title>PyTorch如何为不同网络层分别设置学习率 - Welcome to nowhere.</title>
+    <title>人脸识别学习笔记 - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -127,8 +129,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch如何为不同网络层分别设置学习率</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-13</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">人脸识别学习笔记</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-24</p>
         </div>
     </div>
 
@@ -148,23 +150,24 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a> <a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a>
+                                <a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a> <a class="fw3 ph1 dib" href="/tags/machinelearning/">#machinelearning</a> <a class="fw3 ph1 dib" href="/tags/computervision/">#computervision</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在训练神经网络时，有时需要为不同的网络层设置不同的学习率。比如在训练目标检测模型时，backbone网络使用了预训练参数，为了不破坏预训练参数，在训练时需要给backbone网络以相对较小的学习率。</p>
-<p>那么在PyTorch框架下，如何给不同网络层设置不同的学习率呢？</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>假设我们的模型名为<code>net</code>，其中有一个模块<code>net.backbone</code>。我们希望<code>backbone</code>的参数与<code>net</code>的其他参数的学习率不同。示例代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">net</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, ...)</span>:</span></span><br><span class="line">    self.backbone = ...</span><br><span class="line">    ...	<span class="comment"># 其他参数</span></span><br><span class="line">model = net()</span><br><span class="line">backbone_params = [id(param) <span class="keyword">for</span> param <span class="keyword">in</span> model.backbone.parameters()]</span><br><span class="line">params = [</span><br><span class="line">  &#123;<span class="string">'params'</span>: model.backbone.parameters(), <span class="string">'lr'</span>: <span class="number">1e-6</span>&#125;,	<span class="comment"># backbone参数</span></span><br><span class="line">  &#123;<span class="string">'params'</span>: [param <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters() <span class="keyword">if</span> id(param) <span class="keyword">not</span> <span class="keyword">in</span> backbone_params], <span class="string">'lr'</span>: <span class="number">1e-4</span>&#125;	<span class="comment"># 其他参数</span></span><br><span class="line">]</span><br><span class="line">optimizer = torch.optim.Adam(params)</span><br></pre></td></tr></table></figure>
-
+                    <h3 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h3>
+<p>人脸识别，就是通过待识别人的一张面部图像，确认待识别人的身份。它包括两个步骤：</p>
+<ul>
+<li>从待识别人的面部图像中，提取面部特征</li>
+<li>将待识别人的面部特征与数据库中已知身份者的面部特征作对比，确定待识别人的身份</li>
+</ul>
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a> <a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/deeplearning/">#deeplearning</a> <a class="fw3 ph1 dib" href="/tags/machinelearning/">#machinelearning</a> <a class="fw3 ph1 dib" href="/tags/computervision/">#computervision</a>
                         </div>
                     
 
@@ -198,7 +201,7 @@
     <h3>Categories</h3>
     
         <p>
-            <a href="/categories/PyTorch/">PyTorch</a>
+            <a href="/categories/computervision/">computervision</a>
         </p>
     
 </div>
