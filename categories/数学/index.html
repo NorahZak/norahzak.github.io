@@ -10,10 +10,6 @@
 
     <!--Description-->
     
-        <meta name="description" content="保存模型：torch.save(state_dict: dict, path)，将模型状态（以字典形式存储）保存为.pth文件
-
-123456model = net()state = &amp;#123;	&#39;params&#39;:model.state_dict(), #	保存模型参数	&#39;epoch&#39;:epoch">
-    
 
     <!--Author-->
     
@@ -22,7 +18,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="PyTorch保存和加载模型"/>
+        <meta property="og:title" content="Welcome to nowhere."/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +29,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="article" />
+        <meta property="og:type" content="website" />
     
 
     <!--Page Cover-->
@@ -44,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>PyTorch保存和加载模型 - Welcome to nowhere.</title>
+    <title>数学 - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -75,6 +71,8 @@
 <body>
 
 <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Main Content -->
+
+
 <!-- Banner -->
 <!-- Banner -->
 <div class="w-100 bg-1 ph5-ns ph3 text-light">
@@ -127,125 +125,37 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch保存和加载模型</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-15</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">数学</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns"></p>
         </div>
     </div>
 
     <!-- Icon -->
     <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa-file-text-o"></i>
+        <i class="header-icon fa fa-folder-open"></i>
     </div>
 </div>
 
-<!-- Content -->
 <div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
     <div class="content">
         <div class="mw8 center">
-            <div class="cf">
-                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
-                    <!-- Tags Vertical -->
-                    
-                        <div class="tags-container-vertical">
-                            <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
-                            </div>
-                        </div>
-                    
-
-                    <!-- Main Post Content -->
-                    <ol>
-<li>保存模型：<code>torch.save</code><em>(state_dict: dict, path)</em>，将模型状态（以字典形式存储）保存为.pth文件</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = &#123;</span><br><span class="line">	<span class="string">'params'</span>:model.state_dict(), <span class="comment">#	保存模型参数</span></span><br><span class="line">	<span class="string">'epoch'</span>:epoch	<span class="comment"># 保存其他信息，比如训练的epoch数</span></span><br><span class="line">&#125;</span><br><span class="line">torch.save(state, <span class="string">'model.pth'</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>加载预训练模型：<code>torch.load</code><em>(path, map_location)</em>：从.pth文件中读取模型参数.<ul>
-<li><strong><code>map_location</code></strong>:指定将模型加载到哪个设备上运行。默认为GPU，如果要使用CPU，那么需要 <code>map_location=torch.device(&#39;cpu&#39;)</code></li>
-</ul>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = torch.load(<span class="string">'model.pth'</span>)</span><br><span class="line">model.load_state_dict(state[<span class="string">'params'</span>])</span><br><span class="line">epoch = state[<span class="string">'epoch'</span>]</span><br></pre></td></tr></table></figure>
-
-
-                    
-                    <!-- Tags Bottom -->
-                    
-                        <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
-                        </div>
-                    
-
-                    <!-- Comments -->
-                    
-
-
-
-                </div>
-                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
-                    
-                    <hr class="dn-l mw4 black-50 mt5" />
-                    
-                    <!-- Widget 1: About -->
-                    <div class="mt5 mt0-l">
-    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
-        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
-            <img src="https://norahzak.github.io/tomcat.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="Norah Zhang">
+            
+                <a href="/2020/05/08/%E6%AC%A7%E6%8B%89%E5%9B%BE/">
+    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
+        <div class="dtc v-mid w-20 black-50">
+            
+                <span class="f4 fw3 lh-copy">May 2020</span> 
+            
         </div>
-        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
-            Welcome to my blog!<br>I'm a postgraduate student majored in computer science. My main interest is in machine learning and computer vision.<br>If you have any questions or advices about this blog, please feel free to contact me by sending email to norahz1997@gmail.com.
+        <div class="dtc v-mid w-80 black-70">
+            <span class="f4 fw3 lh-copy">欧拉图<span>
         </div>
-    </article>
-</div>
-
-                    <hr class="dn-l mw4 black-50 mt5" />
-                    
-                    <!-- Widget 2: Categories -->
-                    
-                        <div class="mt5 tc tl-l">
-    <h3>Categories</h3>
-    
-        <p>
-            <a href="/categories/PyTorch/">PyTorch</a>
-        </p>
-    
-</div>
-
-
-                        <hr class="dn-l mw4 black-50 mt5" />
-                    
-
-                    <!-- Widget 3: Recent Posts -->
-                    <div class="mt5 tc tl-l">
-    <h3>Recent Posts</h3>
-    
-        <p>
-            <a href="/2020/05/08/%E6%AC%A7%E6%8B%89%E5%9B%BE/">欧拉图</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/">机器学习中的数据预处理</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/27/%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF/">可分离卷积</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/27/%E5%BE%AA%E7%8E%AF%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/">循环检测算法</a>
-        </p>
-    
-        <p>
-            <a href="/2020/04/24/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">人脸识别学习笔记</a>
-        </p>
-    
-</div>
-                </div>
-            </div>
+    </div>
+</a>
+            
         </div>
     </div>
 </div>
-
 
 <!-- Footer -->
 <div class="bg-1 ph2 ph5-ns pv5">

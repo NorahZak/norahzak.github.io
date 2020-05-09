@@ -10,9 +10,11 @@
 
     <!--Description-->
     
-        <meta name="description" content="保存模型：torch.save(state_dict: dict, path)，将模型状态（以字典形式存储）保存为.pth文件
+        <meta name="description" content="定义
+通过图（无向图或有向图）中所有边且每边仅通过一次的通路，称为欧拉通路，如果这条通路的起点和终点相同，则成为欧拉回路。具有欧拉回路的图称为欧拉图（Euler Graph），具有欧拉通路而无欧拉回路的图称为半欧拉图。
+ 判定定理
 
-123456model = net()state = &amp;#123;	&#39;params&#39;:model.state_dict(), #	保存模型参数	&#39;epoch&#39;:epoch">
+无向图G存在欧拉回路 &amp;lt;=&amp;gt; G为连通图且所有结点的度">
     
 
     <!--Author-->
@@ -22,7 +24,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="PyTorch保存和加载模型"/>
+        <meta property="og:title" content="欧拉图"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +46,7 @@
 
     <!-- Title -->
     
-    <title>PyTorch保存和加载模型 - Welcome to nowhere.</title>
+    <title>欧拉图 - Welcome to nowhere.</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -127,8 +129,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">PyTorch保存和加载模型</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-04-15</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">欧拉图</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-05-08</p>
         </div>
     </div>
 
@@ -148,31 +150,34 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
+                                <a class="fw3 ph1 dib" href="/tags/数学/">#数学</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <ol>
-<li>保存模型：<code>torch.save</code><em>(state_dict: dict, path)</em>，将模型状态（以字典形式存储）保存为.pth文件</li>
+                    <h3 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h3>
+<p>通过图（<a href="https://baike.baidu.com/item/%E6%97%A0%E5%90%91%E5%9B%BE/1680427" target="_blank" rel="noopener">无向图</a>或<a href="https://baike.baidu.com/item/%E6%9C%89%E5%90%91%E5%9B%BE" target="_blank" rel="noopener">有向图</a>）中所有边且每边仅通过一次的通路，称为欧拉通路，如果这条通路的起点和终点相同，则成为欧拉回路。具有<a href="https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF/10036484" target="_blank" rel="noopener">欧拉回路</a>的图称为欧拉图（Euler Graph），具有欧拉通路而无欧拉回路的图称为<a href="https://baike.baidu.com/item/%E5%8D%8A%E6%AC%A7%E6%8B%89%E5%9B%BE/8698931" target="_blank" rel="noopener">半欧拉图</a>。</p>
+<h3 id="判定定理"><a class="markdownIt-Anchor" href="#判定定理"></a> 判定定理</h3>
+<ol>
+<li>无向图G存在欧拉回路 &lt;=&gt; G为连通图且所有结点的度都为偶数；</li>
+<li>无向图G存在欧拉通路 &lt;=&gt; G为连通图且只有0个或2个度为奇数的结点；</li>
+<li>有向图D存在欧拉回路 &lt;=&gt; D为连通图且所有结点的入度=出度；</li>
+<li>有向图D存在欧拉通路 &lt;=&gt; D为连通图且 D 中除两个结点外，其余每个结点的入度=出度，且此两点满足 <code>deg-(u)-deg+(v)=±1</code> .</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = &#123;</span><br><span class="line">	<span class="string">'params'</span>:model.state_dict(), <span class="comment">#	保存模型参数</span></span><br><span class="line">	<span class="string">'epoch'</span>:epoch	<span class="comment"># 保存其他信息，比如训练的epoch数</span></span><br><span class="line">&#125;</span><br><span class="line">torch.save(state, <span class="string">'model.pth'</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>加载预训练模型：<code>torch.load</code><em>(path, map_location)</em>：从.pth文件中读取模型参数.<ul>
-<li><strong><code>map_location</code></strong>:指定将模型加载到哪个设备上运行。默认为GPU，如果要使用CPU，那么需要 <code>map_location=torch.device(&#39;cpu&#39;)</code></li>
-</ul>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = net()</span><br><span class="line">state = torch.load(<span class="string">'model.pth'</span>)</span><br><span class="line">model.load_state_dict(state[<span class="string">'params'</span>])</span><br><span class="line">epoch = state[<span class="string">'epoch'</span>]</span><br></pre></td></tr></table></figure>
-
+<p>判定定理的证明参考：<a href="https://www.cnblogs.com/xpjiang/p/4396106.html" target="_blank" rel="noopener">https://www.cnblogs.com/xpjiang/p/4396106.html</a></p>
+<h3 id="寻找欧拉回路"><a class="markdownIt-Anchor" href="#寻找欧拉回路"></a> 寻找欧拉回路</h3>
+<p>Hierholzer 算法可以用于找到有向欧拉图中的一条欧拉回路，其思路如下：</p>
+<p>从任意结点 <code>u</code> 开始，任意地经过未经过的边，直到我们“无路可走”。可以发现，我们最终一定会停在节点 <code>u</code>，这是因为所有节点的入度和出度都相等。</p>
+<p>我们得到了一条从 <code>u</code> 开始到 <code>u</code> 结束的回路，这条回路上仍然有些结点有未经过的出边。从某个这样的节点<code>v</code>开始，把 <code>v</code> 看成 <code>u</code>，继续得到一条从 <code>v</code> 开始到 <code>v</code> 结束的回路，再嵌入之前的回路中，即 <code>u -&gt; ... -&gt; v -&gt; ... -&gt; u</code> 变为 <code>u -&gt; ... -&gt; v -&gt; ... -&gt; v -&gt; ... -&gt; u</code>。重复这样的过程，直到图中没有未经过的边，此时我们就找到了一条欧拉回路。</p>
+<p>递归实现的伪代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">path = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(u)</span>:</span></span><br><span class="line">  <span class="keyword">for</span> e <span class="keyword">in</span> u.outedges:</span><br><span class="line">    <span class="keyword">if</span> e <span class="keyword">is</span> <span class="keyword">not</span> visited:</span><br><span class="line">      set e <span class="keyword">as</span> visited</span><br><span class="line">      v = e.end</span><br><span class="line">      dfs(v)</span><br><span class="line">      path.append(e)</span><br></pre></td></tr></table></figure>
 
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/PyTorch/">#PyTorch</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/数学/">#数学</a>
                         </div>
                     
 
@@ -206,7 +211,7 @@
     <h3>Categories</h3>
     
         <p>
-            <a href="/categories/PyTorch/">PyTorch</a>
+            <a href="/categories/数学/">数学</a>
         </p>
     
 </div>
