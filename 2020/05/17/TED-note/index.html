@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-05-16T17:26:38.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-05-17</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>4.7k words</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <p>[TOC]</p>
+<h3 id="The-revolutional-power-of-diverse-thoughts"><a href="#The-revolutional-power-of-diverse-thoughts" class="headerlink" title="The revolutional power of diverse thoughts"></a>The revolutional power of diverse thoughts</h3><p>‘Can you taste words ?’ It was a question that caught me by surprise . The summer I was giving a tour containing the tree festival , and afterwards I was signing books , a teenage girl came with her friends , and this was what she asked me . I told her that some people experience an  overlap in their senses , so that they could hear colors , or see songs . And many wisers are fascinated by this subject , myself included . But she cut me off , being unpatient, ‘Yeah I know that staff , we call it athesia . We’ve learned it in school . But my mom is reading your book , and she says there is lots of food , and ingredients , and the long dinner ? that she gets hungry at every page . So I was thinking , how come you don’t get hungry when you write , and I thought maybe you could taste words . It makes sense .’ And actually it did make sense , because ever since my childhood , each letter in the alphabet has a different color , and colors bring me flavors . So ? is the color purple is quite punjent? almost perfumed , and any word that was associated with purple taste the same way , such as sunset is a very spicy word . But I was worried that if I tell all of this to the teenager , it might sound either too abstruct or perhaps too weird . And there wasn’t enough time anyhow , because people were waiting in the queue . So it suddenly felt like what I was trying to convey was more complicated and detailed than what the circumstances allowed me to say . And I did what I usually do in similar situations - I stumbled , I shut down , and I stop talking . I stop talking because the truth was complicated , even though I knew deep inside that one should never ever remain silent for fear of complexity .</p>
+<p>So I want to start my talk today with the unsaid that I was not able to give on that day - yes , I can taste words . Sometimes , that is not always . And happy words have different flavor than sad words . I like to explore how does the word ‘creativity’ taste like , or ‘equality ‘, ‘love ‘, ‘revolution ‘. And what about ‘motherland ‘?  These days it’s particularly this last word that troubles me . It leaves a sweet taste on my tongue , like ? and golden apples . But underneath there’s a sharp tongue like ? and ?. The taste of my motherland , Turkey , is a mixture of sweet and bitter . And there is a ? I’m telling you this because I think there are more and more people all around the world , who has similarly mixed emotions about the land where they came from . We love our native countries , yeah , how can we not ? We feel attached to the people , the culture , the food. And yet at the same time , we are increasingly frustrated for the politics and politicians , sometimes for the ? hurt , or anger . </p>
+<p>I want to talk about emotions and the need to boost out emotional intelligence .  I think it’s a pity that main political theory pays very little attention to emotions . Often times , experts and analysts are too busy with data and metrics , that they seemed to forget those things in life that are difficult to measure and perhaps impossible to cluster under statistical models . But I think this is a mistake for 2 main reasons : firstly , because we are emotional beings , as human beings I think we are all like that , but secondly - and this is new - I think we’ve enter the new stage in world history in which collective sentiments guides and misguides politicians more than ever before . And through social media and social networking , these sentiments are further amplified , polarized , and they travel around the world quite fast . Ours is the age of anxiety , anger , distrust , resentment, and I think lots of fear . But here is the thing : even though there’s plenty of research about economical factors , there’s relatively few studies about emotional factors .  Why is that we underestimate feelings and perceptions ? I think it’s gonna be one of our biggest intellectual challenges , because our political systems are ? with emotion . And country after country , we’ve seen illegal politicians exploiting these emotions . And yet within the acemedia, we’re yet to take emotions seriously .</p>
+<h3 id="The-beautiful-tricks-of-flowers"><a href="#The-beautiful-tricks-of-flowers" class="headerlink" title="The beautiful tricks of flowers"></a>The beautiful tricks of flowers</h3><p>Do you know how many species of <del>flowers</del> flowering plants <del>are there in Armstrong</del> there are ? <del>A</del> There are a quarter of a million , at least , <del>that’s</del> those are the ones <del>you</del> who we know about <del>it</del> . A quarter of a million species of <del>flowers</del> flowering plants <del>in the planet</del> . </p>
+<p>Flowers are a real <del>abundant</del> <u>bugger</u> . They’re <del>already</del> really difficult for plants to <del>reproduce</del> produce . <u>They take an enormous amount of energy and a lot of resources</u> . Why would they <del>get</del> go to that <del>border</del> bother ? The answer <del>is</del> - of course , like so many things <u>in the world</u> - is sex . I know what ‘s on your mind when <del>you see those</del> you’re looking at these pictures . And the reason why sexual reproduction is so important , there are lots of other things that plants can do to reproduce . You can take <del>cottons</del> cuttings , they can <u>sort of</u> have sex with themselves , <u>they can pollinate themselves</u> . But they really need to spread their <del>pollen</del> genes to <del>make without the pollen</del> mix with other genes so they can adapt to environmental niches . Evolutions work that way . </p>
+<p>Now <del>why</del> that plants <del>transform</del> <u>transmit</u> that information through <del>that</del> pollen . <u>Some of you may have seen some of these pictures before . As I say , every home should have a scanning electron</u> microscope <u>to be able to see these</u> . There are many different kinds of pollen as <del>they are in flower in</del> there’re flowering plants . <del>I’m not a sexuality ?</del> <u>And that’s actually rather forensics and</u> so on . <u>Most pollen that causes hay fever for us is from plants that use the wind to disseminate the pollen , and that’s a very inefficient process, which is why it gets up to our noses so much .</u> . <del>We need to check on</del> Because you need to chuck out masses of masses of it , <u>hoping that your sex cells , your male sex cells , which are held within the pollen , will somehow reach another flower</u> just by chance . So all the grasses, <u>which means all of the <del>serial</del> cereal crops and most of the trees</u> have <del>wind blow</del> wind-borne pollen .</p>
+<p>But most species actually use insects to do <del>that</del> their bidding . And that’s more intelligent in a way , because the pollen , <u>they don’t need so</u> much of it , insects and other species can take the pollen , <del>transformed</del> transfer it directly to where it’s required . </p>
+<p><u>So we’re aware , obviously , of</u> the relationship between insects and <del>flowers</del> plants . <u>There’s a symbiotic relationship here</u> ,  whether it’s flies or birds or bees , <u>they are getting something in return , and that something in return is generally nectar</u> .</p>
+<h3 id="Virtual-choir-live"><a href="#Virtual-choir-live" class="headerlink" title="Virtual choir live"></a>Virtual choir live</h3><p>In 1991, I had made the most profound and transforming experience in my life . I was in the third year of my seven-year undergraduate degree . I took a couple of victory laps? in here . And … in northern California . … we were relaxing at the beautiful lake of … and the ? and birds and crows making noise .</p>
+<h3 id="What-really-happens-to-the-plastic-you-throw-away"><a href="#What-really-happens-to-the-plastic-you-throw-away" class="headerlink" title="What really happens to the plastic you throw away"></a>What really happens to the plastic you throw away</h3><p>This is the story of three plastic bottles , empty and discarded . Their journeys are about to diverge with outcomes that impact nothing less than the fate of the planet . But they weren’t always this way .</p>
+<p>To understand where these bottles end up , we must first explore their origins . The heroes of our story are <u>conceived</u> in these oil <u>refinery</u> . The plastic in their bodies was formed by chemically bonding oil and gas <u>molecules</u> together to make <u>monomers</u> . In <u>turn</u> , these monomers were bonded into long <u>polymer</u> chains to make plastic in the form of millions of <u>pellets</u>  . Those were melted in <u>manufacturing plants</u> ,  and reformed in <u>molds</u> to create the resilient material that makes up the triplets’ bodies . Machine filled those bottles with sweet <u>bubbly</u> liquid , and they were wrapped , shipped, bought , opened , consumed , and <u>unceremoniously</u> discarded . And here they lie , <u>poised at</u> the edge of unknown . </p>
+<p>Bottle 1, like hundreds and millions of tons of his plastic <u>brethren</u> , ends up in a <u>landfill</u> . This huge <u>dump</u> expand each day as more trash comes in and continues to take up space . As plastic sit there being compressed <u>amongst</u> layers of other <u>junk</u> , rainwater flows through the waste , and absorbs the <u>water-soluble</u> compounds it contains , and some of those are highly toxic . Together , they create a harmful <u>stew</u> called leachate , which can move into groundwater , soil and streams , poisoning ecosystems and harming wildlife . It can take bottle 1 an <u>agonizing</u> 1000 years to decompose . </p>
+<p>Bottle 2’s journey is a little stranger , but unfortunately no happier . He floats on a <u>trickle</u> that reaches a stream , a stream that flows into the river , and a river that reaches the ocean . After months’ lost at sea , he’s slowly drown into a massive <u>vortex</u> , where trash accumulates . A place known as The great Pacific garbage patch  . Here the ocean’s currents have trapped millions of pieces of plastic <u>debris</u> . This is one of 5 plastic-filled <u>gyres</u> in the world’s  seas , places where the pollutants turn the water into a cloudy plastic soup . Some animals , like seabirds , get entangled in the <u>mess</u> . They , and others , mistake the brightly colored plastic bits for food . Plastics make them feel full when they’re not , so they starve to death , and pass the toxins from the plastic up the food chain . For example , it’s eaten by lanternfish , the lanternfish are eaten by squid , the squid are eaten by tuna , by the tuna are eaten by us . And most plastics don’t <u>biodegrade</u> , which means they’re <u>destined</u> to break down into smaller and smaller pieces , called micro plastics , which might <u>rotate</u> in the sea eternally .</p>
+<p>But bottle 3 is <u>spared</u> the cruel <u>purgatories</u> of his brothers . A truck brings it to a <u>plant</u> , where he and his companions are squeezed flat , and compressed into a block . Ok , this sounds pretty bad , too , but hang in there , it gets better . The blocks are shredded into tiny pieces , which are washed and melted , so they become the raw materials that can be used again . As if by magic , bottle 3 is now ready to <u>reborn</u> as  something completely new . For this bit of plastic with such humble origins , suddenly the sky is the limit.</p>
+<h3 id="Why-do-cats-act-so-weird"><a href="#Why-do-cats-act-so-weird" class="headerlink" title="Why do cats act so weird?"></a>Why do cats act so weird?</h3><p>They are cute , they are lovable , and judging by the 26 billion views of over 2 million YouTube videos of them <u>pouncing</u> , bouncing , climbing , <u>cramming</u> , stalking , <u>clawing</u> , chattering and purring , one thing is certain : cats are very entertaining .</p>
+<p>These somewhat strange <u>feline</u> behaviors , both amusing and <u>baffling</u> , leave many of us asking : why do cats do that ? </p>
+<p><u>Throughout</u> time , cats were simultaneously <u>solitary</u> predators of smaller animals and prey for larger <u>carnivores</u> . As both predator and prey , survival of their species depended on crucial instinctual behaviors , which we still observe in wild and domestic cats today .</p>
+<p>While the feline actions of your house cat Grazmale might seem <u>perplexing</u> , in the wild these same behaviors naturally bred into cats for millions of years would make Grazmale a super cat .</p>
+<p>Enabled by their unique muscular structure and keen balancing abilities , cats climbed to high <u>vantage</u> points to survey their territory and spot prey in the wild . Grazmale doesn’t need these particular skills to find and hunt down dinners in her food bowl today , but instinctually , viewing the living room from top of the bookcase is exactly what she has evolved to do .</p>
+<p>As wild predators , cats are opportunistic and hunt whenever prey is available . Since most cat prey are small , cats in the wild needed to eat many times each day , and use a stock-pounce-kill-eat strategy to stay <u>fed</u> . This is why Grazmale prefers to chase and bounce on little toys and eat small meals over the course of day and night . </p>
+<p>Also , small prey tend to hide in tiny spaces in their natural environments , so one explanations for Grazmale’s <u>propensity</u> to reach into containers and openings is that she is <u>compelled</u> by the same curiosity that helped ensure the continuation of her species from millions of years before .</p>
+<p>In the wild , cats needed sharp claws for climbing , hunting and self-defense . Sharpening claws on nearby surfaces kept them conditioned and ready , helped stretch their back and leg muscles , and <u>relieve</u> some stress , too . So it’s not that Grazmale hates your <u>couch</u> , chair , <u>ottoman</u> , pillows , curtains and everything else you put in her environment . She is <u>ripping</u> these things to shreds and keeping her claws in tip-top shape , because this is exactly what her ancestors did in order to survive .</p>
+<p>As animals that were preyed upon , cats evolved to not get caught , and in the wild , the cats <u>that were the best at  avoiding predators thrived</u> . So at your home today , Grazmale is an expert at squeezing into small spaces and seeking out and hiding in unconventional spots . It also explains why she prefers a clean and <u>odor</u>-free litter box , that’s less likely to give away her location to any predators that may be sniffing around nearby .</p>
+<p>Considering everything we do know about cats , it seems that one of their most predominant behaviors is still one of the most mysterious . Cats may purr for any number of reasons , such as happiness , stress and hunger . But curiously , the frequency of their purrs between 25 and 150 Hz is within a range that can promote <u>tissue</u> regeneration . So while her purring makes Grazmale an excellent nap companion , it is also possible that her purr is healing her muscles and bones , and maybe even yours , too .</p>
+<p>They developed through time as both solitary predators that hunted and killed to eat , and <u>stealthy</u> prey hid and escaped to survive . So cats today <u>retain</u> many of the same instincts that allowed them to thrive in the wild for millions of years . This explains some of their seemingly strange behaviors . To them , our homes are their jungles , but if this is the case , in our own cats eyes , who are we ? Big , dumb , hairless cats competing with them for resources ? Terribly stupid predators they’re able to outsmart everyday ? Or maybe , they think we are the prey …</p>
+<h3 id="How-the-food-you-eat-affects-your-brain"><a href="#How-the-food-you-eat-affects-your-brain" class="headerlink" title="How the food you eat affects your brain"></a>How the food you eat affects your brain</h3><p>If you sucked all of the <u>moisture</u> out of your brain and broke it down to its <u>constituent</u> nutritional content , what would it look like ?</p>
+<p>Most of the weight of your dehydrated brain would come from fats , also known as <u>lipids</u> . In the remaining brain matter , you would find proteins and <u>amino</u> acids , traces of micronutrients , and <u>glucose</u> . The brain is , of course , more than just the sum of its nutritional parts . But each component does have a distinct impact on functioning , development , mood and energy . So that <u>post-lunch apathy</u> or late-night alertness you might be feeling , well , that could simply be the affects of foods on your brain .</p>
+<p>Of the fats in your brain , the superstars are Omegas 3&amp;6. These essential fatty acids , which have been linked to preventing degenerative brain conditions , must come from our diets . So eating Omega-rich food like nuts , seeds and fatty fish is crucial to the creation and maintenance of cell <u>membranes</u> . And while Omegas are good fats for your brain , long-term consumption of other fats , like trans and saturated fats , may <u>compromise</u> brain health .</p>
+<p>Meanwhile , proteins and amino acids , the building block nutrients of growth and development , manipulate how we feel and behave . Amino acids contain the <u>precursors</u> to <u>neurotransmitters</u> - the chemical messengers that carry signals between neurons , affecting things like mood , sleep , attentiveness and weight . They’re one of the reasons we might feel calm after eating a large plate of pasta or more alert after a protein-rich meal . The complex combination of compounds in food can stimulate brain cells to release <u>mood-altering norepinephrine , dopamine and serotonin</u> . But getting into your brain cells is tricky , and amino acids have to compete for limited access . A diet with a range of foods helps maintain a balanced combination of brain messengers , and keeps your mood from getting <u>skewed</u> in one direction or the other .</p>
+<p>Like the other organs in our bodies , our brains also benefit from a steady supply of micronutrients . <u>Antioxidants</u> in fruits and vegetables strengthen the brain to fight off <u>free radicals</u> that destroy brain cells , enabling your brain to work well for a longer period of time . And without powerful micronutrients like the vitamins B6 , B12 and <u>folic</u> acid , our brains would be <u>susceptible</u> to brain disease and mental decline . Trace amounts of the <u>mineral , iron , copper , zinc and sodium</u> are also fundamental to brain health and early cognitive development . </p>
+<p>In order for the brain to efficiently transform and synthesize these valuable nutrients , it needs fuel , and lots of it . While the human brain only makes up about 2% of our body weight , it uses up to 20% of our energy resources . Most of these energy comes from <u>carbohydrates</u> that our body digests into glucose or blood sugar . The <u>frontal lobes</u> are so sensitive to drops in glucose  , in fact , that a change in mental function is one of the primary signals of nutrient <u>deficiency</u> . Assuming that we’re getting glucose regularly , how does this specific type of carbohydrates we eat affect our brains ? Carbs come in 3 forms : <u>starch</u> , sugar and <u>fiber</u> . While on most nutrition labels , they’re all <u>lumped</u> into one total carb count . The ratio of the sugar and fiber subgroups to the whole amount affect how the body and brain respond . A high-<u>glycemic</u> food , like white bread , causes a rapid release if glucose into blood , and then comes the <u>dip</u> . Blood sugar shoots down , and with it , our attention span and mood . On the other hand , oats , <u>grains</u> and <u>legumes</u> have slower glucose release , enabling a steadier level of attentiveness . </p>
+<p>For <u>sustained</u> brain power , opting for a varied diet of nutrient-rich food is critical . When it comes to what you bite , chew and swallow , your choices have a direct and long-lasting affect on the most powerful organ of your body .</p>
+<h3 id="The-language-of-lying"><a href="#The-language-of-lying" class="headerlink" title="The language of lying"></a>The language of lying</h3><p>“Sorry , my phone died .”</p>
+<p>“It’s nothing , I’m fine .”</p>
+<p>These <u>allegations</u> are completely <u>unfounded</u> .</p>
+<p>“The company was not aware of any <u>wrongdoing</u> .”</p>
+<p>“I love you !”</p>
+<p>We <u>hear anywhere from 10 to 200 lies</u> a day , and we’ve spent much of our history coming up with the ways to detect them , from <u>medieval</u> torture devices to <u>polygraphs</u> , blood-pressure and breathing monitors , voice-stress analyzers , eye trackers , <u>infrared</u> brain scanners and even the 400-pound <u>electroencephalogram</u> . But although such tools have worked under certain circumstances , most can be fooled with enough preparation , and none are considered reliable enough to be even admissible in court .</p>
+<p>But what if the problem is not with the techniques , but the underlying assumption that lying <u>spurs</u> <u>physiological</u> changes ? What if we took a more direct approach , using communication science to analyze the lies themselves ?</p>
+<p>On a psychological level , we lie partly to paint a better picture of ourselves , connecting our fantasies to the person we wish we were rather than the person we are . But while our brain is busy dreaming , it’s letting plenty of signals slip by . Our conscious mind only controls about 5% of our cognitive function , including communication , while the other 95% <u>occurs</u> beyond our awareness . And according to literature on reality monitoring , stories based on imagined experiences are <u>qualitatively</u> different from those based on real experiences . This suggests that creating a false story about a personal topic takes work and results in a different pattern of language use . A technology known as linguistic text analysis has helped to identify 4 such common patterns in the subconscious language of <u>deception</u> . </p>
+<p>First , <u>liars</u> reference themselves less when making deceptive statements . They write or talk more about others , often using the third person to distance and dissociate themselves from their lie . Which sounds more false , “Absolutely no party took place at this house .” or “I didn’t host a party here .”</p>
+<p>Second , liars tend to be more negative , because on a subconscious level , they feel guity about lying . For example , a liar might say something like , “Sorry , my stupid phone battery died . I hate that thing .”</p>
+<p>Third , liars typically explain events in simple terms since our brains struggle to build a complex lie . Judgment and evaluation are complex things for our brains to compute . As a US president once famously insisted , “I did not have sexual relations with that woman .”</p>
+<p>And finally , even <u>though</u> liars keep the descriptions simple , they tend to use longer and more convoluted sentence structure , inserting unnecessary words and <u>irrelevant</u> but factual-sounding details in order to <u>pad</u> the lie . Another president confronted with the scandal <u>proclaimed</u> , “I can say categorically that this investigation indicates that no one on the White House staff , no one in this administration presently employed , was involved in this very bizarre incident .”</p>
+<p>Let’s apply linguistic analysis to some famous examples . Take 7-time Tour de France winner Lance Armstrong . When comparing a 2005 interview in which he had denied taking performance-enhancing drugs to a 2013 interview in which he admitted it , his use of personal <u>pronouns</u> increased nearly by three quarters . Note the contrast between the 2 following quotes :</p>
+<p>“OK , you know , a guy in a French - in a Parisian laboratory opens up your sample , you know , John Francis so-and-so , and he tests it . And then you get a phone call from a newspaper that says we founded you to be positive 6 times for EPO…”</p>
+<p>“I lost myself in all of that . I’m sure there would be other people that couldn’t handle it . But I certainly couldn’t handle it . And I was used to controlling everything in my life . I controlled every outcome in my life .”</p>
+<p>In his denial , Armstrong described a hypothetical situation focused on someone else , removing himself from the situation entirely . In his admission , he owns his statements , <u>delving into</u> his personal emotions and motivations . </p>
+<p>But the use of personal pronouns is just one indicator of deception . Let’s look at another example , from former senator and US presidential candidate , John Edwards .</p>
+<p>“I only know the apparent father has said publicly that he is the father of the baby . I also have not been engaged in any activity or any description that requested , agreed to or supported payments of any kind to the woman or to the apparent father of the baby .” Not only is that a pretty <u>long-winded</u> way to say , “The baby isn’t mine .” , but Edwards never calls the other parties by name , instead saying “that baby” , “the woman” and “the apparent father” . Now let’s see what he had to say when later admitting <u>paternity</u> . “I am Quinn’s father . I will do everything in my power to provide her with the love and support she deserves . “ The statement is short and direct , calling the child by name and addressing his role in her life .</p>
+<p>So how can you apply these lie-spotting techniques to your life ? First , remember that many of the lies we encountered <u>on a daily basis</u> are far less serious than these examples , and may even be harmless . But it’s still worthwhile to be aware of <u>tell-tale</u> clues like :</p>
+<ul>
+<li>minimal self-reference</li>
+<li>negative language </li>
+<li>simple explanations </li>
+<li>convoluted phrasing</li>
+</ul>
+<p>It just might help you avoid an overvalued stock , an ineffective product , or even a terrible relationship .</p>
+<h3 id="How-playing-an-instrument-benefits-your-brain"><a href="#How-playing-an-instrument-benefits-your-brain" class="headerlink" title="How playing an instrument benefits your brain"></a>How playing an instrument benefits your brain</h3><p>Did you know that every time musicians pick up their instruments , there are fireworks going off all over their brain ? On the outside , they may look calm and focused , reading the music and making the precise and practical movements required . But inside their brains , there’s a party going on . How do we know this ? </p>
+<p>Well , in the last few decades , neuroscientists have made enormous breakthroughs in understanding how our brains work by monitoring them in real-time with instruments like functional magnetic resonance imaging and positron emission tomography scanners . When people are hooked up to these machines , tasks, such as  reading or doing math problems each have <u>corresponding</u> areas of the brain where activity can be observed . But when researchers got the participants to listen to music , they saw fireworks . Multiple areas in their brains were lighting up at once , as they processed the sound , took it apart to understand elements like melody and rhythm , and then put it all back together into unified musical experience . And our brains do all this work in the split second between when we first hear the music and when our foot starts to tap along .</p>
+<p>But when scientists turned from observing the brains of music listeners to those of musicians , the little backyard fireworks became a <u>jubilee</u> . It turns out that while listening to music engages the brain in some pretty interesting activities , playing music is the brain’s equivalent of a full-body workout . The neuroscientists saw multiple areas of the brain light up , simultaneously processing different information in <u>intricate</u> , <u>interrelated</u> and <u>astonishingly fast</u> sequences .</p>
+<p>But what is it about making music that sets the brain alight ? <u>The research is still fairly new</u> , but neuroscientists have a pretty good idea . Playing a musical instrument engages practically every area of the brain at once , especially the visual , auditory and motor <u>cortices</u> . And as with any other workout , disciplined , structured practice in playing music strengthens those brain functions , allowing us to apply that strength to other activities . The most obvious difference between listening to music and playing it is that the latter requires fine motor skills , which are controlled in both <u>hemispheres</u> of the brain . It also combines the linguistic and mathematical precision in which the left hemisphere is more involved with the novel and creative content that the right <u>excels in</u> . For these reasons , </p>
+<p>playing music has been found to increase the volume and activity in the brain’s <u>corpus callosum</u> , the bridge between the two hemispheres , allowing the messages to get across the brain faster and through more diverse routes . This may allow musicians to solve problems more effectively and creatively in both academic and social settings .</p>
+<p>Because making music also involves crafting and understanding its emotional content and message , musicians often have higher levels of executive function , a category of <u>interlinked</u> tasks that includes planning , strategizing and attention to detail , and requires simultaneous analysis of both cognitive and emotional aspects . This ability also has an impact on how our memory systems work . And indeed , musicians exhibit enhanced memory functions , creating , storing and retrieving memories more quickly and efficiently . Studies have found that musicians appear to use their highly-connected brains to give each memory multiple tags , such as a conceptual tag , an emotional tag and audio tag and contextual tag , like a good Internet search engine .</p>
+<p>So how do we know that all these benefits are unique to music , as opposed to say sports or painting ? Or could it be that people who go into music were already smarter to begin with ? Neuroscientists have explored these issues , but so far they’ve found the artistic and <u>aesthetic</u> aspects of learning to play a musical instrument are different from any other activity studied , including other arts . And several randomized studies of participants , who show the same levels of cognitive function and neural processing at the start , found that those who were exposed to a period of music learning showed enhancement in multiple brain areas compared to the others . This recent research about the mental benefits of playing music has advanced our understanding of mental function , revealing the inner rhythms and complex interplay that make up the amazing orchestra of our brain .</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2020/05/17/TED-note/">http://example.com/2020/05/17/TED-note/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/06/04/工作日志/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/05/11/Markdown公式/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-revolutional-power-of-diverse-thoughts"><span class="toc-text">The revolutional power of diverse thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-beautiful-tricks-of-flowers"><span class="toc-text">The beautiful tricks of flowers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-choir-live"><span class="toc-text">Virtual choir live</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What-really-happens-to-the-plastic-you-throw-away"><span class="toc-text">What really happens to the plastic you throw away</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-do-cats-act-so-weird"><span class="toc-text">Why do cats act so weird?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-the-food-you-eat-affects-your-brain"><span class="toc-text">How the food you eat affects your brain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-language-of-lying"><span class="toc-text">The language of lying</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-playing-an-instrument-benefits-your-brain"><span class="toc-text">How playing an instrument benefits your brain</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>30</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>0</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-revolutional-power-of-diverse-thoughts"><span class="toc-text">The revolutional power of diverse thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-beautiful-tricks-of-flowers"><span class="toc-text">The beautiful tricks of flowers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-choir-live"><span class="toc-text">Virtual choir live</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What-really-happens-to-the-plastic-you-throw-away"><span class="toc-text">What really happens to the plastic you throw away</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-do-cats-act-so-weird"><span class="toc-text">Why do cats act so weird?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-the-food-you-eat-affects-your-brain"><span class="toc-text">How the food you eat affects your brain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-language-of-lying"><span class="toc-text">The language of lying</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-playing-an-instrument-benefits-your-brain"><span class="toc-text">How playing an instrument benefits your brain</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-revolutional-power-of-diverse-thoughts"><span class="toc-text">The revolutional power of diverse thoughts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-beautiful-tricks-of-flowers"><span class="toc-text">The beautiful tricks of flowers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-choir-live"><span class="toc-text">Virtual choir live</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What-really-happens-to-the-plastic-you-throw-away"><span class="toc-text">What really happens to the plastic you throw away</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-do-cats-act-so-weird"><span class="toc-text">Why do cats act so weird?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-the-food-you-eat-affects-your-brain"><span class="toc-text">How the food you eat affects your brain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-language-of-lying"><span class="toc-text">The language of lying</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-playing-an-instrument-benefits-your-brain"><span class="toc-text">How playing an instrument benefits your brain</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/Python 闭包的作用/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/C++ const关键字的用法/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-28</div>
+        <a href="/2020/08/28/面试常见问题/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-07</div>
+        <a href="/2020/08/07/集成学习/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

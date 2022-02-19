@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-04-10T01:21:14.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-04-10</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>589 words</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="Github使用手册"><a href="#Github使用手册" class="headerlink" title="Github使用手册"></a>Github使用手册</h1><h2 id="一、使用Github管理项目"><a href="#一、使用Github管理项目" class="headerlink" title="一、使用Github管理项目"></a>一、使用Github管理项目</h2><h3 id="0-Github仓库"><a href="#0-Github仓库" class="headerlink" title="0.Github仓库"></a>0.Github仓库</h3><p>Github使用仓库来管理项目，你可以在本地创建并编辑项目，然后将其同步到Github上面来进行共享。</p>
+<h3 id="1-配置SSH连接"><a href="#1-配置SSH连接" class="headerlink" title="1.配置SSH连接"></a>1.配置SSH连接</h3><p>本地仓库和远程仓库之间进行加密的文件传输，为此需要将本地的公钥加入到远程仓库的公钥列表中。</p>
+<p>首先获取本地公钥：</p>
+<pre class="highlight"><span class="line">cat .ssh/id_rsa.pub</span><br></pre>
+
+<p>接下来在Github的用户设置中添加本地公钥：</p>
+<p>Setting -&gt; SSH and GPG keys -&gt; New SSH key -&gt; 拷贝本地公钥 -&gt; 保存</p>
+<h3 id="2-创建本地仓库"><a href="#2-创建本地仓库" class="headerlink" title="2.创建本地仓库"></a>2.创建本地仓库</h3><p>创建一个文件夹，用于存放本地仓库。在终端下进入该文件夹，并执行以下命令来初始化本地仓库。</p>
+<pre class="highlight"><span class="line">git init</span><br></pre>
+
+
+
+<h3 id="3-创建远程仓库"><a href="#3-创建远程仓库" class="headerlink" title="3.创建远程仓库"></a>3.创建远程仓库</h3><p>只需根据Github提示操作即可。</p>
+<h3 id="4-建立本地仓库到远程仓库的映射"><a href="#4-建立本地仓库到远程仓库的映射" class="headerlink" title="4.建立本地仓库到远程仓库的映射"></a>4.建立本地仓库到远程仓库的映射</h3><p>建立映射之后，才能在本地仓库和远程仓库之间进行同步。</p>
+<pre class="highlight"><span class="line">git remote add origin https://github.com/NorahZak/note.github.io</span><br></pre>
+
+
+
+<h3 id="5-将远程仓库上的变化同步到本地仓库"><a href="#5-将远程仓库上的变化同步到本地仓库" class="headerlink" title="5.将远程仓库上的变化同步到本地仓库"></a>5.将远程仓库上的变化同步到本地仓库</h3><pre class="highlight"><span class="line">git pull origin master --allow-unrelated-histories</span><br></pre>
+
+
+
+<h3 id="6-将本地仓库上的变化同步到远程仓库"><a href="#6-将本地仓库上的变化同步到远程仓库" class="headerlink" title="6.将本地仓库上的变化同步到远程仓库"></a>6.将本地仓库上的变化同步到远程仓库</h3><p>首先将已增加/修改的文件加入到待同步的文件列表中：</p>
+<pre class="highlight"><span class="line">git add test.txt</span><br></pre>
+
+<p>接下来提交待同步的文件列表，-m参数表示本次更改的注释：</p>
+<pre class="highlight"><span class="line">git commit -m &quot;commit&quot;</span><br></pre>
+
+<p>最后进行同步：</p>
+<pre class="highlight"><span class="line">git push origin master</span><br></pre>
+
+
+
+<h2 id="二、Github个人网站"><a href="#二、Github个人网站" class="headerlink" title="二、Github个人网站"></a>二、Github个人网站</h2><p>创建个人网站，需要购置自己的服务器，并编写网页代码。而Github则提供了一种方法，能帮助用户更加方便快捷地创建自己的网站，那就是Github pages。用户可以使用Github提供的服务器和网页模板，从而专注于编写网站的内容。</p>
+<h3 id="1-创建仓库"><a href="#1-创建仓库" class="headerlink" title="1.创建仓库"></a>1.创建仓库</h3><p>创建一个远程仓库，用于管理要放到网站上的内容，然后在仓库的Setting中将仓库名改为<code>username.github.io</code>。接下来就可以通过<code>username.github.io</code>这个网址访问你的个人主页了。</p>
+<h3 id="2-编辑网页"><a href="#2-编辑网页" class="headerlink" title="2.编辑网页"></a>2.编辑网页</h3><p>我们可以将仓库同步到本地，然后在本地对网页内容进行编辑，再同步到远程仓库，从而实现对网页内容的编辑修改。</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2020/04/10/Github%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">http://example.com/2020/04/10/Github%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/04/10/C++中的天坑/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/04/10/ImageClassification/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Github%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">Github使用手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8Github%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE"><span class="toc-text">一、使用Github管理项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-Github%E4%BB%93%E5%BA%93"><span class="toc-text">0.Github仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%85%8D%E7%BD%AESSH%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.配置SSH连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">2.创建本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">3.创建远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BB%BA%E7%AB%8B%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E6%98%A0%E5%B0%84"><span class="toc-text">4.建立本地仓库到远程仓库的映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B0%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8A%E7%9A%84%E5%8F%98%E5%8C%96%E5%90%8C%E6%AD%A5%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">5.将远程仓库上的变化同步到本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E7%9A%84%E5%8F%98%E5%8C%96%E5%90%8C%E6%AD%A5%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">6.将本地仓库上的变化同步到远程仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Github%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99"><span class="toc-text">二、Github个人网站</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-text">1.创建仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BC%96%E8%BE%91%E7%BD%91%E9%A1%B5"><span class="toc-text">2.编辑网页</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>30</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>0</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Github%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">Github使用手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8Github%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE"><span class="toc-text">一、使用Github管理项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-Github%E4%BB%93%E5%BA%93"><span class="toc-text">0.Github仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%85%8D%E7%BD%AESSH%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.配置SSH连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">2.创建本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">3.创建远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BB%BA%E7%AB%8B%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E6%98%A0%E5%B0%84"><span class="toc-text">4.建立本地仓库到远程仓库的映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B0%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8A%E7%9A%84%E5%8F%98%E5%8C%96%E5%90%8C%E6%AD%A5%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">5.将远程仓库上的变化同步到本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E7%9A%84%E5%8F%98%E5%8C%96%E5%90%8C%E6%AD%A5%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">6.将本地仓库上的变化同步到远程仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Github%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99"><span class="toc-text">二、Github个人网站</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-text">1.创建仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BC%96%E8%BE%91%E7%BD%91%E9%A1%B5"><span class="toc-text">2.编辑网页</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Github%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">Github使用手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8Github%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE"><span class="toc-text">一、使用Github管理项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-Github%E4%BB%93%E5%BA%93"><span class="toc-text">0.Github仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%85%8D%E7%BD%AESSH%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.配置SSH连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">2.创建本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">3.创建远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BB%BA%E7%AB%8B%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E6%98%A0%E5%B0%84"><span class="toc-text">4.建立本地仓库到远程仓库的映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B0%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8A%E7%9A%84%E5%8F%98%E5%8C%96%E5%90%8C%E6%AD%A5%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">5.将远程仓库上的变化同步到本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E7%9A%84%E5%8F%98%E5%8C%96%E5%90%8C%E6%AD%A5%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">6.将本地仓库上的变化同步到远程仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Github%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99"><span class="toc-text">二、Github个人网站</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-text">1.创建仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BC%96%E8%BE%91%E7%BD%91%E9%A1%B5"><span class="toc-text">2.编辑网页</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/Python 闭包的作用/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/C++ const关键字的用法/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-28</div>
+        <a href="/2020/08/28/面试常见问题/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-07</div>
+        <a href="/2020/08/07/集成学习/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

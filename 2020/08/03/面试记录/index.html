@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-08-03T09:58:34.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-08-03</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>2.4k words</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <p>[TOC]</p>
+<h2 id="面试经验"><a href="#面试经验" class="headerlink" title="面试经验"></a>面试经验</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
+<li>如何找到数组中的重复元素？<ul>
+<li>答：集合</li>
+<li>再问：python/c++中的集合是如何实现的？</li>
+<li>答：python:set, c++:unordered_set</li>
+</ul>
+</li>
+<li>如何复制一个字符串？<ul>
+<li>答：python:deepcopy</li>
+<li>正答：python : python中字符串是不可变对象，复制操作没有意义；c++ : strcpy/memcpy</li>
+</ul>
+</li>
+<li>快速排序的时间复杂度（平均/最坏）？如何优化快速排序算法（比如：使它变成稳定排序/避免最坏情况下的时间复杂度）<ul>
+<li>答：平均时间复杂度O(nlogn)，最坏时间复杂度O(n^2)（在数据已经完全有序或完全倒序的情况下）；为了避免最坏时间复杂度，可以在每次分区时，以随机选取pivot代替选取第一个元素作为pivot</li>
+<li>补充：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34560548">快速排序的优化</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39521554/article/details/79364718">快速排序为何比堆排序使用更多</a><ul>
+<li>只需将待比较的关键字变成<code>(x[i], i)</code>，然后做双关键字排序，即可变成稳定排序，时间和空间复杂度不变（从数量级来说）</li>
+<li>合理选择pivot，原则是使得大于和小于pivot的元素数量接近。通常的做法是采样若干元素，取其中位数作为pivot</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线性链表<ul>
+<li><a target="_blank" rel="noopener" href="https://norahzak.github.io/2020/04/27/%E5%BE%AA%E7%8E%AF%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/">如何检测单向链表中是否存在环，如果存在，如何找到环的起点</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fengxinlinux/article/details/78885764">如何判断两个单向链表是否有交点</a><ul>
+<li>答：假设链表有额外的标记位，可以先遍历其中一个链表，并将所有结点的标记置为1；再遍历另一个链表，当找到第一个标记为1的结点，即找到了两个链表的第一个交点。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hairetz/article/details/4141043">堆和栈的区别是什么？请结合程序运行过程来具体说明。</a><ul>
+<li>答：函数递归调用时会入栈，数组保存在堆上。</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/25532384">进程和线程的区别？</a><ul>
+<li>没答上</li>
+</ul>
+</li>
+</ul>
+<h3 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h3><ul>
+<li>给定一个由若干整数组成的字符串，整数之间有各种可能的分隔符，要求返回这些整数排序后组成的字符串，整数之间以空格分隔。<ul>
+<li>一开始要求用c++来写，因为我的vscode没安装c++扩展，所以没法编译运行c++程序，面试官说直接写就行，不需要编译运行。但因为太久没有写c++程序，所以写了十几分钟还是没写对。</li>
+<li>面试官又说可以用python来写，写了第一版之后，面试官说我没有理解题意（当时太紧张了，忘了要排序这码事），修改之后正确运行了，面试官让讲一下代码的逻辑（面试官还有点怀疑程序的正确性，给了个比较复杂的case，不过还是正确通过了。面试官：……行吧）</li>
+</ul>
+</li>
+<li>字符串变换：求将str1转换为str2所需的最小操作次数，每次操作只能增加/删除/修改一个字符<ul>
+<li>面试官说你可以思考一下再做答，我因为在leetcode上做过，很快给出了思路（但因为太紧张了，说得磕磕巴巴，感谢面试官听懂了。。），面试官说你是不是做过这道题，我说是的哈哈（干笑）</li>
+<li>用c++写的，大概花了10-15分钟，一遍过了，但是代码写得比较啰嗦</li>
+</ul>
+</li>
+<li>寻找str1中包含str2中所有字符的最小窗口，如果有多个最小窗口，返回第一个即可<ul>
+<li>没做过这题，但因为蛮简单的，很快给出了思路（但一开始没考虑周全，面试官提醒之后，才得到完善的思路）</li>
+<li>因为涉及到集合和字典两种数据结构，c++我很久不用，怕把数据类型搞错，于是提出能不能用python，面试官无奈说可以，时代不同了，啥语言都一样</li>
+<li>写了大概10-15分钟，一遍过了，同样代码写得不太雅观</li>
+</ul>
+</li>
+<li>Hivesql：假设有两个表，一个表有字段a和b，另一个表有字段a和c，现要将两个表以a为关键字作inner join，问时间复杂度和什么有关？<ul>
+<li>答：表的大小，及a字段的值分布，如果a字段的值比较集中，会对复杂度有影响</li>
+<li>问：会增加还是降低复杂度？</li>
+<li>答：（我脑子瓦特了，想了半天，一面觉得笛卡尔积数目增多会增加复杂度，一面又觉得a的可选值比较少可能降低复杂度）应该是增高吧</li>
+<li>问：是的，那该怎么解决这个问题呢？</li>
+<li>答：（尬住了，我实习时经常用hivesql，但因为处理的数据量不大，没有深入考虑过效率优化的问题）</li>
+<li>问：提示一下，是不是可以在第一个表中新增一个c字段并赋值常数，在第二个表中新增b字段并赋值常数，然后将join改为union呢？</li>
+<li>答：（再次尬住，不理解这个做法为什么会得到正确的结果）</li>
+<li>问：但是这样做可能会使结果不完全正确，因为balabala</li>
+<li>答：（还是没懂）哦哦，对的对的</li>
+</ul>
+</li>
+</ul>
+<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><ul>
+<li>伪基站判别<ul>
+<li>这个项目，所有面试官在听我讲完思路之后都沉默了，然后立即开始下一环节，是因为过于naive了吗。。。</li>
+</ul>
+</li>
+<li>搜索词结果承接<ul>
+<li>你们这个模型用到了什么特征？<ul>
+<li>答：主要是共现特征和结果特征</li>
+<li>问：共现特征怎么提取的？</li>
+<li>答：以所有搜索结果的标题作为语料库，计算2gram，3gram的共现次数（其实这里说的不太准确，我们是遍历了所有可能的2/3term组成的短语，而不是只考虑相邻的2/3term）</li>
+<li>问：有考虑到term之间的距离吗？</li>
+<li>答：目前没有</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>音乐情感分类<ul>
+<li>这个项目用到了随机森林，你使用的是哪一种树？<ul>
+<li>没答上来，其实我没懂他想问什么，可能我对随机森林的概念理解得还是不够透彻。</li>
+<li>查了下资料，其实他想问的，应该是我用了哪种集成学习方法（bagging/boosting）。这个我确实忘记了。</li>
+</ul>
+</li>
+<li>介绍下随机森林吧<ul>
+<li>答：随机森林是若干决策树的集合，预测时将所有决策树投票表决的结果作为最终结果</li>
+<li>问：（悄悄问旁边的面试官：是吗？）</li>
+</ul>
+</li>
+<li>boosting和bagging的区别<ul>
+<li>答：boosting中，每个弱模型的学习样本权重是基于上一轮模型的预测结果的；而在bagging中，每个弱模型是独立采样和训练的。</li>
+<li>其实还有个区别我一时忘了：boosting会根据弱模型的预测准确率，对它们进行加权组合；而bagging中所有弱模型的权重是相同的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>运动模糊图像的识别<ul>
+<li>densenet的设计初衷是什么？<ul>
+<li>答：通过skip connection，让梯度的反向传播变得更容易，避免因网络过深导致的梯度爆炸/消失现象</li>
+</ul>
+</li>
+<li>resnet的设计初衷是什么？<ul>
+<li>答：作者发现，实际训练中，卷积层学到的映射近似于等值映射，如果让卷积层改为学习残差映射，那么参数量会大大减少，学习也会更加容易</li>
+</ul>
+</li>
+<li>介绍下你了解的<a target="_blank" rel="noopener" href="https://blog.csdn.net/quiet_girl/article/details/88668421">常用激活函数</a><ul>
+<li>答：relu, sigmoid, softmax</li>
+<li>问：sigmoid的缺点是什么？</li>
+<li>答：当自变量很大时，sigmoid的导数非常小，容易发生梯度消失</li>
+<li>问：即使导数再小，也还是有值的，为什么梯度会消失呢？</li>
+<li>答：因为计算机能表示的数值范围有限，如果数值过小的话，在计算机的表示中就等价于0了。</li>
+<li>问：nonono，回去再了解一下吧</li>
+</ul>
+</li>
+<li>请介绍下你了解的经典CNN模型<ul>
+<li>Alexnet, vgg</li>
+<li>问：介绍下alexnet吧，以及vgg相较于alexnet做了哪些改进</li>
+<li>答：（太紧张所以愣住了）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h3><ul>
+<li>lstm的提出是为了解决什么问题？<ul>
+<li>答：为了提取一个序列的数据中各元素之间的关联</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>被面试官吐槽话少，不会表现自己的长处。<ul>
+<li>其实不是话少，是真的没什么长处可以炫耀的。</li>
+</ul>
+</li>
+<li>方便的话说下你现在都有什么offer？<ul>
+<li>因为之前在准备论文，所以没有投提前批，最近才开始准备秋招，balabala一顿挽尊，总之现在还没有offer。。。</li>
+</ul>
+</li>
+</ul>
+<h3 id="美团-推荐算法工程师"><a href="#美团-推荐算法工程师" class="headerlink" title="美团-推荐算法工程师"></a>美团-推荐算法工程师</h3><h4 id="一面-8-25（30min）"><a href="#一面-8-25（30min）" class="headerlink" title="一面-8.25（30min）"></a>一面-8.25（30min）</h4><ol>
+<li>实习项目/本科毕业设计</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/massquantity/p/9794480.html">xgboost和GBDT的区别</a>（谈到了xgboost的并行化）</li>
+<li>机器学习中有哪些解决过拟合的技巧</li>
+<li>L1和L2正则化各有什么优缺点</li>
+<li>dropout的推断过程（谈到了scale问题，需要在训练时适当放大神经元权重，或者在测试时适当减小神经元权重，否则会导致训练和测试时输出的scale不同）</li>
+<li>sql有哪几种join操作</li>
+<li>对spark的运行机理有了解吗</li>
+<li>spark中，reduceByKey和groupByKey的区别</li>
+<li>如何优化spark效率（比如在数据倾斜时）</li>
+<li>假设训练数据分布不均衡，负例：正例=10:1，此时可以对负例进行下采样，下采样之后训练的模型，预测值会有什么变化</li>
+<li>densenet和resnet的区别</li>
+<li>对多任务学习有什么了解</li>
+<li>进程和线程的区别</li>
+<li>什么是死锁</li>
+<li>编程题：找到链表中倒数第k个元素</li>
+</ol>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2020/08/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">http://example.com/2020/08/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/08/07/集成学习/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/06/04/工作日志/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C"><span class="toc-text">面试经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-text">编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="toc-text">项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BE%8E%E5%9B%A2-%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="toc-text">美团-推荐算法工程师</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E9%9D%A2-8-25%EF%BC%8830min%EF%BC%89"><span class="toc-text">一面-8.25（30min）</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>30</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>0</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C"><span class="toc-text">面试经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-text">编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="toc-text">项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BE%8E%E5%9B%A2-%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="toc-text">美团-推荐算法工程师</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E9%9D%A2-8-25%EF%BC%8830min%EF%BC%89"><span class="toc-text">一面-8.25（30min）</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C"><span class="toc-text">面试经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-text">编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="toc-text">项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BE%8E%E5%9B%A2-%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="toc-text">美团-推荐算法工程师</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E9%9D%A2-8-25%EF%BC%8830min%EF%BC%89"><span class="toc-text">一面-8.25（30min）</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/Python 闭包的作用/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/C++ const关键字的用法/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-28</div>
+        <a href="/2020/08/28/面试常见问题/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-07</div>
+        <a href="/2020/08/07/集成学习/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

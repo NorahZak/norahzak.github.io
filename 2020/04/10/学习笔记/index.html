@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2020-04-10T01:21:14.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2020-04-10</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>80 words</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h1><h2 id="Github使用"><a href="#Github使用" class="headerlink" title="Github使用"></a><a href="./Github%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C.md">Github使用</a></h2><h2 id="PyTorch使用手册"><a href="#PyTorch使用手册" class="headerlink" title="PyTorch使用手册"></a><a href="./PyTorch%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C.md">PyTorch使用手册</a></h2><h2 id="C-中的天坑-md"><a href="#C-中的天坑-md" class="headerlink" title="C++中的天坑.md"></a><a href="./C++%E4%B8%AD%E7%9A%84%E5%A4%A9%E5%9D%91.md">C++中的天坑.md</a></h2><h2 id="Linux命令大全-md"><a href="#Linux命令大全-md" class="headerlink" title="Linux命令大全.md"></a><a href="Linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8.md">Linux命令大全.md</a></h2><h2 id="Python语法-md"><a href="#Python语法-md" class="headerlink" title="Python语法.md"></a><a href="./Python%E8%AF%AD%E6%B3%95.md">Python语法.md</a></h2><h2 id="Markdown公式总结"><a href="#Markdown公式总结" class="headerlink" title="Markdown公式总结"></a><a href="./markdown%E5%85%AC%E5%BC%8F.md">Markdown公式总结</a></h2><h2 id="Matplotlib绘图教程"><a href="#Matplotlib绘图教程" class="headerlink" title="Matplotlib绘图教程"></a><a href="./matplotlib%E7%BB%98%E5%9B%BE.md">Matplotlib绘图教程</a></h2><h2 id="Shell脚本编程"><a href="#Shell脚本编程" class="headerlink" title="Shell脚本编程"></a><a href="./shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B.md">Shell脚本编程</a></h2><h2 id="图像复原论文阅读笔记"><a href="#图像复原论文阅读笔记" class="headerlink" title="图像复原论文阅读笔记"></a><a href="./%E5%9B%BE%E5%83%8F%E5%A4%8D%E5%8E%9F.md">图像复原论文阅读笔记</a></h2><h2 id="数字图像处理"><a href="#数字图像处理" class="headerlink" title="数字图像处理"></a><a href="./%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86.md">数字图像处理</a></h2><h2 id="常见程序运行错误"><a href="#常见程序运行错误" class="headerlink" title="常见程序运行错误"></a><a href="./%E5%B8%B8%E8%A7%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E9%94%99%E8%AF%AF.md">常见程序运行错误</a></h2><h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a><a href="./%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.pages">机器学习</a></h2><p>![](/Users/apple/Desktop/屏幕快照 2019-12-04 上午11.27.23.png)</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2020/04/10/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2020/04/10/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2020/04/10/图像复原/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2020/04/10/常见程序运行错误/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Github%E4%BD%BF%E7%94%A8"><span class="toc-text">Github使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">PyTorch使用手册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E4%B8%AD%E7%9A%84%E5%A4%A9%E5%9D%91-md"><span class="toc-text">C++中的天坑.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8-md"><span class="toc-text">Linux命令大全.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%AF%AD%E6%B3%95-md"><span class="toc-text">Python语法.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown%E5%85%AC%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="toc-text">Markdown公式总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matplotlib%E7%BB%98%E5%9B%BE%E6%95%99%E7%A8%8B"><span class="toc-text">Matplotlib绘图教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B"><span class="toc-text">Shell脚本编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A4%8D%E5%8E%9F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="toc-text">图像复原论文阅读笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">数字图像处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E9%94%99%E8%AF%AF"><span class="toc-text">常见程序运行错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>30</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>0</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Github%E4%BD%BF%E7%94%A8"><span class="toc-text">Github使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">PyTorch使用手册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E4%B8%AD%E7%9A%84%E5%A4%A9%E5%9D%91-md"><span class="toc-text">C++中的天坑.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8-md"><span class="toc-text">Linux命令大全.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%AF%AD%E6%B3%95-md"><span class="toc-text">Python语法.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown%E5%85%AC%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="toc-text">Markdown公式总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matplotlib%E7%BB%98%E5%9B%BE%E6%95%99%E7%A8%8B"><span class="toc-text">Matplotlib绘图教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B"><span class="toc-text">Shell脚本编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A4%8D%E5%8E%9F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="toc-text">图像复原论文阅读笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">数字图像处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E9%94%99%E8%AF%AF"><span class="toc-text">常见程序运行错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Github%E4%BD%BF%E7%94%A8"><span class="toc-text">Github使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">PyTorch使用手册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E4%B8%AD%E7%9A%84%E5%A4%A9%E5%9D%91-md"><span class="toc-text">C++中的天坑.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8-md"><span class="toc-text">Linux命令大全.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%AF%AD%E6%B3%95-md"><span class="toc-text">Python语法.md</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown%E5%85%AC%E5%BC%8F%E6%80%BB%E7%BB%93"><span class="toc-text">Markdown公式总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matplotlib%E7%BB%98%E5%9B%BE%E6%95%99%E7%A8%8B"><span class="toc-text">Matplotlib绘图教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B"><span class="toc-text">Shell脚本编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A4%8D%E5%8E%9F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="toc-text">图像复原论文阅读笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">数字图像处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E9%94%99%E8%AF%AF"><span class="toc-text">常见程序运行错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/Python 闭包的作用/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-09-12</div>
+        <a href="/2020/09/12/C++ const关键字的用法/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-28</div>
+        <a href="/2020/08/28/面试常见问题/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2020-08-07</div>
+        <a href="/2020/08/07/集成学习/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
