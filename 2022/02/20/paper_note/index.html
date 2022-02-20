@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      论文阅读笔记
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-20T03:36:59.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-20</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>1.9k words</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="论文阅读笔记"><a href="#论文阅读笔记" class="headerlink" title="论文阅读笔记"></a>论文阅读笔记</h1><p>[TOC]</p>
+<h2 id="1-Learning-to-Synthesize-Motion-Blur"><a href="#1-Learning-to-Synthesize-Motion-Blur" class="headerlink" title="1. Learning to Synthesize Motion Blur"></a>1. Learning to Synthesize Motion Blur</h2><p>CVPR2019, Tim Brooks Jonathan, T. Barron, Google Research </p>
+<p><a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_CVPR_2019/papers/Brooks_Learning_to_Synthesize_Motion_Blur_CVPR_2019_paper.pdf">http://openaccess.thecvf.com/content_CVPR_2019/papers/Brooks_Learning_to_Synthesize_Motion_Blur_CVPR_2019_paper.pdf</a></p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>This paper presented a method for synthesizing motion blurred image from a pair of consecutive sharp images using deep learning techniques.</p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ol>
+<li><p>What is motion blur: </p>
+<p>the blur in captured image caused by the varying light during exposure time due to camera or scene motion.</p>
+</li>
+<li><p>The meaning of synthesizing realistic motion blurred images:</p>
+<p>(a) to generate training data for learning based motion deblurring methods;</p>
+<p>(b) to generate artistic motion blurred images with easy-captured sharp images.</p>
+</li>
+<li><p>The research status:</p>
+<p>(a) This problem is well studied in rendering community [1]. However, previous methods requires extra information about input sharp image, such as velocity and depth, and in most cases we don’t have these information. <em><strong>(Does these methods produce good results? What are the extra information needed? Are these information hard to get?)</strong></em> Instead, this paper’s method only takes a pair of sharp images as input.</p>
+<p><em><strong>(b) This problem is also well studied in motion deblurring community. Many deep learning based motion deblur papers have proposed their methods for synthesizing motion blurred images from sharp images. They can be roughly divided into 2 categories: take average on consecutive sharp images, and convolve on single sharp image with artistic motion blur kernels. The former has shortage in that it has temporal downsampling artifacts, while the latter is not realistic enough.</strong></em></p>
+</li>
+<li><p>Their method:</p>
+<p>Using machine learning based method to predict line kernels for motion blurring image pairs. Specifically, they use CNN and end-to-end training since it has achieved good performance on similar tasks such as optical flow prediction and frame interpolation. And the training data is synthesized using frame interpolation technique.</p>
+</li>
+<li><p>Contributions:</p>
+<p>(a) this model achieves higher accuracy on motion blur synthesizing task than previous methods;</p>
+<p>(b) though frame interpolation have competitive accuracy, their method is much faster and more suitable for artistic consumer-facing rendering or smartphone-photography setting. </p>
+</li>
+</ol>
+<h3 id="Problem-formulation"><a href="#Problem-formulation" class="headerlink" title="Problem formulation"></a>Problem formulation</h3><p>Given two consecutive sharp images $I_1$ and $I_2$ . $I_1$ is captured during time $[s_1, t_1]$ and $I_2$ is captured during time $<a href="s_1%3Ct_1%3Cs_2%3Ct_2">s_2, t_2</a>$. The goal is to synthesize an motion blurred image $B$ that is captured during time $[s_1, t_2]$.</p>
+<h4 id="Assumptions"><a href="#Assumptions" class="headerlink" title="Assumptions:"></a>Assumptions:</h4><ol>
+<li>The pixels move from one location in $I_1$ to another location in $I_2$ during exposure time;</li>
+<li>The motion of pixels is linear;</li>
+<li>Each pixel in $B$ is related to 2 lines: $[x, y]–&gt;[x+\Delta_1 x, y+\Delta_1 y]$, and  $[x, y]–&gt;[x+\Delta_2 x, y+\Delta_2 y]$. And can be seen as weighted sum of pixels sampled along these lines in $I_1$ and $I_2$ .</li>
+</ol>
+<h4 id="Line-kernel-prediction"><a href="#Line-kernel-prediction" class="headerlink" title="Line kernel prediction:"></a>Line kernel prediction:</h4><p>According to the assumptions, for each pixel in $B$, they need to :</p>
+<ol>
+<li>predict the 2 end points of 2 blur lines related to it: $[\Delta_1 x, \Delta_1 y]$ and$[\Delta_2 x, \Delta_2 y]$ related to it;</li>
+<li>sample pixels along the line in $I_1$ and $I_2$ ;</li>
+<li>compute weighted sum of the sampled pixels.</li>
+</ol>
+<p>Why using weighted sum instead of average sum?</p>
+<ol>
+<li>if there exists occlusion, then the sampled pixels that are occluded should be given weight 0;</li>
+<li>if the pixels is accelerating during exposure time, then the sampled pixels that are closer to start point should be given larger weight than others.</li>
+</ol>
+<p>Since they use CNN to predict the weights of sampled pixels, the number of samples N must be fixed because CNN has trouble predicting variable-length output.  If N is fixed, then the length of line should also be limited, because if the line is too long, then only sample N pixels will lead temporal downsampling. <em><strong>(However, limit the length of line can also lead to loss of information, since some pixels indeed has longer motion length. So during training and testing, they did data cleansing to ensure the motion is no larger than N.)</strong></em> </p>
+<h3 id="Network-structure"><a href="#Network-structure" class="headerlink" title="Network structure"></a>Network structure</h3><p>They used U-net since it has achieved good performance on similar tasks such as optical flow prediction and frame interpolation. The input is the concatenation of two sharp images. The output of U-net is a 32-channel feature map, which is feed into four $1*1$ conv layers seperately for producing line predictions, i.e. (a) end points of motion lines in $I_1$ and $I_2$. (b) weights of N sampled pixels in $I_1$ and $I_2$. Finally, the motion blurred image is produced using  $I_1$ , $I_2$ and the line predictions. For non-int pixel coordinate, use bilinear interpolation. <em><strong>(Though this operation is differentiable theoratically, how did they do that in realization?)</strong></em></p>
+<p>![image-20191120220636009](/Users/apple/Library/Application Support/typora-user-images/image-20191120220636009.png)</p>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><p>To train this model in an end-to-end way, they need a lot of data, i.e. consecutive image pairs and corresponding ground-truth motion blurred image, which is the average of light during exposure time of the 2 input images. Since real training data is hard to get, they have to synthesize data, i.e. using average of consecutive frames as ground truth motion blurred image. To get an abundance of train data, they use easy-to-get video sequences for synthesizing. Since most video has a relatively low frame rate (e.g. 30fps)，the time gap between two consecutive frames is large. Therefore, in order to better mimic true motion blurred image, they use frame interpolation to generate middle frames between 2 input frames, and use their average as the ground-truth. They use adjacent triplets in videos to train a frame inperpolation model, then use this model to interpolate between every triplets to get a 33-frame interpolated video sequence, and use their average as ground-truth motion blurred image. <em><strong>(How much training data are they using here? 300000 pairs. Can they get enough train data from publicly available high frame rate video sequences? No)</strong></em></p>
+<h3 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h3><p>Since the data synthesize method used in training phase can be less realistic due to mistake in frame interpolation, for evaluation they choose a harder but more realistic way to collect a small set of data, i.e. using high frame-rate (240 fps) camera to capture moving subjects, and use the average of several consecutive frames as ground-truth, while the first and last frame served as input.</p>
+<h3 id="Dataset-amp-Experiment"><a href="#Dataset-amp-Experiment" class="headerlink" title="Dataset &amp; Experiment"></a>Dataset &amp; Experiment</h3><p>Omitted.</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[1] Fernando Navarro, Francisco J. Sern, and Diego Gutierrez. Motion Blur Rendering: State of the Art. <em>Computer Graphics Forum</em>, 2011. </p>
+<h2 id="2-Phase-only-Image-Based-Kernel-Estimation-for-Single-Image-Blind-Deblurring"><a href="#2-Phase-only-Image-Based-Kernel-Estimation-for-Single-Image-Blind-Deblurring" class="headerlink" title="2.Phase-only Image Based Kernel Estimation for Single Image Blind Deblurring"></a>2.Phase-only Image Based Kernel Estimation for Single Image Blind Deblurring</h2><p>Pan, Liyuan, et al. “Phase-Only Image Based Kernel Estimation for Single Image Blind Deblurring.” <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition</em>. 2019.</p>
+<h3 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h3><p>This paper uses phase-only image of an motion blurred image to estimate the blur kernel, then estimate the latent sharp image by solving an optimization problem.</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><h4 id="Notations"><a href="#Notations" class="headerlink" title="Notations"></a>Notations</h4><p>Blur image: $B$, latent sharp image: $L$, blur kernel: $\mathbf{k}$,</p>
+<p>Fourier transform: $F(\centerdot)$, inverse fourier transform: $F^{-1}(\centerdot)$,</p>
+<p>Complex: $z=ke^{i\theta}$, phase of complex: $e^{i\theta}$, amplitude of complex: $k$, </p>
+<p>Extract phase-only image: $P(I)=F^{-1}(Phase(F(I)))$,</p>
+<p>Rotation: $R(\centerdot)$, shift:$S(\centerdot)$</p>
+<p>Self-correlation: $A(I)= \overline I\bigotimes I = F^{-1}(F(I)\bigodot \overline {F(I)})$</p>
+<p><em><strong>Dirac delta function</strong></em>: $\delta(x)\begin{cases}\infty&amp;x=0\0&amp;else\end{cases}$</p>
+<p><em><strong>Kronecker delta function:</strong></em> $\delta(x)=\begin{cases}1&amp;x=0\0&amp;else\end{cases}$</p>
+<p><em><strong>(The function used in paper is Dirac, but I doubt it might be Kronecker)</strong></em></p>
+<p>Top-hat function: $H(x)=\begin{cases}a&amp;b&lt;=x&lt;=c\0&amp;else \end{cases}$</p>
+<p>Image gratitude:$\nabla I_x(x,y)=I(x+1,y)-I(x-1,y),\nabla I_y(x,y)=I(x,y+1)-I(x,y-1)$</p>
+<h4 id="Lemmas"><a href="#Lemmas" class="headerlink" title="Lemmas"></a>Lemmas</h4><ol>
+<li>$R(P(I))=P(R(I)), S(P(I))=P(S(I))$</li>
+<li>$P(L\bigotimes k)=P(L)\bigotimes P(k)$</li>
+</ol>
+<h4 id="Invesigate-P-L"><a href="#Invesigate-P-L" class="headerlink" title="Invesigate P(L)"></a>Invesigate P(L)</h4><p>The phase-only image can reveal a lot information about the texture and profile of a sharp image.</p>
+<p>![image-20191126175240664](/Users/apple/Library/Application Support/typora-user-images/image-20191126175240664.png)</p>
+<h4 id="Investigate-P-k"><a href="#Investigate-P-k" class="headerlink" title="Investigate P(k)"></a>Investigate P(k)</h4><p>First, assume the blur kernel is linear. Since $P$ has rotation and shift covariance (Lemma 1), we can assume that P is axis-aligned, so it can be seperated as follows:</p>
+<p>$\mathbf k(x, y)=\delta(y)H(x)$</p>
+<p>Extract phase-only image, we got:</p>
+<p>$P(\mathbf k)(x, y)=\delta(y)P(H)(x)$</p>
+<p>where $P(H)$ has the shape as follows:</p>
+<p>![屏幕快照 2019-11-22 上午10.44.43](/Users/apple/Desktop/屏幕快照 2019-11-22 上午10.44.43.png)</p>
+<p>It has two principle peaks. Note that $P(B)=P(L\bigotimes \mathbf k)=P(L)\bigotimes P(\mathbf k)$. Since $P(\mathbf k)$ has the shape like above, convolving $P(L)$ with $P(\mathbf k)$ <em><strong>(maybe firstly normalized)</strong></em> is equal to copying the edges in $P(L)$ twice, and the two copies correspond to the end and start point of blur kernel $\mathbf k$ seperately. Thus, they can estimate $\mathbf k$ from $P(B)$.</p>
+<p>![image-20191126175633289](/Users/apple/Library/Application Support/typora-user-images/image-20191126175633289.png)</p>
+<h4 id="Estimate-k-and-L"><a href="#Estimate-k-and-L" class="headerlink" title="Estimate k and L"></a>Estimate k and L</h4><p>Since $P(B)$ can be seen as copyign the edge in $P(L)$ twice, and the two copy correspond to the end and start point of blur kernel $\mathbf k$ seperately, it may be able to use autocorrelation of $P(B)$ to estimate $P(\mathbf k)$.</p>
+<p>However, $P(B)$’s self-correlation is always $\delta$ function, thus we can’t get useful information from it. This paper proposed that $|P(B)|$ instead of $P(B)$ has meaningful autocorrelation that can indicate $P(\mathbf k)$.</p>
+<p>The autocorrelation of $|P(B)|$ is also a 2-d image, which is central symmetric. As showed below, the autocorrelation has 2 symmetric peak points, which indicates the orientation and length of blur kernel $\mathbf k$. After getting $\mathbf k$, they estimate the sharp image $L$ by solving an optimization problem:</p>
+<p>$L = argmin_L ||\mathbf k \bigotimes L-B||^2+\mu_2h(\nabla L)$</p>
+<p>$h(\nabla L)$ is an regularizaion term aims at preventing $L$ from having too much noise and too sharp edge:</p>
+<p>$h(\nabla L)=\sum_{x,y} min(||\nabla L(x,y)/\epsilon||^2,1)$</p>
+<p>![image-20191125162456978](/Users/apple/Library/Application Support/typora-user-images/image-20191125162456978.png)</p>
+<p>If the blur is linear, then it’s easy to estimate $\mathbf k$ from $A(|P(B)|)$, since it only has two peak points. However, when the blur is non-linear, there will be many peak points in $A(|P(B)|)$, like showed above. Thus, this paper propose to firstly estimate a coarse blue kernel, then refine it in an iterative way. The optimization goal is:</p>
+<p>$L = argmin_L ||\mathbf k \bigotimes L-B||^2+\mu_1||\mathbf k||^2+\mu_2h(\nabla L)$</p>
+<p><em><strong>The solution of this optimization problem involves half quadratic splitting and solving in fourier domain, which is out of my knowledge.</strong></em> </p>
+<h4 id="Extend-to-non-uniform-blur"><a href="#Extend-to-non-uniform-blur" class="headerlink" title="Extend to non-uniform blur"></a>Extend to non-uniform blur</h4><p>For extension to non-uniform blur, the author proposed to divide the whole image into small patches, and assume that motion inside one patch is uniform. Thus, we can use method described above to deblur each patch seperately, then attached them together.</p>
+<h2 id="3-Unsupervised-Domain-Specific-Deblurring-via-Disentangled-Representations"><a href="#3-Unsupervised-Domain-Specific-Deblurring-via-Disentangled-Representations" class="headerlink" title="3.Unsupervised Domain-Specific Deblurring via Disentangled Representations"></a>3.Unsupervised Domain-Specific Deblurring via Disentangled Representations</h2><p>Lu, Boyu, Jun-Cheng Chen, and Rama Chellappa. “Unsupervised domain-specific deblurring via disentangled representations.” <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition</em>. 2019.</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2022/02/20/paper_note/">http://example.com/2022/02/20/paper_note/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/20/object_detection/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">目标检测算法综述 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/02/20/python_closure/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">Python闭包 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="toc-text">论文阅读笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Learning-to-Synthesize-Motion-Blur"><span class="toc-text">1. Learning to Synthesize Motion Blur</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-formulation"><span class="toc-text">Problem formulation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Assumptions"><span class="toc-text">Assumptions:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Line-kernel-prediction"><span class="toc-text">Line kernel prediction:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network-structure"><span class="toc-text">Network structure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training"><span class="toc-text">Training</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Testing"><span class="toc-text">Testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-amp-Experiment"><span class="toc-text">Dataset &amp; Experiment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Phase-only-Image-Based-Kernel-Estimation-for-Single-Image-Blind-Deblurring"><span class="toc-text">2.Phase-only Image Based Kernel Estimation for Single Image Blind Deblurring</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract-1"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Notations"><span class="toc-text">Notations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lemmas"><span class="toc-text">Lemmas</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Invesigate-P-L"><span class="toc-text">Invesigate P(L)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Investigate-P-k"><span class="toc-text">Investigate P(k)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Estimate-k-and-L"><span class="toc-text">Estimate k and L</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Extend-to-non-uniform-blur"><span class="toc-text">Extend to non-uniform blur</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Unsupervised-Domain-Specific-Deblurring-via-Disentangled-Representations"><span class="toc-text">3.Unsupervised Domain-Specific Deblurring via Disentangled Representations</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>23</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>6</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="toc-text">论文阅读笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Learning-to-Synthesize-Motion-Blur"><span class="toc-text">1. Learning to Synthesize Motion Blur</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-formulation"><span class="toc-text">Problem formulation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Assumptions"><span class="toc-text">Assumptions:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Line-kernel-prediction"><span class="toc-text">Line kernel prediction:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network-structure"><span class="toc-text">Network structure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training"><span class="toc-text">Training</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Testing"><span class="toc-text">Testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-amp-Experiment"><span class="toc-text">Dataset &amp; Experiment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Phase-only-Image-Based-Kernel-Estimation-for-Single-Image-Blind-Deblurring"><span class="toc-text">2.Phase-only Image Based Kernel Estimation for Single Image Blind Deblurring</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract-1"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Notations"><span class="toc-text">Notations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lemmas"><span class="toc-text">Lemmas</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Invesigate-P-L"><span class="toc-text">Invesigate P(L)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Investigate-P-k"><span class="toc-text">Investigate P(k)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Estimate-k-and-L"><span class="toc-text">Estimate k and L</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Extend-to-non-uniform-blur"><span class="toc-text">Extend to non-uniform blur</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Unsupervised-Domain-Specific-Deblurring-via-Disentangled-Representations"><span class="toc-text">3.Unsupervised Domain-Specific Deblurring via Disentangled Representations</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\Programming" title="Programming"><div class="tags-list-item">Programming</div></a>
+    
+    <a href="\tags\Computer vision" title="Computer vision"><div class="tags-list-item">Computer vision</div></a>
+    
+    <a href="\tags\Machine learning" title="Machine learning"><div class="tags-list-item">Machine learning</div></a>
+    
+    <a href="\tags\机器学习" title="机器学习"><div class="tags-list-item">机器学习</div></a>
+    
+    <a href="\tags\Deep learning" title="Deep learning"><div class="tags-list-item">Deep learning</div></a>
+    
+    <a href="\tags\Deep learning, Programming" title="Deep learning, Programming"><div class="tags-list-item">Deep learning, Programming</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="toc-text">论文阅读笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Learning-to-Synthesize-Motion-Blur"><span class="toc-text">1. Learning to Synthesize Motion Blur</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-formulation"><span class="toc-text">Problem formulation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Assumptions"><span class="toc-text">Assumptions:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Line-kernel-prediction"><span class="toc-text">Line kernel prediction:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network-structure"><span class="toc-text">Network structure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Training"><span class="toc-text">Training</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Testing"><span class="toc-text">Testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset-amp-Experiment"><span class="toc-text">Dataset &amp; Experiment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Phase-only-Image-Based-Kernel-Estimation-for-Single-Image-Blind-Deblurring"><span class="toc-text">2.Phase-only Image Based Kernel Estimation for Single Image Blind Deblurring</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract-1"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Notations"><span class="toc-text">Notations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lemmas"><span class="toc-text">Lemmas</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Invesigate-P-L"><span class="toc-text">Invesigate P(L)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Investigate-P-k"><span class="toc-text">Investigate P(k)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Estimate-k-and-L"><span class="toc-text">Estimate k and L</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Extend-to-non-uniform-blur"><span class="toc-text">Extend to non-uniform blur</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Unsupervised-Domain-Specific-Deblurring-via-Disentangled-Representations"><span class="toc-text">3.Unsupervised Domain-Specific Deblurring via Disentangled Representations</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/image_processing/"><div class="recent-posts-item-content">数字图像处理基础</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/python_manual/"><div class="recent-posts-item-content">Python使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/pytorch_manual/"><div class="recent-posts-item-content">PyTorch使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/cnn/"><div class="recent-posts-item-content">卷积神经网络</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

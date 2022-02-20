@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      图像分类算法综述
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-20T03:36:59.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-20</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>509 words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Computer-vision/" class="post-meta-link">Computer vision</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="图像分类"><a href="#图像分类" class="headerlink" title="图像分类"></a>图像分类</h1><h2 id="1-任务定义"><a href="#1-任务定义" class="headerlink" title="1.任务定义"></a>1.任务定义</h2><p>图像分类，顾名思义就是给定一张图像，判断它所属的类别。按照图像所属类别的数目，可分为单分类与多分类；按照图像类别的细化程度，可分为物种间分类（或称通用分类，例如区分车/人/猫），物种内分类（例如不同种类的鸟）和个体间分类（例如人脸识别）。</p>
+<h2 id="2-数据集"><a href="#2-数据集" class="headerlink" title="2.数据集"></a>2.数据集</h2><p>按照图像类别细化程度来划分，目前常用的主要有以下这些数据集：</p>
+<p>（1）通用分类</p>
+<p><a href="https://link.zhihu.com/?target=http://image-net.org/">ImageNet</a>：各类新算法实际使用的图像数据集。ImageNet是一个用于视觉物体识别研究的大型数据库，其包含了来自超过2万个类别的超过1400万个图像以及每个图像对应的标注。现在大多数图像分类算法都是在ImageNet上训练并且评估的。</p>
+<p><a href="https://link.zhihu.com/?target=https://www.cs.utoronto.ca/~kriz/cifar.html">CIFAR10 / CIFAR100</a>：32×32自然图像数据集，10或100种类别。目前已不再普遍使用，但还是可以用来进行合理性检验。</p>
+<p><a href="https://link.zhihu.com/?target=http://yann.lecun.com/exdb/mnist/">MNIST – 手写数字</a>：最常用的合理性检验数据集，由黑白手写数字图像组成，图像大小为25×25，数字居中显示。MNIST是一项比较简单的任务，通过MNIST测试不一定表明模型本身能有效运作。</p>
+<p><a href="https://link.zhihu.com/?target=http://www.vision.caltech.edu/Image_Datasets/Caltech101/">Caltech 101</a>：101类物体的图片。</p>
+<p><a href="https://link.zhihu.com/?target=http://www.vision.caltech.edu/Image_Datasets/Caltech256/">Caltech 256</a>：256类物体的图片。</p>
+<p><a href="https://link.zhihu.com/?target=http://host.robots.ox.ac.uk/pascal/VOC/">Pascal VOC</a>：通用图像分割/分类数据集，很适合作为基线。</p>
+<p>（2）物种内分类</p>
+<p><a target="_blank" rel="noopener" href="http://www.vision.caltech.edu/visipedia/CUB-200.html">Caltech-UCSD Birds-200-2011</a>：一个专门对鸟类进行分类的数据集。</p>
+<p>（3）个体级分类</p>
+<p>包括一些人脸识别、车辆识别的数据集。</p>
+<h2 id="3-现有方法"><a href="#3-现有方法" class="headerlink" title="3.现有方法"></a>3.现有方法</h2><p>主要可分为手工提取特征+分类器，和深度学习两大类。鉴于目前深度学习模型在性能上已经大大超越手工特征，以下只介绍基于深度学习的分类方法。</p>
+<p>（1）VGGNet</p>
+<p>（2）GoogleNet</p>
+<p>（3）ResNet</p>
+<p>（4）DenseNet</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2022/02/20/image_classification/">http://example.com/2022/02/20/image_classification/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/20/github_manual/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">Github使用手册 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/02/20/image_restoration/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">图像复原算法综述 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-text">图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89"><span class="toc-text">1.任务定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">2.数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95"><span class="toc-text">3.现有方法</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>23</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>6</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-text">图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89"><span class="toc-text">1.任务定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">2.数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95"><span class="toc-text">3.现有方法</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\Programming" title="Programming"><div class="tags-list-item">Programming</div></a>
+    
+    <a href="\tags\Computer vision" title="Computer vision"><div class="tags-list-item">Computer vision</div></a>
+    
+    <a href="\tags\Machine learning" title="Machine learning"><div class="tags-list-item">Machine learning</div></a>
+    
+    <a href="\tags\机器学习" title="机器学习"><div class="tags-list-item">机器学习</div></a>
+    
+    <a href="\tags\Deep learning" title="Deep learning"><div class="tags-list-item">Deep learning</div></a>
+    
+    <a href="\tags\Deep learning, Programming" title="Deep learning, Programming"><div class="tags-list-item">Deep learning, Programming</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-text">图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%BB%E5%8A%A1%E5%AE%9A%E4%B9%89"><span class="toc-text">1.任务定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">2.数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95"><span class="toc-text">3.现有方法</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/image_processing/"><div class="recent-posts-item-content">数字图像处理基础</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/python_manual/"><div class="recent-posts-item-content">Python使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/pytorch_manual/"><div class="recent-posts-item-content">PyTorch使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/cnn/"><div class="recent-posts-item-content">卷积神经网络</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Shell使用手册
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-20T03:36:59.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-20</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>733 words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Programming/" class="post-meta-link">Programming</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="Shell使用手册"><a href="#Shell使用手册" class="headerlink" title="Shell使用手册"></a>Shell使用手册</h1><p>[TOC]</p>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>Shell是一种用C语言写的程序，其作用是给Linux系统的用户提供一个可以调用系统内核的接口。而用户使用Shell脚本来操作这个接口。</p>
+<p>目前已经有很多种shell，比如bash，zsh等。大多数Linux系统默认的shell为bash。不同种类的Shell脚本需要用不同的shell解释程序来进行编译。在shell脚本的第一行，要指定解释程序的位置（通常在<code>/bin</code>目录下）。例如，以下语句指定将该脚本作为bash脚本来解释。</p>
+<pre class="highlight"><span class="line">#! /bin/bash</span><br></pre>
+
+<h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><p><strong>声明变量</strong></p>
+<pre class="highlight"><span class="line">var_name=var_value</span><br></pre>
+
+<p>注意等号与变量名之间不要有空格。特别地，字符串变量的值可以加引号，也可以不加。<em><strong>即使是空串也可以不加引号。</strong></em></p>
+<p><strong>使用变量</strong></p>
+<pre class="highlight"><span class="line">$&#123;var_name&#125;</span><br></pre>
+
+<h2 id="3-输出"><a href="#3-输出" class="headerlink" title="3.输出"></a>3.输出</h2><blockquote>
+<p><code>echo</code> [-e] ${var_name} / string</p>
+<p>-e: 允许string中带有格式化字符</p>
+</blockquote>
+<pre class="highlight"><span class="line">echo -e &#x27;test\n&#x27;</span><br><span class="line">&gt;&gt;&gt; test</span><br><span class="line"></span><br></pre>
+
+<h2 id="4-函数"><a href="#4-函数" class="headerlink" title="4.函数"></a>4.函数</h2><pre class="highlight"><span class="line">function_name()&#123;		</span><br><span class="line">		function body...</span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="5-注释"><a href="#5-注释" class="headerlink" title="5.注释"></a>5.注释</h2><p><strong>单行注释：</strong>以<code>#</code>号开头。</p>
+<p><strong>多行注释：</strong>可以将你要注释掉的部分定义为一个函数，这样就不会去执行这一段代码了。</p>
+<h2 id="6-传递参数"><a href="#6-传递参数" class="headerlink" title="6.传递参数"></a>6.传递参数</h2><p>执行shell脚本时，可以向其中传递参数，其中<code>$0</code>是脚本名，之后的参数用空格分开，在脚本中通过<code>$1,$2,...</code>的形式访问它们。以下假设脚本名为learn.sh。如果没有第k个参数，那么<code>$k</code>的值为空。</p>
+<pre class="highlight"><span class="line">echo $0</span><br><span class="line">echo $1</span><br><span class="line">echo $2</span><br></pre>
+
+<p>通过命令 <code>./learn.sh arg1</code>调用该脚本，输出为</p>
+<pre class="highlight"><span class="line">./learn.sh</span><br><span class="line">arg1</span><br><span class="line"></span><br></pre>
+
+<h2 id="7-运算符"><a href="#7-运算符" class="headerlink" title="7.运算符"></a>7.运算符</h2><p><strong>布尔运算</strong></p>
+<blockquote>
+<p><code>!</code>: 求表达式的逻辑反，注意和表达式之间要以空格分开</p>
+</blockquote>
+<pre class="highlight"><span class="line">! false</span><br><span class="line">&gt;&gt;&gt; true</span><br></pre>
+
+<blockquote>
+<p><code>&amp;&amp;</code>: 求两个表达式的逻辑与</p>
+<p><code>||</code>: 求两个表达式的逻辑非</p>
+</blockquote>
+<p>注意，参与布尔运算的不一定是逻辑表达式，也可以是其他语句（比如复制、输出等）。此时，逻辑与运算<code>&amp;&amp;</code>可以用于条件判断，左边是条件（逻辑表达式），右边是当逻辑表达式满足时执行的语句，比如：</p>
+<pre class="highlight"><span class="line">! false &amp;&amp; echo &#x27;ok&#x27;</span><br><span class="line">&gt;&gt;&gt; ok</span><br></pre>
+
+<p><strong>文件测试</strong></p>
+<blockquote>
+<p><code>-x file_name</code>: 判断文件是否可执行，如果文件不存在或不可执行则返回false，否则返回true</p>
+<p><code>-d path</code>: 检测文件是否是目录文件</p>
+<p><code>-f path</code>: 检测文件是否是普通文件（既非目录也非设备文件）</p>
+</blockquote>
+<p><strong>比较运算</strong></p>
+<blockquote>
+<p><code>=</code>: 比较两个值是否相等，与赋值号不同之处在于，这个<code>=</code>号与左右两边表达式之间需要用空格分开</p>
+</blockquote>
+<h2 id="8-设置文件权限掩码"><a href="#8-设置文件权限掩码" class="headerlink" title="8.设置文件权限掩码"></a>8.设置文件权限掩码</h2><p><code>umask</code>命令可以用来设置生成文件时的权限，比如：</p>
+<pre class="highlight"><span class="line">umask 0022</span><br><span class="line">mkdir x</span><br></pre>
+
+<p>则生成的文件夹<code>x</code>，其权限为默认权限777-掩码022=755。</p>
+<h2 id="9-转移语句"><a href="#9-转移语句" class="headerlink" title="9.转移语句"></a>9.转移语句</h2><p><strong>if-else语句</strong></p>
+<pre class="highlight"><span class="line">if condition1</span><br><span class="line">then</span><br><span class="line">		do...</span><br><span class="line">elif condition2</span><br><span class="line">then</span><br><span class="line">		do...</span><br><span class="line">else</span><br><span class="line">		do...</span><br><span class="line">fi</span><br></pre>
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2022/02/20/shell_manual/">http://example.com/2022/02/20/shell_manual/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/20/python_closure/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">Python闭包 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/02/20/scale_ai/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">ScaleAI调研 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Shell%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">Shell使用手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-text">1.简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F"><span class="toc-text">2.变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BE%93%E5%87%BA"><span class="toc-text">3.输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0"><span class="toc-text">4.函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%B3%A8%E9%87%8A"><span class="toc-text">5.注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-text">6.传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">7.运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%8E%A9%E7%A0%81"><span class="toc-text">8.设置文件权限掩码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E8%BD%AC%E7%A7%BB%E8%AF%AD%E5%8F%A5"><span class="toc-text">9.转移语句</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>23</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>6</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Shell%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">Shell使用手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-text">1.简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F"><span class="toc-text">2.变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BE%93%E5%87%BA"><span class="toc-text">3.输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0"><span class="toc-text">4.函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%B3%A8%E9%87%8A"><span class="toc-text">5.注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-text">6.传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">7.运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%8E%A9%E7%A0%81"><span class="toc-text">8.设置文件权限掩码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E8%BD%AC%E7%A7%BB%E8%AF%AD%E5%8F%A5"><span class="toc-text">9.转移语句</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\Programming" title="Programming"><div class="tags-list-item">Programming</div></a>
+    
+    <a href="\tags\Computer vision" title="Computer vision"><div class="tags-list-item">Computer vision</div></a>
+    
+    <a href="\tags\Machine learning" title="Machine learning"><div class="tags-list-item">Machine learning</div></a>
+    
+    <a href="\tags\机器学习" title="机器学习"><div class="tags-list-item">机器学习</div></a>
+    
+    <a href="\tags\Deep learning" title="Deep learning"><div class="tags-list-item">Deep learning</div></a>
+    
+    <a href="\tags\Deep learning, Programming" title="Deep learning, Programming"><div class="tags-list-item">Deep learning, Programming</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Shell%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-text">Shell使用手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-text">1.简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F"><span class="toc-text">2.变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BE%93%E5%87%BA"><span class="toc-text">3.输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0"><span class="toc-text">4.函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%B3%A8%E9%87%8A"><span class="toc-text">5.注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-text">6.传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">7.运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%8E%A9%E7%A0%81"><span class="toc-text">8.设置文件权限掩码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E8%BD%AC%E7%A7%BB%E8%AF%AD%E5%8F%A5"><span class="toc-text">9.转移语句</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/image_processing/"><div class="recent-posts-item-content">数字图像处理基础</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/python_manual/"><div class="recent-posts-item-content">Python使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/pytorch_manual/"><div class="recent-posts-item-content">PyTorch使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/cnn/"><div class="recent-posts-item-content">卷积神经网络</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

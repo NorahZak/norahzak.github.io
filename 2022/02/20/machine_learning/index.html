@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      机器学习
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-20T03:36:59.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-20</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>4.6k words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Machine-learning/" class="post-meta-link">Machine learning</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><h2 id="一、机器学习综述"><a href="#一、机器学习综述" class="headerlink" title="一、机器学习综述"></a>一、机器学习综述</h2><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h3><p>​        机器学习，就是让计算机自动地从数据中学习知识，并完成指定的任务。</p>
+<p>​        一个任务（task）就是从给定输入中得到正确的输出，比如图像分类（输入：图片，输出：图片的类别），语音识别（输入：语音信号，输出：自然语言句子）等等，而机器学习就是要从数据中学习一个准确的从输入到输出的映射<code>y = f(x)</code>。</p>
+<h3 id="2-分类"><a href="#2-分类" class="headerlink" title="2.分类"></a>2.分类</h3><p><strong>按应用场景</strong></p>
+<ul>
+<li>监督学习：所有数据都有标注</li>
+<li>半监督学习：部分数据有标注</li>
+<li>无监督学习：所有数据都没有标注</li>
+<li>转换学习：部分数据与任务并非直接相关</li>
+<li>强化学习：从经验中学习而非从数据中学习</li>
+</ul>
+<p><strong>按输出种类</strong></p>
+<ul>
+<li>回归问题（连续输出）</li>
+<li>分类问题（离散输出）</li>
+<li>结构化输出。</li>
+</ul>
+<p><strong>按模型</strong></p>
+<ul>
+<li>线性模型</li>
+<li>非线性模型<ul>
+<li>深度学习</li>
+<li>SVM</li>
+<li>决策树</li>
+<li>K-NN</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-组成部分"><a href="#3-组成部分" class="headerlink" title="3.组成部分"></a>3.组成部分</h3><p>一个机器学习算法应该由三部分组成：</p>
+<ol>
+<li><strong>函数空间</strong>：可能的函数的集合。通常，在所有函数中搜索最优解是不可能的，所以要对函数做出限制，比如要求函数是k次n元多项式，n层神经网络，等等。这一类函数通常也被称为这个算法使用的模型。在限定了函数的形式之后，给函数赋予一组参数（比如多项式的系数，神经网络的权重和偏置），就得到了一个具体的函数。这样，寻找最优函数的问题就转换为寻找最优参数的问题。</li>
+<li><strong>损失函数：</strong>要寻找最优函数，首先要确定判断函数优劣的数值标准。我们需要设计一个损失函数L(f)，它是映射f的函数（从而是f的参数w的函数），用于反映f的优劣，L的值越小表示函数越好。这样，寻找最优函数，也就是要寻找一组f的参数w，使得L(f)或L(w)达到最小值。</li>
+<li><strong>搜索算法：</strong>即使限制了映射f的形式，但可能的参数w有无穷多种，因此，要想在有限的时间内找到最优解，需要一种高效的搜索算法。</li>
+</ol>
+<h3 id="4-误差分析"><a href="#4-误差分析" class="headerlink" title="4.误差分析"></a>4.误差分析</h3><p>通过机器学习学到的函数，通常不会和真实的函数完全一致，这个误差称为泛化误差。机器学习的目标是尽可能地减小这个泛化误差。</p>
+<p>泛化误差的来源主要有两个：</p>
+<ol>
+<li>模型自身的误差（bias），过大导致欠拟合；</li>
+<li>由于采样导致的偏差（variance），过大导致过拟合。</li>
+</ol>
+<p>通常来说，模型越复杂，bias越小（因为函数空间更大，更有可能接近真实函数），而variance越大（训练数据的微小变化可能引起参数的巨大波动）。因此选择复杂度适宜的模型非常重要。</p>
+<p>欠拟合的解决方法：</p>
+<ul>
+<li>增加模型容量</li>
+</ul>
+<p>过拟合的解决方法：</p>
+<ul>
+<li>增加训练数据</li>
+<li>降低模型容量</li>
+<li>正则化<ul>
+<li>在损失函数中加入正则化项</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、梯度下降算法"><a href="#二、梯度下降算法" class="headerlink" title="二、梯度下降算法"></a>二、梯度下降算法</h2><p>梯度下降是机器学习中常用的最优化算法。它的基本思想是：损失函数的值，沿着梯度方向下降最快，因此为了使损失函数的值减少，可以先随机选择一个初始点，然后求这一点的梯度，使参数沿着梯度方向走一小步，重复此过程直到找到最优解。</p>
+<p>梯度下降的过程可以用以下伪代码来描述：</p>
+<p>Randomly initialize $\theta_0$;</p>
+<p>for ith iteration:</p>
+<p>​        $\theta_i = \theta_{i-1} - \eta \frac{\nabla L(\theta)}{\nabla\theta}$</p>
+<p>在实际应用中，梯度下降方法的性能（收敛速度，能否收敛到最优点）受到许多因素影响，最主要的有：</p>
+<ol>
+<li>学习率 $\eta$：通常应该随着训练次数的增加而逐渐减小学习率。手动调整学习率非常费力，因此出现了许多自动调节学习率的算法，比如Adagrad，Adam等等。</li>
+<li>批次大小：减小批次大小能加快学习速率。</li>
+<li>特征尺度：为了使同一个学习率能应用于所有参数，我们应该让所有输入特征具有相似的分布，因此需要对特征进行归一化。</li>
+</ol>
+<h3 id="三、回归问题"><a href="#三、回归问题" class="headerlink" title="三、回归问题"></a>三、回归问题</h3><p>回归问题，是根据特征预测一个数值，模型的输出是一个常数，其取值范围是连续的。回归问题有多种常用的模型，而常用的损失函数为均方差。</p>
+<ol>
+<li><p>线性回归，是输出为输入的线性映射的回归模型，即 $f(x)=k*x+b$.</p>
+</li>
+<li><p>逻辑斯蒂回归，是一种特殊的回归模型，尽管其输出是连续常数，但它的常用损失函数不是均方差而是交叉熵，而且它经常用于二分类问题而非回归问题。它的模型是 $f(x)=\sigma(k*x+b)$，其输出介于0-1之间。它通常用于解决二分类问题，规定正类的目标值为1，反类的目标值为0，损失函数为交叉熵函数 $L(w, b)=\sum\limits_n-[\hat y_nlnf(x_n)+(1-\hat y_n)ln(1-f(x_n))]$ 。</p>
+<p>之所以选择交叉熵作为损失函数，是因为：1. 其在离最低点很远时，对参数有很大的梯度，从而使得梯度下降的过程能更快收敛。2. 是凸函数，从而使得梯度下降不会收敛到局部最优点。</p>
+</li>
+</ol>
+<h3 id="四、分类问题"><a href="#四、分类问题" class="headerlink" title="四、分类问题"></a>四、分类问题</h3><p>分类问题，是根据样本的特征预测其所属的类别的问题，模型的输出是一个离散值。</p>
+<p>分类问题常用的模型可以分为两大类：</p>
+<ol>
+<li>生成模型：根据训练样本，估计产生训练样本的数据分布，从而判断给定的样本属于某一类的概率，将样本分到概率最大的那一类。此时，训练的目标是估计一个数据分布，使得该分布生成训练数据的概率达到最大，即目标函数为最大似然函数。通常需要对数据分布做出某些假设（如高斯分布、简单贝叶斯假设等）以简化模型。优点是：适合数据量较小的情况；不易受到噪声数据的干扰。</li>
+<li>判别模型：不估计数据分布，直接估计样本的特征与其属于某一类的概率之间的函数关系。优点是：一般来说准确率比生成模型更高（因为不用对数据的分布做出任何假设）。</li>
+</ol>
+<p><strong>二、转换学习</strong></p>
+<p>**1.**<strong>定义：</strong></p>
+<p>训练使用的数据与任务之间并非直接相关，这样的学习方法称作转换学习。</p>
+<p>**2.**<strong>使用场景：</strong></p>
+<p>当与任务直接相关的数据非常少且较难获取，而又有大量的与任务间接相关的数据可以获取。</p>
+<p>**3.**<strong>分类：</strong> </p>
+<p>(1)源数据和目标数据都有标注：</p>
+<p>一种方法是在源数据上训练模型，然后用目标数据进行fine-tuning，比如 在做语音识别时，如果要针对一个特定说话人进行识别，可以先在包含众多说话人的语料库上训练一个模型，然后用该特定说话人的语料对模型进行精调。为了防止精调时发生过拟合（因为数据量太小），可以采用保守训练，也就是让精调之后的模型与初始模型不要差得太远。</p>
+<p>另一种方法是多任务学习，即利用不同任务之间的关联性（比如其中几个解决步骤是相同的），用多个任务的数据共同训练模型的一部分。比如在训练多语种语音识别时，尽管不同语言区别很大，但是他们从语音信号到语音特征这一步的转换是几乎相同的，所以可以在多语种的语料库上训练这一部分模型。 </p>
+<p>（2）源数据有标注而目标数据无标注：</p>
+<p>domain adversarial training：假设源数据和目标数据是同一类的，都用于同样的任务，但是，两者的分布有所不同，因而源数据上学习的模型，在目标数据上的泛化表现不佳。这种情况出现的本质原因，是源数据上学习的模型从目标数据中提取出的特征分布，与源数据的特征分布相差较大。因此，可以让源数据和目标数据之间的特征分布尽量接近，具体地做法是：用一个domain分类器来分辨源数据和目标数据的特征，而提取特征的模型feature extractor要尽可能骗过domain分类器，同时它提取的特征又要在标注的源数据上有较好的表现。 </p>
+<p>zero-shot learning：将源数据和目标数据都嵌入到同一个特征空间，在源数据上训练这个嵌入函数，然后用它将目标样本嵌入到特征空间，在其中搜索相似的源样本，把源样本的标注作为它的标注。</p>
+<p><strong>三、<strong><strong>Support vector machine</strong></strong>（<strong><strong>SVM</strong></strong>）</strong></p>
+<p><strong>（一）线性****SVM</strong></p>
+<p>**1.**<strong>模型：</strong></p>
+<p>在解决二类分类问题时，通常采用的模型是： </p>
+<p>而在线性SVM中，f(x)是x的线性函数： </p>
+<p>**2.**<strong>损失函数：</strong></p>
+<p>理想状态下，损失函数应该等于模型判别错误的样本数。但是这个损失函数是不可微分的，所以要用另一个可微分的损失函数来近似它。损失函数的选择原则是，正样本的f(x)尽量大，负样本的f(x)尽量小，或者说损失函数应该是下式(1)的单调递减函数： </p>
+<p>可选的损失函数有多个，它们与式(1)的关系曲线如下图所示：</p>
+<p>1.square loss：并非(1)式的单调递减函数，不可取</p>
+<p>2.sigmoid+square loss：当(1)式的值非常负时，这个loss提供的梯度非常小，使得模型收敛速度慢</p>
+<p>3.sigmoid+cross entropy：比较好的损失函数，但对outlier样本的鲁棒性较差</p>
+<p>4.hinge loss：通过设置margin，解决了sigmoid+cross entropy的鲁棒性问题 </p>
+<p>SVM所采用的损失函数就是hinge loss。这个损失函数还可以用另一种形式表达，如下图所示，最小化hinge loss，相当于在下面红色框中的限制条件下最小化hinge loss：</p>
+<p>**3.**<strong>算法：</strong></p>
+<p>可以证明，利用梯度下降求得的线性SVM的最优解w*是所有支持样本x的线性组合：</p>
+<p>这时f(x)可写作如下形式：</p>
+<p>损失函数可写作如下形式：</p>
+<p>最优化的目标是找到一组a使得L达到最小值。为此，需要计算样本之间的内积。</p>
+<p>有时样本在低维空间中很难分开，因此要将样本映射到高维空间中。这时样本之间的内积变成样本的像之间的内积。</p>
+<p>由于映射可能非常复杂，而高维空间的维度又很大（甚至可能是无穷维），因此计算样本的像之间的内积，代价非常高。</p>
+<p>但有些映射拥有这样的性质：像的内积是原像的函数。这时，像的内积可以不用通过映射后求内积的方法来计算，而是可以直接在低维空间中计算得到。而且，这时甚至不需要知道映射是什么，只需要知道其相应的原像函数就可以了。这个原像函数称为核函数（kernel function），这种计算方法称作核技巧（kernel trick）。</p>
+<p>常见的核函数包括：RBF， sigmoid，等等。</p>
+<p><strong>四、结构化学习</strong><strong>(Structured learning)</strong></p>
+<p>**1.**<strong>定义：</strong></p>
+<p>当输入和输出的数据有一定的结构时，这样的机器学习算法称为结构化学习。比如：语音识别（输入/输出都是时间序列，其结构就是元素之间的先后关系），目标检测（输出是bbox，其结构是一个4元组），等等。</p>
+<p>**2.**<strong>算法结构：</strong></p>
+<p>如下图所示（为什么采用这种结构？） </p>
+<p>非结构化学习可以视为结构化学习的一种特例。以图像分类为例，F就是预测的分类向量（DNN(x)）与真实值(y)之间的负交叉熵，而搜索最好的输出y’，就是寻找一个y’使得负交叉熵最大，搜索算法很简单，只需遍历DNN(x)，找出值最大的那一维即可。</p>
+<p>**3.**<strong>待解决的问题：</strong></p>
+<p>（1）F(x, y)应该满足什么形式？</p>
+<p>通常采用线性函数。它是一个权重向量w和一个特征向量Φ之间的内积。其中，w是从数据中习得的。 </p>
+<p>（2）确定了F(x, y)之后，如何搜索最优解y?</p>
+<p>在不同任务中有不同的搜索算法，例如：</p>
+<p>目标检测：selective search</p>
+<p>序列标注：viterbi algorithm</p>
+<p>（3）训练时，如何找到最优的F(x, y)？</p>
+<p>找到最优的F(x, y)，即是找到最优的w，使得每个样本x与其真实标签y’之间的相关度F(x, y’)大于不匹配的标签F(x, y*)。</p>
+<p>A.可分情况 </p>
+<p>如果满足条件的w存在（可分情况），这时可用structured perceptron算法来求解w。它在有限步之后必定能找到解。</p>
+<p>B.不可分情况</p>
+<p>如果满足上述严格条件的w不存在，我们依然可以比较不同w之间的优劣，从而选择一个最优的w。首先需要一个损失函数： </p>
+<p>接下来可以用SGD来求最优解，如下图所示。</p>
+<p> 当学习率为1时，这就是structured perceptron算法。</p>
+<p>C.error function：</p>
+<p>上面的损失函数，对于所有false label是同等看待的。但是，实际上false label之间的分数也应该有差异。以目标检测为例，与真实的bbox交集较大的bbox较好，分数应该更高一些。所以，需要对损失函数做出一些修改，使其能够反映不同false label之间的差异。</p>
+<p>首先要定义false label的好坏，通常是用一个反映false label与ground truth之间差距的error function来衡量的： </p>
+<p>以目标检测为例，error function可以如下： </p>
+<p>定义了error function之后，接下来就可以设计新的损失函数。设计的原则是：false label的error越大，当它的分数比ground truth高时，惩罚就越大。 </p>
+<p>最小化上式的含义可以这样理解：它等价于最小化error function的一个上界，因为Cn是样本xn的error的一个上界： </p>
+<p>同样是满足“Cn是样本xn的error的一个上界”这一条件，有多种可能的损失函数可以选择： </p>
+<p>再加入正则化项，最终的损失函数为： </p>
+<p>解这个最优化问题，等同于解如下最优化问题： </p>
+<p>最优化目标是：在满足下面的constraint的同时，找到最优的w和{εn}，使C达到最小。</p>
+<p>4.Cutting plane algorithm：</p>
+<p>上面的最优化问题有n*n个限制，求解非常麻烦。事实上，其中的很多限制都是不必要的，对最终的解没有影响。为了简化求解过程，可以用Cutting plane algorithm来找到那些必要的限制。具体地，每个样本xn都有一个工作集An，只有xn和An中的所有样本yn所构成的限制才是对结果有影响的： </p>
+<p>求解{An}可以用Cutting plane algorithm，具体地说，它首先将所有An初始化为空集，然后用迭代的方法向An中添加元素：先求解w和{εn}，然后检查最violated的{xn, y}对，将y加入到An中： </p>
+<p>如何找到最violated的{xn, y}对？如下图所示，对每一个样本xn，只需找到degree of violation最大的y就可以了。 </p>
+<p>当F(x, y)是线性函数时，上面的一整个算法就叫做structured SVM。</p>
+<p><strong>4.Beyond Structured SVM</strong></p>
+<p>structured SVM有两个局限性：第一，非常依赖于特征函数Φ的设计，而手工设计的函数表达能力不强；第二，它是线性的，表达能力受到限制。</p>
+<p>由此，可以有两个改进思路：</p>
+<p>（1）用学习的方法习得Φ（deep learning）</p>
+<p>（2）用DNN取代线性的structured SVM </p>
+<p><strong>五、循环神经网络****RNN</strong></p>
+<p>**1.**<strong>产生原因：</strong></p>
+<p>在解决序列化输入或输出的机器学习问题时，每一时刻的输出往往不止由这一时刻的输入决定，还由上下文环境决定。比如在作词性标注时，同一个单词的词性，在上下文不同时也有所不同。</p>
+<p>为了使模型的输出能够考虑上下文环境，需要模型能够记住之前（或之后）的状态，即具有“记忆”。当采用神经网络作为模型时，一个方法是在网络中加入循环连接，使得下一时刻的输出与之前时刻的反馈有关。</p>
+<p>**2.**<strong>基本结构及变种：</strong></p>
+<p>（1）SimpleRNN：</p>
+<p>输入x(t)经过一个隐藏层得到隐藏状态h(t)，输出y(t)由隐藏状态决定，而h(t)同时又作为下一时刻的输出，与x(t+1)共同计算下一时刻的隐藏状态h(t+1)。 </p>
+<p>（2）Jordan Network：</p>
+<p>与SimpleRNN稍有不同，Jordan Network是将y(t)作为t+1时刻的输入。  </p>
+<p>（3）双向RNN：</p>
+<p>增加了逆向路径，使得y(t)不仅和上文状态h(t)有关，也和下文状态h’(t)有关。 </p>
+<p>（4）LSTM：</p>
+<p>引入了记忆单元c(t)和三个门控单元：输入门i(t),遗忘门f(t)和输出门o(t)。 </p>
+<p>（5）多层RNN：</p>
+<p>多个LSTM单元叠加起来，下层的LSTM单元的输出y1(t)作为上层的LSTM单元的输入x2(t)。</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2022/02/20/machine_learning/">http://example.com/2022/02/20/machine_learning/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/20/image_restoration/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">图像复原算法综述 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/02/20/linux_manual/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">Linux使用手册 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BB%BC%E8%BF%B0"><span class="toc-text">一、机器学习综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%86%E7%B1%BB"><span class="toc-text">2.分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">3.组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90"><span class="toc-text">4.误差分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95"><span class="toc-text">二、梯度下降算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98"><span class="toc-text">三、回归问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-text">四、分类问题</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>23</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>6</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BB%BC%E8%BF%B0"><span class="toc-text">一、机器学习综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%86%E7%B1%BB"><span class="toc-text">2.分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">3.组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90"><span class="toc-text">4.误差分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95"><span class="toc-text">二、梯度下降算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98"><span class="toc-text">三、回归问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-text">四、分类问题</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\Programming" title="Programming"><div class="tags-list-item">Programming</div></a>
+    
+    <a href="\tags\Computer vision" title="Computer vision"><div class="tags-list-item">Computer vision</div></a>
+    
+    <a href="\tags\Machine learning" title="Machine learning"><div class="tags-list-item">Machine learning</div></a>
+    
+    <a href="\tags\机器学习" title="机器学习"><div class="tags-list-item">机器学习</div></a>
+    
+    <a href="\tags\Deep learning" title="Deep learning"><div class="tags-list-item">Deep learning</div></a>
+    
+    <a href="\tags\Deep learning, Programming" title="Deep learning, Programming"><div class="tags-list-item">Deep learning, Programming</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BB%BC%E8%BF%B0"><span class="toc-text">一、机器学习综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="toc-text">1.定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%86%E7%B1%BB"><span class="toc-text">2.分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">3.组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90"><span class="toc-text">4.误差分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95"><span class="toc-text">二、梯度下降算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98"><span class="toc-text">三、回归问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-text">四、分类问题</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/image_processing/"><div class="recent-posts-item-content">数字图像处理基础</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/python_manual/"><div class="recent-posts-item-content">Python使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/pytorch_manual/"><div class="recent-posts-item-content">PyTorch使用手册</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/cnn/"><div class="recent-posts-item-content">卷积神经网络</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
