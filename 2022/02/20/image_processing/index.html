@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      image_processing.md
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-20T03:36:59.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-20</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>5.3k words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Computer-vision/" class="post-meta-link">Computer vision</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="数字图像处理"><a href="#数字图像处理" class="headerlink" title="数字图像处理"></a>数字图像处理</h1><h2 id="1-频率分析"><a href="#1-频率分析" class="headerlink" title="1.频率分析"></a>1.频率分析</h2><h3 id="1-基础知识"><a href="#1-基础知识" class="headerlink" title="1.基础知识"></a>1.基础知识</h3><ul>
+<li><p>定义 ： $C=R+jI$ ，其中 $R，I$ 为实数，$j$为复数单位，$j=\sqrt {-1}$.</p>
+</li>
+<li><p>极坐标表示： $C=|C|(cos\theta +jsin\theta)$,其中 $|C|=\sqrt {R^2+I^2}，\theta=arctan(I/R)$.</p>
+</li>
+<li><p>欧拉公式： $e^{j\theta}=cos\theta +jsin\theta$.</p>
+</li>
+<li><p>复数的另一种表示： $C=|C|e^{j\theta}$，其中 $|C|$称为幅度，$\theta$称为相位。</p>
+</li>
+<li><p>复数的共轭： $C^*=R-jI$.</p>
+</li>
+<li><p>定义：傅里叶提出，任何周期函数都可以表示成一系列正弦和/或余弦函数的和，这些正弦和/或余弦函数的系数就称作傅里叶级数。假设 $f(t)$为连续变量 $t$的周期函数，周期为 $T$，那么 $f(t)$可被分解为一系列离散的正弦和余弦函数之和，即所谓的傅里叶级数： $f(t)=\sum \limits_{n=-\infty} \limits^{\infty}c_ne^{j\frac{2\pi n}{T}t}=\sum \limits_{n=-\infty} \limits^{\infty}c_n(cos(\frac{2\pi n}Tt)+jsin\frac{2\pi n}Tt),其中c_n=\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)e^{-j\frac{2\pi n}{T}t}dt, n=0,\pm1, \pm2…$</p>
+</li>
+</ul>
+<h3 id="2-冲激函数"><a href="#2-冲激函数" class="headerlink" title="2.冲激函数"></a>2.冲激函数</h3><ul>
+<li><p>定义： $\delta(t)=\begin{cases}\infty&amp;t=1\0&amp;else\end{cases}$</p>
+</li>
+<li><p>特性： 对任意函数 $f(t)$，假设 $f(t)$在 $t=0$处连续，则有 $\int_{-\infty}^{\infty}f(t)\delta(t)dt=f(0)$；这一特性又称为采样特性。</p>
+</li>
+<li><p>冲激串： 无限多个周期冲激单元 $\delta(t-\Delta T)$之和，$s_{\Delta T}(t)=\sum \limits_{n=-\infty}\limits^{\infty}\delta(t-n\Delta T)$</p>
+</li>
+</ul>
+<h3 id="连续傅里叶变换"><a href="#连续傅里叶变换" class="headerlink" title="连续傅里叶变换"></a>连续傅里叶变换</h3><ul>
+<li><p>对于非周期函数，只要满足有限积分的条件，那么它同样可以表示为一系列正弦函数的加权和，这就是傅里叶变换。</p>
+</li>
+<li><p>假设有连续变量 $t$的连续函数 $f(t)$，如果它的绝对值或平方的积分有限，那么它存在以下傅里叶变换： $F(\mu)=\int_{-\infty}^{\infty}f(t)e^{-j2\pi \mu t}dt$，其中 $F(\mu)$是复数，如果把它写成 $F(\mu)=C(\mu)e^{j\theta(\mu)}$的形式，那么 $C(\mu)$就是频率为 $\mu$的正弦分量的幅度，而 $\theta(\mu)$就是频率为 $\mu$的正弦分量的相位。</p>
+</li>
+<li><p>而通过傅里叶反变换，可以由 $F(\mu)$得到 $f(t)$： $f(t)=\int_{-\infty}^{\infty}F(\mu)e^{j2\pi \mu t}d\mu$。一个函数在经过傅里叶变换之后，可以经过傅里叶逆变换得到原函数，而不损失任何信息，这是傅里叶变换的重要性质。</p>
+</li>
+<li><p>举例： 冲激串 $s_{\Delta T}(t)$ 的傅里叶变换： $S(\mu)=\frac{1}{\Delta T}\sum \limits_{n=-\infty}\limits^{\infty}\delta(\mu-\frac{n}{\Delta T})$，即冲激串的傅里叶变换还是冲激串，其周期变为倒数。</p>
+</li>
+<li><p>盒型函数： $h(t)=\begin{cases}A&amp;-\frac W2 &lt; t &lt; \frac W2\0&amp;else\end{cases}$，其中 $A,b$为常数，它的傅里叶变换为：$H(\mu)=AW\frac{sin(\pi\mu W)}{\pi\mu W}=AWsinc(\mu W)$，其中 $sinc$函数为 $sinc(x)=\frac{sin(\pi x)}{\pi x}$.</p>
+</li>
+</ul>
+<h3 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h3><ul>
+<li><p>连续情况： 两个连续函数 $f(t),h(t)$的卷积定义$f(t)*h(t)=\int_{-\infty}^{\infty}f(\tau)h(t-\tau)d\tau$.</p>
+</li>
+<li><p>离散情况： 两个连续函数 $f(t),h(t)$的卷积定义$f(x)*h(x)=\sum\limits_{n=\infty}^{\infty}f(n)h(x-n)$</p>
+</li>
+<li><p>相当于先将 $h(t)$翻转180度，然后再向右平移 $t$个单位，再与 $f(t)$相乘并积分。</p>
+</li>
+<li><p>卷积定理: 空间域的两个连续函数的卷积的傅里叶变换，等于两个函数的傅里叶变换在频率域的乘积，即 $f(t)*h(t)\Leftrightarrow H(\mu)F(\mu)$；反过来，空间域的两个连续函数的乘积的傅里叶变换，等于两个函数的傅里叶变换在频率域的卷积，即 $f(t)h(t)\Leftrightarrow H(\mu)*F(\mu)$</p>
+</li>
+</ul>
+<h3 id="取样函数"><a href="#取样函数" class="headerlink" title="取样函数"></a>取样函数</h3><ul>
+<li><p>定义：用计算机来处理连续信号，必须先将其离散化，这是通过采样和量化来完成的。给定输入的连续信号值，取样函数返回其经过采样和量化后的离散值。</p>
+<ul>
+<li><p>假设连续函数 $f(t)$的定义域为 $(-\infty, +\infty)$，要对它每隔 $\Delta T$周期进行一次采样，那么可以将 $f(t)$与周期为 $\Delta T$的冲激串函数 $s_{\Delta T}(t)$ 相乘，得到取样后的函数 $\mathop{f}\limits^{\sim}(t)$： $\mathop{f} \limits^{\sim}(t)=f(t)s_{\Delta T}(t)=\sum\limits_{n=-\infty}^{\infty}f(t)\delta(t-n\Delta T)$.</p>
+</li>
+<li><p>每一个取样值都可以用积分的形式求出： $f_k=\int_{-\infty}^{\infty}f(t)\delta(t-k\Delta T)dt=f(k\Delta T)$.</p>
+</li>
+<li><p>取样后的函数 $\mathop{f}\limits^{\sim}(t)$的傅里叶变换，可以由卷积定理求出，即原函数 $f(t)$的傅里叶变换 $F(\mu)$与冲激串函数 $s_{\Delta T}(t)$的傅里叶变换 $S(\mu)$的卷积： $\mathop{F}\limits^{\sim}(\mu)=Fourier(\mathop{f}\limits^{\sim}(t))=Fourier(f(t)s_{\Delta T}(t))=Fourier(f(t))*Fourier(s_{\Delta T}(t))\=F(\mu)*S(\mu)=\frac{1}{\Delta T}\sum\limits_{n=-\infty}^{\infty}F(\mu-\frac{n}{\Delta T})$</p>
+</li>
+<li><p>取样后的函数 $\mathop{f}\limits^{\sim}(t)$的傅里叶变换是一个周期函数，它就是原函数 $f(t)$的傅里叶变换 $F(\mu)$的无数份拷贝之和，相邻两份拷贝之间的距离为采样周期的倒数 $\frac{1}{\Delta T}$.</p>
+</li>
+<li><p>同时，从傅里叶变换的定义出发，可以得到 $\mathop{F}\limits^{\sim}(\mu)$的另一种表达方式： $\mathop{F}\limits^{\sim}(\mu)=\int_{-\infty}^{\infty}\mathop{f}\limits^{\sim}(t)e^{-j2\pi\mu t}dt=\int_{-\infty}^{\infty}\sum\limits_{n=-\infty}^{\infty}f(t)\delta(t-n\Delta T) e^{-j2\pi\mu t}dt\=\sum\limits_{n=-\infty}^{\infty}\int_{-\infty}^{\infty}f(t)\delta(t-n\Delta T) e^{-j2\pi\mu t}dt=\sum\limits_{n=-\infty}^{\infty}f_ne^{-j2\pi\mu n\Delta t}$</p>
+</li>
+<li><p>取样后的函数 $\mathop{f}\limits^{\sim}(t)$的值可以表示为 $f(t)$采样值的加权和。</p>
+</li>
+<li><p>带限函数： 连续函数 $f(t)$定义在 $(-\infty, +\infty)$上，且其傅里叶变换的频率介于 $(-\mu_{max},\mu_{max})$之间，则称其为带限函数.</p>
+</li>
+<li><p>取样定理： 如果带限函数 $f(t)$的频率介于 $(-\mu_{max},\mu_{max})$之间，则当采样频率是最大频率 $\mu_{max}$ 的2倍以上$(\frac{1}{\Delta T}&gt;2\mu_{max})$时，由取样后的函数$ \mathop{f}\limits^{\sim}(t)$能够完全恢复原函数 $f(t)$，而没有任何信息损失. 恢复方法是，首先将$\mathop{F}\limits^{\sim}(\mu)$与一个低通滤波器 $H(\mu)$相乘，以分离出 $F(\mu)$： $F(\mu)=\mathop{F}\limits^{\sim}(\mu)H(\mu)$，其中 $H(\mu)=\begin{cases}\Delta T&amp;-\mu_{max}&lt; \mu &lt; \mu_{max}\0&amp;else\end{cases}$；然后对 $F(\mu)$进行傅里叶反变换，即可获得无损的原始信号 $f(t)$： $f(t)=Fourier^{-1}(F(\mu))=\int_{-\infty}^{\infty}F(\mu)e^{j2\pi \mu t}d\mu$；也可用卷积定理来求 $f(t)$： $f(t)=\mathop{f}\limits^{\sim}(t)*h(t)=\sum\limits_{n=-\infty}^{\infty}f(n\Delta T)sinc[(t-n\Delta T)/\Delta T]$；其中 $h(t)$为 $H(\mu)$的傅里叶反变换，是一个 $sinc$函数.</p>
+</li>
+<li><p>混淆： 当采样频率不足最大频率 $\mu_{max}$ 的2倍$(\frac{1}{\Delta T}&lt;2\mu_{max})$时，在$\mathop{F}\limits^{\sim}(\mu)$中，相邻的$F(\mu)$的拷贝之间会相互叠加，从而无法辨识出单个$F(\mu)$，这种现象叫做混淆.几乎所有有限函数都不是带限函数（频率没有最大值），因此在对有限信号取样时，不可避免地会发生混淆。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="离散傅里叶变换"><a href="#离散傅里叶变换" class="headerlink" title="离散傅里叶变换"></a>离散傅里叶变换</h3><ul>
+<li><p>定义：假设对连续有限信号 $f(t)$每隔 $\Delta T$时间进行一次采样，共进行 $M$次采样，那么就得到一个离散的采样值序列 ${f_x},x=0,1,…M-1$. 由于取样后的函数的傅里叶变换 $F(\mu)$是一个无限的周期函数，因此我们只需研究其中一个周期即可。假设在 $[0,\frac{1}{\Delta T}]$区间内对 $F(\mu)$进行 $M$次采样，则这些采样值也构成一个离散序列 ${F_u}$，可以由${f_x}$的值计算出来，这就是离散傅里叶变换(DFT)： $F_u=F(\frac{u}{M\Delta T})=\sum\limits_{x=-\infty}^{\infty}f_xe^{-j2\pi x\frac{u}{M\Delta T}\Delta T}=\sum\limits_{x=0}^{M-1}f_xe^{-j2\pi xu/M},u=0,1,…M-1$</p>
+</li>
+<li><p>逆变换: 反过来，${f_x}$的值也可以由 ${F_u}$计算出来，即离散傅里叶逆变换：$f_x=\frac 1M\sum\limits_{u=0}^{M-1}F_ue^{j2\pi xu/M},x=0,1,…M-1$</p>
+</li>
+<li><p>如果将${F_u}$和 ${f_x}$写成离散函数形式 $F(u)和f(x)$，则两个函数都是无限周期的： $F(u)=F(u+kM),f(x)=f(x+kM)，其中M为采样点个数，k为整数.$</p>
+</li>
+<li><p>二维情形： </p>
+<ul>
+<li><p>假设 $f(x,y)$是一幅大小为 $M*N$的数字图像，则其二维离散傅里叶变换为： $F(u, v)=\sum\limits_{x=0}^{M-1}\sum\limits_{y=0}^{N-1}f(x,y)e^{-j2\pi(ux/M+vy/N)},其中u=0,…M-1,v=0,…N-1$</p>
+</li>
+<li><p>相应地，二维离散傅里叶反变换为： $f(x,y)=\frac{1}{MN}\sum\limits_{u=0}^{M-1}\sum\limits_{v=0}^{N-1}F(u,v)e^{j2\pi(ux/M+vy/N)},其中x=0,…M-1,y=0,…N-1$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="互相关函数"><a href="#互相关函数" class="headerlink" title="互相关函数"></a>互相关函数</h3><ul>
+<li>定义: 互相关函数，用来表示两个信号之间的相似度。设有连续两个时变信号 $f(t)$ 与 $g(t)$, 则这两个信号之间的互相关函数是一个关于时间的函数，定义为：$R_{fg}(\tau) = \int \overline f(t)g(t+\tau)dt$；它可以视作两个信号之间的卷积。</li>
+</ul>
+<h3 id="自相关函数"><a href="#自相关函数" class="headerlink" title="自相关函数"></a>自相关函数</h3><ul>
+<li><p>定义：自相关函数是一个信号与其自身的互相关函数。设有连续时变信号 $f(t)$, 其自相关函数定义为： $R_{ff}(\tau) = \int \overline f(t)f(t+\tau)dt$</p>
+</li>
+<li><p>自相关函数可以视作一个信号与其自身的相似度随时间差变化的函数。</p>
+</li>
+<li><p>上述定义在信号平方可积或平方可和（即有限能量）的前提下才成立。这对于有限信号（比如语音、图像等等），通常是成立的。但对于无限信号（通常被描述为随机过程），则需要使用基于期望值的与之不同的定义： $R_{ff}(\tau) = E[\overline f(t)f(t+\tau)]$</p>
+</li>
+</ul>
+<h2 id="2-线性代数"><a href="#2-线性代数" class="headerlink" title="2.线性代数"></a>2.线性代数</h2><h3 id="矩阵范数"><a href="#矩阵范数" class="headerlink" title="矩阵范数"></a>矩阵范数</h3><ul>
+<li><p>向量的p范数： $||x||<em>p=(\sum \limits</em>{i=1} \limits^n |x_i|^p)^{\frac{1}{p}}$</p>
+</li>
+<li><p>矩阵的诱导p范数： $||A||<em>p=\mathop{max} \limits</em>{x\neq 0} \frac{||Ax||_p}{||x||_p}$</p>
+</li>
+<li><p>矩阵的元素形式p范数： $||A||<em>p=(\sum \limits</em>{i=1} \limits^{m}\sum \limits_{j=1} \limits^{n}|A_{ij}|^p)^{\frac{1}{p}}$</p>
+</li>
+<li><p>在matlab中，求向量或矩阵x的范数的函数是<code>norm(x,p)</code>。</p>
+</li>
+</ul>
+<h3 id="伪逆矩阵"><a href="#伪逆矩阵" class="headerlink" title="伪逆矩阵"></a>伪逆矩阵</h3><ul>
+<li><p>矩阵A的伪逆矩阵 $A^+$，又称为广义逆矩阵，其定义为： $AA^+A=A,A^+AA^+=A^+$</p>
+</li>
+<li><p>在matlab中，求伪逆矩阵的函数是<code>pinv()</code>。<em>（求法？）</em></p>
+</li>
+</ul>
+<h3 id="线性方程组的最小二乘解"><a href="#线性方程组的最小二乘解" class="headerlink" title="线性方程组的最小二乘解"></a>线性方程组的最小二乘解</h3><ul>
+<li><p>定义: 假设有线性方程组 $Ax=b$，其中系数矩阵$A=A_{n\times s}$,可表示为列向量组的形式： $A=(\alpha_1,…,\alpha_s)$,而 $b=(b_1,…,b_n)^T$. 当此方程组无精确解时，我们想要找到这样一个近似解 $x^0$，使得 $||Ax-b||^2$达到最小值，这个解称为最小二乘解。</p>
+</li>
+<li><p>记 $y=Ax$,则$y$可以表示为 $A$的列向量组 $\alpha_1,…,\alpha_s$ 的线性组合。假设由$A$的列向量 $\alpha_1,…,\alpha_s$构成的子空间为 $L(\alpha_1,…,\alpha_s)$,则显然 $y$在此空间中，$b$不在此子空间中。因此，问题转化为： 在$L(\alpha_1,…,\alpha_s)$中寻找一点 $y$，使得它和 $b$之间的距离最短这等价于向量$c=y-b$垂直于子空间$L(\alpha_1,…,\alpha_s)$，等价于$(c,\alpha_1)=…=(c,\alpha_s)=0$.将$\alpha_1,…,\alpha_s$这s个列向量转置，则得到 $\alpha_1^Tc=…=\alpha_s^Tc=0$，即 $A’c=A’(y-b)=A’(Ax-b)=\mathbf 0$，即 $A’Ax=A’b(1)$.</p>
+</li>
+<li><p>(1)式称为最小二乘解的正规方程，它必定存在解，其中一个解就是 $x=A^+b$. *(证明？)*当矩阵 $A$ 的列向量组线性无关时，这就是方程组$Ax=b$唯一的最小二乘解。当矩阵 $A$ 的列向量组线性相关时，方程组$Ax=b$的最小二乘解不唯一，其解集为$Ax=0$的所有通解加上$Ax=b$的一个最小二乘解所构成的集合。</p>
+</li>
+<li><p>在matlab中，可以用运算符\来求线性方程组$Ax=b$的最小二乘解： <code>x=A\b</code>；当最小二乘解不唯一时，可以用函数<code>lsqminnorm(A,b)</code>来求具有最小范式的最小二乘解。</p>
+</li>
+</ul>
+<h2 id="3-数字图像基本概念"><a href="#3-数字图像基本概念" class="headerlink" title="3.数字图像基本概念"></a>3.数字图像基本概念</h2><h3 id="彩色图像编码格式"><a href="#彩色图像编码格式" class="headerlink" title="彩色图像编码格式"></a>彩色图像编码格式</h3><ul>
+<li><p>人眼之所以能够看到图像，是因为人的视觉细胞能够感知一定波长的电磁波，并将它们“翻译”为颜色。人眼能够感知的电磁波波长有三种，分别对应于红、绿、蓝三种颜色的光线，光线的强度则与电磁波的幅度成正比。三种色光的叠加，构成了我们所看到的自然界的各种色彩。</p>
+</li>
+<li><p>彩色图像有多种编码格式。在Matlab中，转换图片格式的步骤为：</p>
+<ul>
+<li>用<code>makecform(type)</code>方法创建一个色彩转换结构： <code>C = makecform(&#39;srgb2lab&#39;)</code></li>
+<li>用<code>applycform(img, color_trans_structure)</code>方法进行色彩转换：<code>transformed_img = applycform(img,C)</code></li>
+<li>RGB格式：将所有色彩表示为红-绿-蓝三个分量的组合。主要标准有sRGB，AdobeRGB等等。不同的RGB标准，其区别在于对每个色彩分量的上下限定义不同。对人眼来说，当某种颜色所对应的电磁波的幅度小于（大于）一定阈值时，人眼就不再能够区分，会认为都是黑色（纯色）。sRGB定义的绿色的阈值比AdobeRGB定义的阈值要窄，主要是由于sRGB标准提出的时间较早，当时显示器能显示的颜色范围有限。</li>
+<li>Lab格式：将所有色彩表示为亮度L-对比度a和b，共三个维度的组合。Lab能表示的颜色范围非常大，甚至比人眼所能感知的颜色范围还要大。它通常作为各种色彩编码格式之间相互转换的中间步骤。</li>
+</ul>
+</li>
+</ul>
+<h3 id="色彩三要素"><a href="#色彩三要素" class="headerlink" title="色彩三要素"></a>色彩三要素</h3><ul>
+<li><p>定义：色彩三要素即色相（Hue），亮度（Lightness）和饱和度（Saturation）。HSL 空间是把 RGB 空间经过一个非线性变换得到的。在一个空间中改变一个参数，往往导致另一个空间中三个参数都改变，体现出「牵一发而动全身」的效果。</p>
+<ul>
+<li><code>饱和度</code>： 饱和度是指<code>色彩的鲜艳程度</code>，也称色彩的纯度。饱和度取决于该色中含色成分和消色成分（灰色）的比例。含色成分越大，饱和度越大；消色成分越大，饱和度越小。纯的颜色都是高度饱和的，如鲜红，鲜绿。混杂上白色，灰色或其他色调的颜色，是不饱和的颜色，如绛紫，粉红，黄褐等。完全不饱和的颜色根本没有色调，如黑白之间的各种灰色。</li>
+<li><code>明度</code>： <code>颜色的亮度</code>。</li>
+<li><code>色相</code>： <code>颜色的种类</code>。</li>
+</ul>
+</li>
+<li><p>计算方法：由于大部分数字图像是用RGB格式表示的，因此有必要掌握由RGB值计算HSL值的方法。</p>
+</li>
+</ul>
+<p>![preview](https： //pic1.zhimg.com/v2-7bb33022eefcf81f8c9f5c3fdfe9311b_r.jpg)</p>
+<ul>
+<li><p>Hue 叫色相，表示了颜色在色环上的角度。纯红色位于 0 度，纯绿色位于 120 度，纯蓝色位于 240 度。具体计算时，角度主要由 RGB 中最大的那个决定，由次大的那个进行修正。</p>
+</li>
+<li><p>Lightness 叫亮度，具体计算公式是 RGB 中最大值与最小值的平均值。</p>
+</li>
+<li><p>Saturation 叫饱和度，表示的是 RGB 三个值的对比有多强烈。其算式中分子 C 是 RGB 中最大值与最小值的差值，但当 L 特别大或特别小的时候，C 的范围有限，为了把它归一化到 [0,1]，又除了个与亮度有关的分母。</p>
+</li>
+</ul>
+<hr>
+<p>a<em>调整方法</em></p>
+<p>现在有一个颜色 (0.1, 0.2, 0.5)，这是一个比较暗的、略偏绿的蓝色。所以它的色相会略小于 240 度（具体值是 225 度），亮度 L = (0.1 + 0.5) / 2 = 0.3，饱和度分子 C = 0.5 - 0.1 = 0.4，分母为 0.6，所以饱和度为 0.4 / 0.6 ≈ 0.67。<br>a调整色相： 由于亮度、饱和度都只与 RGB 中的最大、最小值相关，所以若要仅调整色相，就要调整绿色 G 的值。增大 G 的值会让色相更偏向绿色，即减小，G = B 时色相最小，为 180 度；反之，减小 G 则会让色相增大，G = R 时色相最大，为 240 度。<br>a调整亮度： 要调整亮度，主要靠调整值最大和最小的 B 和 R，但要注意保持色相和饱和度不变。当 L &lt; 0.5 时，饱和度 S 的公式可以简化为 (M - m) / (M + m)。为了保持饱和度不变，B 和 R 要同比例增减，增时亮度增加，减时亮度降低。为了保持色相不变，G 也要同比例增减。<br>a调整饱和度： 同样，调整饱和度靠的也是 B 和 R。为了保持亮度不变，其中一个增加多少，另一个就要减小多少。增大 B、减小 R 可以让饱和度增加；减小 B、增大 R 可以让饱和度降低。为了保持色相不变，也要调整 G 使它与 B、R 的差值之比与原来相同。</p>
+<h3 id="图像的属性"><a href="#图像的属性" class="headerlink" title="图像的属性"></a>图像的属性</h3><p>https： //zhuanlan.zhihu.com/p/31418499<br>a<code>对比度</code>： 图像中最大灰度值与最小灰度值之间的差。增加图像的对比度，会使图像中亮的区域更亮，暗的区域更暗。<br>a<code>锐度</code>： 图像边缘处的对比度，或者说图像亮度的导数的幅度。增加图像的锐度，会使图像的边缘更加明显。</p>
+<h2 id="4-基于深度学习的图像处理"><a href="#4-基于深度学习的图像处理" class="headerlink" title="4.基于深度学习的图像处理"></a>4.基于深度学习的图像处理</h2><h3 id="图像数据预处理"><a href="#图像数据预处理" class="headerlink" title="图像数据预处理"></a>图像数据预处理</h3><p>在利用深度学习的方法对图像进行处理之前，需要先对图像进行预处理，目的是使图像的像素值归一化并消除像素之间的相关性，以使神经网络能更好地学习输入与输出之间的关系。预处理方法有以下几种： </p>
+<ul>
+<li><p>归一化： 使所有图像在每一个通道上的像素值都具有均值0和方差1.</p>
+<pre class="highlight"><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">image = Image.<span class="built_in">open</span>(path)</span><br><span class="line"></span><br><span class="line"><span class="comment">## scale to [0,1] from [0,255]</span></span><br><span class="line">image = image.astype(numpy.float32)</span><br><span class="line">image = numpy.multiply(image,<span class="number">1.0</span>/<span class="number">255.0</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment">## normalization</span></span><br><span class="line">image[： ,： ,<span class="number">0</span>] = (x_train[： ,： ,<span class="number">0</span>]-<span class="number">0.485</span>)/<span class="number">0.229</span></span><br><span class="line">image[： ,： ,<span class="number">1</span>] = (x_train[： ,： ,<span class="number">1</span>]-<span class="number">0.456</span>)/<span class="number">0.224</span></span><br><span class="line">image[： ,： ,<span class="number">2</span>] = (x_train[： ,： ,<span class="number">2</span>]-<span class="number">0.406</span>)/<span class="number">0.225</span></span><br></pre></li>
+<li><p>白化： 使所有图像在每一个像素位置的数据都归一化，并消除不同位置的像素之间的相关性.参考链接： https： //zhuanlan.zhihu.com/p/45140262</p>
+</li>
+</ul>
+<h2 id="5-相机基本知识"><a href="#5-相机基本知识" class="headerlink" title="5.相机基本知识"></a>5.相机基本知识</h2><h3 id="ISO感光度"><a href="#ISO感光度" class="headerlink" title="ISO感光度"></a>ISO感光度</h3><p>相机的感光度，即ISO值，描述了相机的感光元件（在数码相机中是CMOS传感器，在胶片相机中则是相机底片）对于光线的敏感程度。感光度越高，对光线越敏感，需要的曝光时间越短。</p>
+<h3 id="噪声"><a href="#噪声" class="headerlink" title="噪声"></a>噪声</h3><p>数码相机在拍摄照片时会产生噪声，噪声的主要来源有两个： </p>
+<ul>
+<li>固定模式噪声： 曝光期间，CMOS在工作时产生热量从而使温度升高，而CMOS受到高温影响，产生热噪声。通常来说，曝光时间越长，CMOS产生热量越多，温度越高，热噪声也就越严重。同一部相机，在相同的条件下（温度，曝光时间，ISO感光度），产生的热噪声是几乎完全相同的，因此要去除热噪声是比较容易的。目前的数码相机多具有“长时间曝光降噪功能”，其原理就是在拍摄一张长曝光图像之后，再用相同的曝光时间拍摄一张纯黑图像以捕捉热噪声，从拍摄的图像中减去噪声即可达到去噪的目的。</li>
+<li>随机噪声： 相机的ISO感光度越高，越容易受到干扰，随机噪声就越严重。随机噪声相对于固定模式噪声来说更难以去除。它又可以分为两种： 高斯噪声和泊松噪声。<ul>
+<li>高斯白噪声： 噪声服从均值为0的高斯分布，且二阶矩不相关。与光强没有关系。</li>
+<li>泊松噪声： 主要是由于光的粒子性造成的。光源发射出光子，光子打在传感器上形成光点，光子的数目越多，像素的灰度值也就越大。由于在光子由光源发射到被传感器表面接收的过程中可能会有干扰，导致最终统计的光子数目与实际数目之间有一定波动，从而像素值也与真正的像素值有一定差异，这样的噪声是服从泊松分布的，因此称作泊松噪声。光照越强，泊松噪声越强。</li>
+</ul>
+</li>
+</ul>
+<p>参考链接： </p>
+<ul>
+<li>长时间曝光降噪： https： //baijiahao.baidu.com/s?id=1619931524028219182&amp;wfr=spider&amp;for=pc</li>
+<li>数码相机噪声介绍1： https： //zhuanlan.zhihu.com/p/39260257</li>
+<li>数码相机噪声介绍2： https： //<a target="_blank" rel="noopener" href="http://www.zhihu.com/question/37891356?sort=created">www.zhihu.com/question/37891356?sort=created</a></li>
+<li>泊松噪声与高斯噪声： https： //<a target="_blank" rel="noopener" href="http://www.cnblogs.com/sunny-li/p/8378517.html">www.cnblogs.com/sunny-li/p/8378517.html</a></li>
+</ul>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2022/02/20/image_processing/">http://example.com/2022/02/20/image_processing/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/20/Linux命令大全/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">linux_manual.md </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/02/20/python_manual/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">python_manual.md </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">数字图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%91%E7%8E%87%E5%88%86%E6%9E%90"><span class="toc-text">1.频率分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">1.基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%86%B2%E6%BF%80%E5%87%BD%E6%95%B0"><span class="toc-text">2.冲激函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-text">连续傅里叶变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF"><span class="toc-text">卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%A0%B7%E5%87%BD%E6%95%B0"><span class="toc-text">取样函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-text">离散傅里叶变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-text">互相关函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-text">自相关函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-text">2.线性代数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="toc-text">矩阵范数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E9%80%86%E7%9F%A9%E9%98%B5"><span class="toc-text">伪逆矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E8%A7%A3"><span class="toc-text">线性方程组的最小二乘解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">3.数字图像基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A9%E8%89%B2%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-text">彩色图像编码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="toc-text">色彩三要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">图像的属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">4.基于深度学习的图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">图像数据预处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%9B%B8%E6%9C%BA%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-text">5.相机基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ISO%E6%84%9F%E5%85%89%E5%BA%A6"><span class="toc-text">ISO感光度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0"><span class="toc-text">噪声</span></a></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>26</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>3</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">数字图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%91%E7%8E%87%E5%88%86%E6%9E%90"><span class="toc-text">1.频率分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">1.基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%86%B2%E6%BF%80%E5%87%BD%E6%95%B0"><span class="toc-text">2.冲激函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-text">连续傅里叶变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF"><span class="toc-text">卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%A0%B7%E5%87%BD%E6%95%B0"><span class="toc-text">取样函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-text">离散傅里叶变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-text">互相关函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-text">自相关函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-text">2.线性代数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="toc-text">矩阵范数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E9%80%86%E7%9F%A9%E9%98%B5"><span class="toc-text">伪逆矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E8%A7%A3"><span class="toc-text">线性方程组的最小二乘解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">3.数字图像基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A9%E8%89%B2%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-text">彩色图像编码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="toc-text">色彩三要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">图像的属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">4.基于深度学习的图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">图像数据预处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%9B%B8%E6%9C%BA%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-text">5.相机基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ISO%E6%84%9F%E5%85%89%E5%BA%A6"><span class="toc-text">ISO感光度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0"><span class="toc-text">噪声</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\Programming" title="Programming"><div class="tags-list-item">Programming</div></a>
+    
+    <a href="\tags\Deep learning, Programming" title="Deep learning, Programming"><div class="tags-list-item">Deep learning, Programming</div></a>
+    
+    <a href="\tags\Computer vision" title="Computer vision"><div class="tags-list-item">Computer vision</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">数字图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%91%E7%8E%87%E5%88%86%E6%9E%90"><span class="toc-text">1.频率分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">1.基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%86%B2%E6%BF%80%E5%87%BD%E6%95%B0"><span class="toc-text">2.冲激函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-text">连续傅里叶变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF"><span class="toc-text">卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%A0%B7%E5%87%BD%E6%95%B0"><span class="toc-text">取样函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-text">离散傅里叶变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-text">互相关函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-text">自相关函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="toc-text">2.线性代数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="toc-text">矩阵范数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E9%80%86%E7%9F%A9%E9%98%B5"><span class="toc-text">伪逆矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E8%A7%A3"><span class="toc-text">线性方程组的最小二乘解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">3.数字图像基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A9%E8%89%B2%E5%9B%BE%E5%83%8F%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-text">彩色图像编码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%89%B2%E5%BD%A9%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="toc-text">色彩三要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">图像的属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86"><span class="toc-text">4.基于深度学习的图像处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">图像数据预处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%9B%B8%E6%9C%BA%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-text">5.相机基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ISO%E6%84%9F%E5%85%89%E5%BA%A6"><span class="toc-text">ISO感光度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0"><span class="toc-text">噪声</span></a></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/Linux命令大全/"><div class="recent-posts-item-content">linux_manual.md</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/image_processing/"><div class="recent-posts-item-content">image_processing.md</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/python_manual/"><div class="recent-posts-item-content">python_manual.md</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/pytorch_manual/"><div class="recent-posts-item-content">pytorch_manual.md</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/Kaze.png">
+  <title>theme-kaze demo</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/Kaze.png">
+      
+      <span class="navbar-logo-dsc">theme-kaze demo</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      python_manual.md
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-02-20T03:36:59.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-02-20</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>9.3k words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Programming/" class="post-meta-link">Programming</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>[TOC]</p>
+<h2 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1.基本用法"></a>1.基本用法</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p><em><strong>数字(number)</strong></em></p>
+<ul>
+<li>用科学计数法给一个对象赋以常数值时，默认数据类型为浮点数<em>float</em>. 比如<code>a=1e2 -&gt; a=100.0</code></li>
+</ul>
+<p><em><strong>字符串(string)</strong></em></p>
+<ul>
+<li><p><strong><code>Attributes</code></strong></p>
+</li>
+<li><p><strong><code>Methods</code></strong></p>
+<ul>
+<li><code>replace</code>*(oldstr, newstr[, max])*：将字符串中的所有old子串替换为new，如果指定了max参数，则最大替换次数不超过max。</li>
+<li><code>split</code>*(str)*：将字符串用分隔符str分割成若干子串，返回子串组成的列表</li>
+<li><code>re.split</code>*(str, srcstr)*：同样是分割字符串，但re模块中的split函数支持多个分隔符，只需在str中用’|’隔开即可，而python内置的split仅支持一个分隔符</li>
+<li><code>startswith</code><em>(str)</em>: Return True if <code>string</code>  starts with <code>str</code> else False.</li>
+<li><code>join</code><em>(seq)</em> : Concatenate strings in <em>seq</em> using <em>self</em>. e.g. <code>&#39;-&#39;.join(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;) = &#39;a-b-c&#39;</code></li>
+<li><code>operator&#39;[start:end:step]&#39;</code>: Return a subsequence. Be aware that <em>end</em>&gt;=0. For example, <code>s=abc</code>, then <code>s[2:-1:-1]</code> results in <code>cb</code>, not <code>cba</code>. If you want to get <code>cba</code>, use <code>s[2::-1]</code> instead.</li>
+</ul>
+</li>
+<li><p><strong><code>格式化</code></strong></p>
+<p>Python支持三种字符串格式化方法。</p>
+<ol>
+<li><code>%</code>操作符：<code>%</code>[name][width].[precision]typecode<code>，格式化字符串之后，用</code>%<code>引导的单个变量或者元组来依次给每个格式化字符赋值。</code></li>
+</ol>
+<ul>
+<li><p><code>(name)</code>为命名</p>
+</li>
+<li><p><code>flags</code>可以有<code>+</code>,<code>-</code>,<code>&#39; &#39;</code>或<code>0</code>。<code>+</code>表示右对齐。<code>-</code>表示左对齐。<code>&#39; &#39;</code>为一个空格，表示在正数的左侧填充一个空格，从而与负数对齐。<code>0</code>表示使用0填充。</p>
+</li>
+<li><p><code>width</code>表示显示宽度</p>
+</li>
+<li><p><code>precision</code>表示小数点后精度</p>
+</li>
+<li><p>示例：<code>print(&#39;%s, %.3f&#39; % (&#39;ahahha&#39;, 0.56923))</code> &gt;&gt;&gt; <code>ahahha, 0.569</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>  2.f-string：以 <code>f</code> 或 <code>F</code> 修饰符引领的字符串（<code>f&#39;xxx&#39;</code> 或 <code>F&#39;xxx&#39;</code>），以大括号 <code>&#123;&#125;</code> 标明被替换的字段</p>
+<p>  3.<code>format</code>()</p>
+<ul>
+<li><p><strong><code>正则表达式</code></strong></p>
+<ul>
+<li><p><strong>regular expression</strong>:</p>
+<p>A regular expression (or RE) specifies a set of strings that matches it. The characters in RE can be divided into 2 categories: normal characters and special characters. Some of the special characters are :</p>
+<ul>
+<li><code>&#39;.&#39;</code>: matches any character except a newline.</li>
+<li><code>&#39;^&#39;</code>: matches the start of the string.</li>
+<li><code>&#39;*&#39;</code>: match 0 or more repetitions of the preceding RE, as many repetitions as are possible.</li>
+<li><code>&#39;+&#39;</code>: match 1 or more repetitions of the preceding RE.</li>
+<li><code>&#39;?&#39;</code>: match 0 or 1 repetitions of the preceding RE</li>
+<li><code>&#39;\&#39;</code>: escapes special characters</li>
+<li><code>&#39;[]&#39;</code>: indicate a set of characters.</li>
+<li><code>&#39;|&#39;</code>: <code>A|B</code>, where A and B can be arbitrary REs, creates a regular expression that will match either A or B</li>
+</ul>
+</li>
+<li><p><strong>Python support for regular expression operations : module <code>re</code></strong></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://docs.python.org/2/library/re.html">https://docs.python.org/2/library/re.html</a></p>
+</li>
+<li><p><strong>Classes</strong></p>
+<ul>
+<li><p><code>MatchObject</code></p>
+<ul>
+<li><p><strong><code>Attributes</code></strong></p>
+</li>
+<li><p><strong><code>Methods</code></strong></p>
+<ul>
+<li><p><code>group</code>([<em>group1</em>, <em>…</em>])</p>
+<p>Returns one or more subgroups of the match. If there is a single argument, the result is a single string; if there are multiple arguments, the result is a tuple with one item per argument. Without arguments, <em>group1</em> defaults to zero (the whole match is returned).</p>
+</li>
+<li><p><code>start</code>([<em>group</em>])</p>
+<p>Return the indices of the start of the substring matched by <em>group</em></p>
+</li>
+<li><p><code>end</code>([<em>group</em>])</p>
+<p>Return the indices of the end of the substring matched by <em>group</em></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Functions</strong></p>
+<ul>
+<li><p><code>search</code>(<em>pattern</em>, <em>string</em>, <em>flags=0</em>)</p>
+<p>Scan through <em>string</em> looking for the first location where the regular expression <em>pattern</em> produces a match, and return a corresponding <a target="_blank" rel="noopener" href="https://docs.python.org/2/library/re.html#re.MatchObject"><code>MatchObject</code></a> instance. Return <code>None</code> if no position in the string matches the pattern</p>
+</li>
+<li><p><code>match</code>(<em>pattern</em>, <em>string</em>, <em>flags=0</em>)</p>
+<p>If zero or more characters at the <strong>beginning</strong> of <em>string</em> match the regular expression <em>pattern</em>, return a corresponding <a target="_blank" rel="noopener" href="https://docs.python.org/2/library/re.html#re.MatchObject"><code>MatchObject</code></a> instance. Return <code>None</code> if the string does not match the pattern</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><em><strong>列表(list)</strong></em></p>
+<p>与元组的区别在于，列表的值可以修改，元组不可以。</p>
+<ul>
+<li><code>&gt;/&lt;/==</code> : 比较两个列表的大小，方法是从第一个元素开始，依次比较相同位置上的元素大小，直到两个元素不同或者其中一个列表为空（此时非空的那个列表更大）</li>
+<li><code>in</code> / <code>not in</code>：用来判断一个元素是否存在于列表中</li>
+<li><code>index</code><em>(element)</em> -&gt; <em>int</em> : 用来查找特定元素在列表中第一次出现的位置</li>
+<li><code>pop</code><em>(index=-1)</em> -&gt; <em>object</em> : 删除列表的第<em>index</em>个元素并将其返回</li>
+<li><code>sort</code><em>(key=None, reverse=False)</em> -&gt; <em>None</em> : 对列表排序<ul>
+<li><em>key</em> : A function that map an element to its key. The sorting is based on the value of key.</li>
+<li><em>reverse</em> : True when sort in descending order.</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [(<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>), (<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>), (<span class="number">3</span>, <span class="string">&#x27;c&#x27;</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.sort(key=<span class="keyword">lambda</span> item:item[<span class="number">0</span>], reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[(<span class="number">3</span>, <span class="string">&#x27;c&#x27;</span>), (<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>), (<span class="number">1</span>, <span class="string">&#x27;a&#x27;</span>)]</span><br></pre>
+
+<ul>
+<li><code>[i:j]</code>:取出列表中下标为<code>[i, j-1]</code>的元素组成的列表。其中<code>i</code>和<code>j</code>可以是负值，表示倒数第…个元素。</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>:-<span class="number">2</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre>
+
+<ul>
+<li><p><code>*</code> : 将一个列表复制若干次来获得一个新链表</p>
+<p>但要注意，当列表的元素还是列表时，’*‘运算符进行的是<em><strong>浅复制</strong></em>，也就是只复制子列表的引用，复制出来的所有引用其实指向同一个列表。这意味着，如果修改其中一个引用，那么会影响其他的引用。</p>
+<pre class="highlight"><span class="line">  </span><br></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [[1,2], 1]*3<br>a<br>[[1, 2], 1, [1, 2], 1, [1, 2], 1]<br>a[0][0] = 0<br>a<br>[[0, 2], 1, [0, 2], 1, [0, 2], 1]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre class="highlight"><span class="line">  </span><br></pre></li>
+</ul>
+<p><em><strong>字典(dict)</strong></em>  <a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-dictionary-keys.html">参考网址</a></p>
+<ul>
+<li><strong><code>Attributes</code></strong></li>
+<li><strong><code>Methods</code></strong><ul>
+<li><code>keys</code>()：Returns a <code>dict_keys</code> object consists of all keys in <code>dict</code>.</li>
+<li><code>values</code><em>()</em>: Returns a <code>dict_values</code> object (a kind of list) consists of all values in <code>dict</code>.</li>
+<li><code>get</code><em>(key, default=None)</em>: If <em>key</em> exists, then return a reference to dict[<em>key</em>], otherwise <strong>return</strong> <em>default</em>.</li>
+<li><code>setdefault</code><em>(key, default=None)</em>: If <em>key</em> exists, then return a reference to dict[<em>key</em>], otherwise <strong>add a new element</strong> (<em>key, default</em>) to dict and return a reference to <em>default</em>.</li>
+<li><code>pop</code><em>(key)</em> : Remove an element.</li>
+<li><code>update</code><em>(new_dict)</em>: Update dict with <em>new_dict</em>. For each <code>(k, v)</code> in <em>new_dict</em>, if <code>k</code> is not in dict, then add <code>(k, v)</code> to dict; else change the value of <code>k</code> to <code>v</code>.</li>
+<li><code>items</code>() : Return a list of tuples representing each <code>(k, v)</code> pair in <em>dict</em>.</li>
+</ul>
+</li>
+<li><strong><code>Tips</code></strong><ul>
+<li>The <em>key</em> value in a dict could be a <em><strong>tuple</strong></em>, but could not be a <em><strong>list</strong></em>.</li>
+</ul>
+</li>
+</ul>
+<p><em><strong>默认字典(defaultdict)</strong></em></p>
+<ul>
+<li><code>defaultdict</code>类是Python内置字典<code>dict</code>类的子类，定义在<code>collections</code>模块中。它们的基本用法相似，不同的是，<code>defaultdict</code>类可以更方便地在访问不存在的元素时插入新元素并进行初始化。</li>
+<li><code>defaultdict</code><em>(default_factory)</em>: <code>defaultdict</code>类的构造函数，<em>default_factory</em>是默认的mapped value的类型，比如：<em>default_factory=int</em>意味着新元素会自动被初始化为0，<em>default_factory=list</em>意味着新元素会自动被初始化为空列表。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014755493/article/details/69812244"><em><strong>计数器(counter)</strong></em></a></p>
+<ul>
+<li><code>Counter</code>类是<code>collections</code>模块中定义的<code>dict</code>类的子类，用于对集合（如列表、字符串）中的元素进行计数。</li>
+</ul>
+<hr>
+<h3 id="进阶数据类型"><a href="#进阶数据类型" class="headerlink" title="进阶数据类型"></a>进阶数据类型</h3><p><strong>优先队列</strong> </p>
+<p>1.<code>queue</code> module -&gt; <code>class PriorityQueue()</code> </p>
+<ul>
+<li>Member attributes:<ul>
+<li><code>queue</code>: A list consisting all elements in the queue.</li>
+</ul>
+</li>
+<li>Member functions:<ul>
+<li><code>put</code><em>(e)</em></li>
+<li><code>get</code><em>()</em></li>
+</ul>
+</li>
+</ul>
+<p>2.<code>heapq</code> module -&gt; Provides functions that transfer a list into priority queue.<strong>比<code>PriorityQueue</code>更有效率。</strong><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/heapq.html">reference</a></p>
+<ul>
+<li>Functions:<ul>
+<li><code>heapq.heapify</code><em>(list)</em></li>
+<li><code>heapq.heappush</code><em>(heap, item)</em></li>
+<li><code>heapq.heappop</code><em>(heap)</em></li>
+</ul>
+</li>
+</ul>
+<p><strong>集合</strong></p>
+<ul>
+<li>Create a set: <code>s=set(value)</code>, where <em>value</em> can be a scalar, list, dict, etc.</li>
+<li>Member functions:<ul>
+<li><code>add</code><em>(value)</em></li>
+<li><code>remove</code><em>(value)</em></li>
+<li><code>operator:&#39;in&#39;</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>命名元组（相当于C/C++中的结构体）</strong></p>
+<ul>
+<li>Defined in <code>collections</code> module.</li>
+<li>Create a namedtuple class: <code>collections.namedtuple</code><em>(name: str, attribute_names: list)</em></li>
+</ul>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="comment"># create a namedtuple class &#x27;Student&#x27;</span></span><br><span class="line">Student = collections.namedtuple(<span class="string">&#x27;Student&#x27;</span>,[<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;age&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>])</span><br><span class="line"><span class="comment"># create an instance of Student</span></span><br><span class="line">stu = Student(name=<span class="string">&#x27;Zhang&#x27;</span>, age=<span class="number">23</span>, sex=<span class="string">&#x27;Unknown&#x27;</span>)</span><br><span class="line"><span class="comment"># refer to its attributes using &#x27;.&#x27; operator</span></span><br><span class="line"><span class="built_in">print</span>(stu.name)</span><br></pre>
+
+
+
+<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><blockquote>
+<p><code>sum</code><em>(iterable, start=0)</em> : 返回一个可迭代对象中所有元素的和+<em>start</em></p>
+</blockquote>
+<blockquote>
+<p><code>range</code><em>(start, end, step)</em> : 返回一个数字列表，该列表是从<em>start</em>开始，差为<em>step</em>，小于<em>end</em>的等差数列，注意<em>start, end, step</em>必须是整数。如果想要获取浮点数的等差数列，使用<code>numpy.arange</code><em>(start, end, step)</em>.</p>
+<p><code>sorted</code><em>(container, cmp/key)</em>: Sort all elements in container and returns the sorted <em><strong>list</strong></em>. If the elements are not single values but structures, this function will sort them by their first component by default. It can be applied to string by sorting all characters. <a target="_blank" rel="noopener" href="https://blog.csdn.net/u013383813/article/details/82775211?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task">reference</a></p>
+<ul>
+<li><em>cmp</em> -&gt; <em>function</em> : Define how to compare two elements. It should receive 2 args <code>a</code> and <code>b</code>, and return <code>-1</code> when <code>a</code> is ahead of <code>b</code> logically, <code>1</code> otherwise.</li>
+<li><em>key</em> : This argument is the replacement in Python3 for <em>cmp</em> in Python2. We can use <code>functools</code> to convert a comparing function <code>cmp</code> into <em>key</em> by using <code>key=functools.cmp_to_key(cmp)</code>.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><code>open</code><em>(filename, mode=’r’)</em> : 读取一个文件，返回一个可操作的文件对象。文件的读取格式可以为 <code>&#39;r&#39;,&#39;w&#39;,&#39;w+&#39;</code>等等，默认打开方式为<code>&#39;r&#39;</code>.</p>
+</blockquote>
+<blockquote>
+<p><code>map</code><em>(function, iterable1[, iterable2, …])</em> : 对迭代器<em>iterable1,2,…<em>中的元素依次调用函数</em>function</em>，并返回由全部返回值组成的新列表</p>
+</blockquote>
+<blockquote>
+<p><code>functools.reduce</code><em>(function, iterable)</em> : 用传给<em>function</em>（有两个参数）先对<em>iterable</em>中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 <em>function</em> 函数运算，依次类推，返回最后的结果。如果元素个数小于2，返回1.</p>
+</blockquote>
+<blockquote>
+<p><code>eval</code><em>(str)</em> : <em>str</em>是某个对象<code>x</code>经过Python的标准输出函数<code>print(x)</code>打印出的字符串，<code>eval</code>*(str)*将返回<code>x</code>.</p>
+</blockquote>
+<h3 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h3><ul>
+<li><p><strong><code>def function_name(args)</code></strong></p>
+</li>
+<li><p><strong><code>lambda表达式</code></strong></p>
+<p>如果一个函数的功能比较简单，只需一行即可完成；或者一个功能只在局部使用，在其他地方不会调用，则可以将它写成<code>lambda</code>表达式，使代码更加简洁。用法为：<code>lambda args_list : return value</code>。举例如下：</p>
+</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func = <span class="keyword">lambda</span> x : x*<span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [func(x) <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>]</span><br></pre>
+
+
+
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><ul>
+<li><p><strong>global</strong>: 在<em><strong>Python2</strong></em>中，函数内部的赋值操作是独立的。假设在函数外有变量<code>a=2</code>，而在函数内要给<code>a</code>赋值为<code>1</code>，那么函数外的<code>a</code>和函数内的<code>a</code>是两个不同的名字，前者的值保持为<code>2</code>不变，后者在函数内的值为<code>1</code>，函数运行结束后即释放掉。要想使函数内的赋值操作能够修改函数外的名字的值，需要将函数外的值设为<code>global</code>. <em><strong>Python3</strong></em>中这个关键字好像失效了.</p>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line"><span class="meta">... </span>    a = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="comment"># change to global variable</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">global</span> a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">2</span></span><br></pre>
+
+<ul>
+<li><code>and,or</code> : 逻辑运算符。任何值（即使不是布尔变量）和<code>True</code>进行<code>and</code>操作，结果都是它自身。比如：<code>True and &#39;abc&#39;</code>的值为<code>&#39;abc&#39;</code>. 同理<code>False or &#39;abc&#39;</code>的值为<code>&#39;abc&#39;</code>。另外，两个非布尔变量进行<code>and</code>操作时会返回后者，进行<code>or</code>操作时则会返回前者，比如<code>&#39;a&#39; and &#39;b&#39;</code>的值为<code>&#39;b&#39;</code>，<code>&#39;a&#39; or &#39;b&#39;</code>的值为<code>&#39;a&#39;</code>。</li>
+<li><code>x and a or b</code> : <code>x</code>是一个布尔值，当<code>x=True</code>时，此式的值为<code>a</code>；当<code>x=False</code>时，此式的值为<code>b</code>，因此它的相当于c++中的问号表达式。其原理是：当<code>x=True</code>时，<code>x and a = a</code>，而<code>a or b = a</code>（<strong>当<code>a</code>和<code>b</code>都不是逻辑假<code>False</code>或0时</strong>），当<code>x=False</code>时，<code>x and a = False</code>，而<code>False or b = b</code>. <strong>注意：如果<code>a</code>是逻辑假<code>False</code>或者0，则不能用这种表达式，因此时<code>a or b = b</code>.</strong></li>
+<li><code>is/is not</code> : 判断两个名字是否指向同一个对象（即对象的内存地址是否相同）。注意区分它和<code>==/!=</code>操作符。</li>
+</ul>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><ul>
+<li><p>无穷大：<code>float(&#39;inf&#39;)</code></p>
+</li>
+<li><p>非数字：<code>float(&#39;nan&#39;)</code></p>
+</li>
+<li><p>注意：无穷大可以与无穷大进行比较，但不能与有限数字比较，而非数字不可以与任何数字比较。</p>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">inf</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a == <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a &gt; <span class="number">0</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a == <span class="built_in">float</span>(<span class="string">&#x27;nan&#x27;</span>)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a == <span class="string">&#x27;nan&#x27;</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br></pre></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-Numpy"><a href="#2-Numpy" class="headerlink" title="2.Numpy"></a>2.Numpy</h2><p><code>NumPy</code>(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库。</p>
+<hr>
+<h3 id="张量"><a href="#张量" class="headerlink" title="张量"></a>张量</h3><p>NumPy将张量及其操作包装在<code>numpy.ndarray</code>对象中。</p>
+<p><strong><code>创建张量</code></strong></p>
+<p>numpy提供了很多种方式，供用户来创建新的<code>numpy.array</code>对象。</p>
+<ul>
+<li><p><code>np.array</code><em>(data, dtype)</em> -&gt; ndarray</p>
+<p>Transform existing data into a ndarray.</p>
+<p><strong><code>Parameters</code></strong></p>
+<ul>
+<li><strong>data</strong>: list, tuple, PIL.Image, etc</li>
+</ul>
+</li>
+<li><p><code>zeros</code><em>(size, dtype)</em> -&gt; ndarray</p>
+</li>
+<li><p><code>arange</code><em>([start=0,]stop[,step=1,dtype])</em></p>
+<p>Returns an array, whose elements are sampled in [<code>start</code>, <code>end</code>) with <code>step</code>.</p>
+</li>
+</ul>
+<p><em><strong><code>class numpy.ndarray</code></strong></em></p>
+<p><strong><code>Parameters</code></strong></p>
+<ul>
+<li><code>size</code>: int -&gt; number of elements in array</li>
+<li><code>shape</code>: list of int -&gt; lengths of all dimensions</li>
+<li><code>dtype</code> : dtype object -&gt; Data-type of the array’s elements.</li>
+</ul>
+<p><strong><code>Methods</code></strong></p>
+<ul>
+<li><code>reshape</code><em>(size)</em> -&gt; <em>numpy.ndarray</em> : Return an reshaped array of <code>size</code> (not in-place). </li>
+<li><code>astype</code><em>(dtype)</em> -&gt; <em>numpy.ndarray</em> : Return an array of <code>dtype</code> (not in-place). </li>
+<li><code>dot</code><em>(x)</em> -&gt; <em>numpy.ndarray</em> : Return the <strong>matrix multiplication</strong> with <em>x</em>.</li>
+<li><code>operator&#39;*&#39;</code><em>(x)</em> -&gt; <em>numpy.ndarray</em> : Return the <strong>element-wise multiplication</strong> with <em>x</em>.</li>
+</ul>
+<hr>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p><strong><code>数值运算</code></strong></p>
+<ul>
+<li><p><code>floor</code><em>(num)</em></p>
+</li>
+<li><p><code>ceil</code><em>(num)</em></p>
+</li>
+<li><p><code>sin, cos, tan, arcsin, arccos, arctan</code><em>(array)</em></p>
+<p><strong><code>Parameters</code></strong></p>
+<ul>
+<li><strong>array</strong>: an array of angles in the form of radian, nor degree.</li>
+</ul>
+</li>
+<li><p><code>isnan</code><em>(array)</em></p>
+</li>
+</ul>
+<p><strong><code>随机数</code></strong></p>
+<p>NumPy中所有用于生成随机数和随机排列的方法都定义在其<code>random</code>模块中。</p>
+<ul>
+<li><p><code>rand</code><em>(shape)</em> -&gt; ndarray</p>
+<p>Return an array in <code>shape</code> whose elements are <strong>uniformly sampled</strong> from [0,1].</p>
+</li>
+<li><p><code>randn</code><em>(shape)</em> -&gt; ndarray</p>
+<p>Return an array in <code>shape</code> whose elements are <strong>sampled from standard normal distribution</strong>.</p>
+</li>
+<li><p><code>randint</code><em>(min, max, shape)</em> -&gt; ndarray</p>
+<p>Return an array in <code>shape</code> whose elements are integers <strong>uniformly sampled</strong> from [<code>min</code>,<code>max</code>].</p>
+</li>
+<li><p><code>shuffle</code><em>(array)</em> -&gt; None</p>
+<p>Shuffle the given array (in-place).</p>
+</li>
+<li><p><code>permutation</code><em>(array)</em> -&gt; ndarray</p>
+<p>Return an random permutation of <code>array</code>(not in-place).</p>
+</li>
+</ul>
+<p><strong><code>元素操作</code></strong></p>
+<ul>
+<li><p><code>np.unique</code><em>(array[, axis])</em> -&gt; 1-d ndarray</p>
+<p>Return an 1-d array that consists of all unique elements in <code>array</code>.</p>
+</li>
+<li><p><code>np.clip</code><em>(array, min, max)</em> -&gt; ndarray</p>
+<p>Clip all elements in <code>array</code> into [<code>min</code>, <code>max</code>] (not in-place).</p>
+</li>
+<li><p><code>np.argmax</code><em>(array, axis=None)</em></p>
+</li>
+<li><p><code>np.argsort</code><em>(array)</em></p>
+</li>
+</ul>
+<p><strong><code>维度操作</code></strong></p>
+<ul>
+<li><p><code>np.stack</code><em>(list, axis=0)</em></p>
+<p>Stack all arrays in list together on the new dimension <code>axis</code>.</p>
+</li>
+<li><p><code>np.concatenate</code><em>(list, axis=0)</em></p>
+<p>Concatenate all arrays in list together on dimension <code>axis</code>.</p>
+</li>
+<li><p><code>array=array[:, None]</code></p>
+<p>Add a new dimension at last with length=1.</p>
+</li>
+</ul>
+<p><strong><code>常数</code></strong></p>
+<ul>
+<li><code>np.inf</code>: IEEE 754 floating point representation of (positive) infinity.</li>
+<li><code>np.pi</code></li>
+<li><code>np.nan</code></li>
+</ul>
+<h2 id="3-PIL"><a href="#3-PIL" class="headerlink" title="3.PIL"></a>3.PIL</h2><hr>
+<p><strong>简介</strong></p>
+<p><code>PIL</code>全称Python Image Library，是一个用于处理图像数据的Python第三方库。</p>
+<hr>
+<p><strong>安装</strong></p>
+<p>由于PIL更新维护较慢，因此通常使用它的替代品<code>Pillow</code>。这个库的更新维护比较活跃，而且兼容了PIL的绝大部分语法和API。</p>
+<pre class="highlight"><span class="line">pip install pillow</span><br></pre>
+
+<p>安装完成后，在Python命令行中输入以下命令来检查是否已成功安装。</p>
+<pre class="highlight"><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br></pre>
+
+<hr>
+<p><strong>使用</strong></p>
+<h3 id="PIL-Image"><a href="#PIL-Image" class="headerlink" title="PIL.Image"></a>PIL.Image</h3><p><code>PIL</code>使用<code>Image</code>类来封装图片对象及其操作，这个类定义在<code>Image</code>模块中。</p>
+<p><strong><code>创建图片对象</code></strong></p>
+<pre class="highlight"><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="comment"># 1.打开图片文件并返回图片对象</span></span><br><span class="line">img1 = Image.<span class="built_in">open</span>(<span class="string">&quot;img1.jpg&quot;</span>)</span><br><span class="line"><span class="comment"># 2.创建一个新的图片对象，其模式为RGB，宽和长分别为(720, 480)</span></span><br><span class="line">img2 = Image.new(<span class="string">&quot;RGB&quot;</span>, (<span class="number">720</span>, <span class="number">480</span>))</span><br><span class="line"><span class="comment"># 3.从numpy数组中创建一个图片对象, 数组三维分别为(h, w, c)</span></span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line">a = numpy.array(<span class="number">10</span>, <span class="number">10</span>, <span class="number">3</span>)</span><br><span class="line">img3 = Image.fromarray(a)</span><br></pre>
+
+<p><a target="_blank" rel="noopener" href="http://effbot.org/imagingbook/image.htm"><em><strong><code>class Image</code></strong></em></a> </p>
+<ul>
+<li><strong><code>Attributes</code></strong><ul>
+<li><code>size</code>：二元tuple，代表图片的宽和长</li>
+<li><code>mode</code>：字符串，代表图片的模式，如”RGB”等</li>
+<li><code>format</code>：字符串，该对象来源的图片文件的格式，如”PNG”, “JPG”等</li>
+</ul>
+</li>
+<li><strong><code>Functions</code></strong></li>
+</ul>
+<blockquote>
+<p><code>thumbnail</code><em>(size)</em> -&gt; <em>Image</em></p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="comment"># thumbnail():参数为一个表示缩略后图像大小的tuple，返回缩略后的图片对象</span></span><br><span class="line">img1.thumbnail((<span class="number">360</span>, <span class="number">240</span>))</span><br></pre>
+
+<blockquote>
+<p><code>paste</code><em>(img, location)</em></p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="comment"># paste():参数为待粘贴过来的图片对象，以及一个tuple，用来表示粘贴位置</span></span><br><span class="line"><span class="comment"># 二元tuple：粘贴位置的左上角坐标</span></span><br><span class="line"><span class="comment"># 四元tuple：粘贴位置的左上角及右下角坐标</span></span><br><span class="line"><span class="comment"># 以下两条语句等效，都是将img1(360*240)粘贴到img2的左上角</span></span><br><span class="line">img2.paste(img1, (<span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">img2.paste(img, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">360</span>, <span class="number">240</span>))</span><br></pre>
+
+<blockquote>
+<p><code>save</code><em>(path)</em></p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="comment"># save():参数为保存图片文件的路径</span></span><br><span class="line">img2.save(<span class="string">&quot;img2.jpg&quot;</span>)</span><br></pre>
+
+<blockquote>
+<p><code>resize</code><em>(shape, resample=0)</em> -&gt; <em>Image</em> : Return a resized copy of this image. <strong>size</strong> – The requested size in pixels, as a 2-tuple: (width, height). <strong>resample</strong> – An optional resampling filter. This can be one of <code>PIL.Image.NEAREST</code> (use nearest neighbour), <code>PIL.Image.BILINEAR</code> (linear interpolation), <code>PIL.Image.BICUBIC</code> (cubic spline interpolation), or <code>PIL.Image.LANCZOS</code> (a high-quality downsampling filter). If omitted, or if the image has mode “1” or “P”, it is set <code>PIL.Image.NEAREST</code>.</p>
+</blockquote>
+<blockquote>
+<p><code>crop</code><em>(location : tuple)</em> -&gt; <em>Image</em></p>
+</blockquote>
+<pre class="highlight"><span class="line">img1.crop((x1, y1, x2, y2))</span><br></pre>
+
+<blockquote>
+<p><code>convert</code><em>(mode)</em> : Convert image to <code>mode</code>. </p>
+</blockquote>
+<h3 id="PIL-ImageEnhance"><a href="#PIL-ImageEnhance" class="headerlink" title="PIL.ImageEnhance"></a>PIL.ImageEnhance</h3><p><code>PIL.ImageEnhance</code>这个模块中定义了一些用于图像增强的类。它们都用一个<code>Image</code>类对象来进行初始化，并都定义了成员方法<code>enhance(factor)</code>用来进行增强操作，其中<code>factor</code>为图像增强因子，<code>factor=1</code>表示返回原图。</p>
+<p>该模块中包含的图像增强类有：</p>
+<ul>
+<li>**<code>Color</code>**：用于改变图像饱和度</li>
+<li>**<code>Brightness</code>**：用于改变图像亮度</li>
+<li>**<code>Contrast</code>**：用于改变图像对比度</li>
+<li>**<code>Sharpness</code>**：用于改变图像锐度</li>
+</ul>
+<p>使用示例如下：</p>
+<pre class="highlight"><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageEnhance</span><br><span class="line"><span class="comment"># Get a PIL Image object</span></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&quot;D:\\Code\\Python\\test\\img\\test02.jpg&quot;</span>)</span><br><span class="line"><span class="comment"># Get a color enhancer instance</span></span><br><span class="line">color_enhancer = ImageEnhance.Color(img)</span><br><span class="line"><span class="comment"># Enhance the image</span></span><br><span class="line">enhanced_img = color_enhancer.enhance(<span class="number">1.5</span>)</span><br></pre>
+
+<h2 id="4-文件处理"><a href="#4-文件处理" class="headerlink" title="4.文件处理"></a>4.文件处理</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><p><strong><code>Python内置</code></strong></p>
+<p>Python中的IO模块定义了File对象，它提供了对文件的数据及操作的封装。要对文件进行操作，需要先使用<code>open()</code>方法获取一个文件对象。</p>
+<ul>
+<li><code>open</code>(<em>file</em>, <em>mode=’r’</em>, <em>buffering=-1</em>, <em>encoding=None</em>, <em>errors=None</em>, <em>newline=None</em>, <em>closefd=True</em>, <em>opener=None</em>)<ul>
+<li><em>mode</em>: <em>str</em>, 打开模式，<code>w</code>表示只写，会创建一个新文件，如果原先存在同名文件，则会将原文件删除，注意写入的内容是先暂存入内存缓冲区的，直到关闭文件对象之后，才会写入到磁盘上；<code>r</code>表示只读，<code>w+</code>表示追加写</li>
+</ul>
+</li>
+</ul>
+<p><strong>文件对象的操作</strong></p>
+<ul>
+<li><code>writelines</code><em>(str)</em>: 向文件中写入字符流，参数可以是单个字符串，也可以是一个字符串列表，此时该列表中的字符串将被依次写到文件中，<em><strong>注意两个字符串之间没有分隔符，在每行写入一定数目的字符之后自动插入换行符。</strong></em></li>
+</ul>
+<p><strong><code>glob</code></strong></p>
+<ul>
+<li><code>glob</code><em>(path)</em> : return all files that matches the format string <em>path</em>.</li>
+</ul>
+<p><strong><code>shutil</code></strong></p>
+<ul>
+<li><code>copyfile</code><em>(src, dst)<em>：将文件从</em>src</em>复制到<em>dst</em></li>
+</ul>
+<p><strong><code>os</code></strong></p>
+<ul>
+<li><code>os.path.isdir</code><em>(path)</em> / <code>os.path.isfile</code>*(path)*：判断一个路径指向文件还是目录</li>
+<li><code>os.path.basename</code><em>(path)</em>: 返回路径中的最后一部分</li>
+<li><code>os.listdir</code>*(dir)*：列出一个目录下的所有文件，返回文件名列表。注意列出的顺序不一定是字典序（也就是在用户界面看到的顺序），因此有时要根据需求对结果进行排序</li>
+<li><code>os.path.expanduser</code>*(path)*：Replace the ‘~’ in <em>path</em> with user directory.</li>
+<li><code>os.walk</code><em>(dir)</em> -&gt; <em>list</em> : Recursively traverse all child dirs of <em>dir</em>, returns a list of tuples (root, dirs, files) with each tuple representing the (path, subdirs, subfiles) of one child dir.</li>
+</ul>
+<p>以下方法为Python&gt;=3.5</p>
+<ul>
+<li><code>os.scandir</code>(<em>path = ‘.’</em>): Get an iterator of <em>os.DirEntry</em> objects corresponding to the entries in the directory given by specified path.<ul>
+<li><em>path:</em> <em>A path-like object representing the file system path. This specify the directory to be scanned. If path     is not specified then current working directory is used as path. A path-like object is a string or bytes object which represents a path.</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="mat"><a href="#mat" class="headerlink" title=".mat"></a>.mat</h3><p>.mat文件是用于保存Matlab数据的文件格式。<code>scipy</code>库的<code>io</code>模块提供了对.mat文件进行操作的方法。</p>
+<p><strong>读取/保存mat文件</strong></p>
+<blockquote>
+<p><code>loadmat</code><em>(file_name)</em>: 读取mat文件，返回一个python字典对象</p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io</span><br><span class="line">data = io.loadmat(<span class="string">&quot;data.mat&quot;</span>)    <span class="comment"># data is a python dict</span></span><br></pre>
+
+<blockquote>
+<p><code>savemat</code><em>(file_name, data_dict)</em>: 将字典形式的数据<em>data_dict</em>保存为.mat文件</p>
+</blockquote>
+<p><strong>对mat文件的数据进行操作</strong></p>
+<blockquote>
+<p><code>keys</code><em>()</em>: 获取关键字列表</p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>data.keys()</span><br><span class="line">dict_keys([<span class="string">&#x27;__header__&#x27;</span>, <span class="string">&#x27;__version__&#x27;</span>, <span class="string">&#x27;__globals__&#x27;</span>, <span class="string">&#x27;GTinst&#x27;</span>])</span><br></pre>
+
+<blockquote>
+<p><code>values</code><em>()</em>: 获取值列表</p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>data.values()</span><br><span class="line">dict_values([<span class="string">b&#x27;MATLAB 5.0 MAT-file, Platform: GLNXA64, Created on: Sun Jan  8 03:40:17 2012&#x27;</span>, <span class="string">&#x27;1.0&#x27;</span>, [], array([[(array([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, ..., <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, ..., <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, ..., <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       ...,</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, ..., <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, ..., <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, ..., <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]], dtype=uint8), array([[&lt;375x500 sparse matrix of <span class="built_in">type</span> <span class="string">&#x27;&lt;class &#x27;</span>numpy.uint8<span class="string">&#x27;&gt;&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> <span class="number">1334</span> stored elements <span class="keyword">in</span> Compressed Sparse Column <span class="built_in">format</span>&gt;]],</span><br><span class="line">      dtype=<span class="built_in">object</span>), array([[<span class="number">20</span>]], dtype=uint8))]],</span><br><span class="line">      dtype=[(<span class="string">&#x27;Segmentation&#x27;</span>, <span class="string">&#x27;O&#x27;</span>), (<span class="string">&#x27;Boundaries&#x27;</span>, <span class="string">&#x27;O&#x27;</span>), (<span class="string">&#x27;Categories&#x27;</span>, <span class="string">&#x27;O&#x27;</span>)])])</span><br></pre>
+
+<blockquote>
+<p>访问.mat文件的某一字段值</p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="string">&#x27;__version__&#x27;</span>]</span><br><span class="line"><span class="number">1.0</span></span><br></pre>
+
+<blockquote>
+<p>读取.mat中的结构体：</p>
+<p>.mat中的有些数据会以结构体的格式存储。<code>scipy</code>在读取它时，会将它以Numpy结构化数组的形式读出，对于结构体中的每一字段，可以用类似字典的方式访问，读出的值为一个Numpy数组。</p>
+<p>注意结构体默认以1*1的<code>ndarray</code>格式存储，因此要访问一个结构体<code>struct</code>的值，实际上访问的是<code>struct[0, 0]</code>。</p>
+<p>例如上例中，<code>&quot;GTinst&quot;</code>字段的值就是一个结构体。如果直接输出它的<code>shape</code>，会发现是1*1。要访问它的值，应该用<code>GTinst[0, 0]</code>。而结构体重每个字段的名称，存储在这个Numpy结构化数组的<code>dtype</code>中。</p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="string">&#x27;GTinst&#x27;</span>].shape</span><br><span class="line">(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="string">&#x27;GTinst&#x27;</span>][<span class="number">0</span>, <span class="number">0</span>][<span class="string">&#x27;Categories&#x27;</span>]</span><br><span class="line">array(<span class="number">20</span>)</span><br></pre>
+
+<h3 id="csv"><a href="#csv" class="headerlink" title=".csv"></a>.csv</h3><p><code>pandas</code>库提供了二维表格数据进行操作的方法。它用<code>DataFrame</code>类来封装表格数据，实现对表格数据的访问和修改等操作。表格数据可以以<code>.csv</code>文件格式存储，也可能是以列表或NumPy数组的形式，它们都可以用<code>pandas</code>中的方法转换为<code>DataFrame</code>。</p>
+<p><strong>导入模块</strong></p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre>
+
+<p><strong>创建DataFrame</strong></p>
+<ul>
+<li>从<code>.csv</code>文件中读取</li>
+</ul>
+<blockquote>
+<p><code>read_csv</code><em>(filename)</em> -&gt; return a DataFrame</p>
+</blockquote>
+<pre class="highlight"><span class="line">data = pd.read_csv(&#x27;data.csv&#x27;)</span><br></pre>
+
+<ul>
+<li>从Python List或者NumPy array中读取</li>
+</ul>
+<blockquote>
+<p><code>panda.DataFrame</code><em>(data={col1_name:col1_data[, …]})</em> -&gt; return a DataFrame</p>
+</blockquote>
+<p><strong>DataFrame的数据和操作</strong></p>
+<ul>
+<li>Attributes:</li>
+</ul>
+<blockquote>
+<p><code>values</code> -&gt; get the value of DataFrame (a 2d array)</p>
+</blockquote>
+<pre class="highlight"><span class="line">matrix = data.values</span><br></pre>
+
+<ul>
+<li>Functions:</li>
+</ul>
+<blockquote>
+<p><code>pop</code><em>(column_name)</em> -&gt; return specified column and remove it from Dataframe</p>
+</blockquote>
+<pre class="highlight"><span class="line">labels = data.pop(<span class="string">&#x27;labels&#x27;</span>)</span><br></pre>
+
+<h3 id="xml"><a href="#xml" class="headerlink" title=".xml"></a><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-xml.html">.xml</a></h3><p><code>XML</code>即可扩展标记语言，它使用一组层层嵌套的标签来表示结构化的数据。在Python中，解析<code>XML</code>文件有三种方法：<code>SAX, DOM, ElementTree</code>.</p>
+<ol>
+<li><code>SAX</code> : 基于事件驱动的动态解析方法。它由一个解析器和一个事件处理器组成，解析器负责流式读取文件并提取出开始标签、结束标签、内容等<strong>“事件”</strong>，并将事件抛给事件处理器来处理。优势：由于是边读取边处理，因此不用一开始就将整个数据读进内存，比较节省内存空间。劣势：API不太友好。</li>
+<li><code>DOM</code> :  基于元素树的静态解析方法。它首先读取整个<code>XML</code>文件，并将其以元素树的形式保存在内存中，然后用户可以对数据进行查询和修改。优势：API比较便于使用。劣势：占用较多内存。</li>
+<li><code>ElementTree</code> : 暂略。</li>
+</ol>
+<p>使用<code>DOM</code>解析<code>XML</code>文件的步骤：</p>
+<ol>
+<li><p>导入<code>DOM</code>模块：<code>import xml.dom.minidom</code></p>
+</li>
+<li><p>读取<code>XML</code>文件，获取元素树：<code>DOMTree = xml.dom.minidom.parse(&quot;xxx.xml&quot;)</code></p>
+</li>
+<li><p>对元素进行操作：</p>
+<ul>
+<li>获取元素树的根元素：<code>collection = DOMTree.documentElement</code></li>
+<li>查看元素是否有某个属性：<code>e.hasAttribute</code><em>(attribute: str)</em> -&gt; <em>bool</em></li>
+<li>获取元素某属性的值：<code>e.getAttribute</code><em>(attribute: str)</em></li>
+<li>获取所有标签等于特定值的子元素：<code>e.getElementsByTagName</code><em>(tag: str)</em> -&gt; <em>list</em></li>
+<li>获取所有标签等于特定值的子元素：<code>e.childNodes</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="json"><a href="#json" class="headerlink" title=".json"></a>.json</h3><p>使用<code>json</code>模块来处理json格式的数据</p>
+<ul>
+<li><code>dumps</code><em>(data)</em> -&gt; <em>str</em> : encode <em>data</em> into json string.</li>
+<li><code>loads</code><em>(json_str)</em> : decode <em>json_str</em> into Python object.</li>
+<li><code>dump</code><em>(data, f)</em> : encode <em>data</em> into json string and write to <em>f</em></li>
+<li><code>load</code><em>(f)</em> : load <em>json_str</em> from <em>f</em> and decode it into Python object.</li>
+</ul>
+<h2 id="5-导入模块"><a href="#5-导入模块" class="headerlink" title="5.导入模块"></a>5.导入模块</h2><p>Python解释器在识别import语句时，会首先在当前目录中寻找要导入的模块，如果没有，再在系统路径中寻找，如果再找不到就会报错。</p>
+<p><strong>注意：</strong>当前目录是指你运行程序时所处的目录，而不是你运行的模块所在的目录，比如你当前位于dir目录下，并在命令行中执行：</p>
+<pre class="highlight"><span class="line">user@dir &gt;&gt; python a/b.py</span><br></pre>
+
+<p>此时，当前目录为dir而不是a。</p>
+<p>导入模块的方法如下：</p>
+<h3 id="同级模块"><a href="#同级模块" class="headerlink" title="同级模块"></a>同级模块</h3><pre class="highlight"><span class="line">import xxx</span><br></pre>
+
+<h3 id="第三方库"><a href="#第三方库" class="headerlink" title="第三方库"></a>第三方库</h3><p>注意要事先确保第三方库已安装，且其路径已加入到系统路径之中。</p>
+<pre class="highlight"><span class="line">import xxx</span><br></pre>
+
+<h3 id="下级模块"><a href="#下级模块" class="headerlink" title="下级模块"></a>下级模块</h3><p>假设要导入的模块为当前路径/a/b/c.py，则导入语法为：</p>
+<pre class="highlight"><span class="line">from a.b import c</span><br></pre>
+
+<p>注意目录a/b下必须有一个<code>__init__.py</code>文件（可以为空文件）。</p>
+<h3 id="上级模块"><a href="#上级模块" class="headerlink" title="上级模块"></a>上级模块</h3><p>假设要导入的模块为../a/b.py，则首先要将上级目录添加至系统路径中，这样解释器才能找到上级目录中的模块。语法为：</p>
+<pre class="highlight"><span class="line">import sys</span><br><span class="line"># 将上级目录添加至系统路径中</span><br><span class="line">sys.path.append(&#x27;..&#x27;)</span><br><span class="line"># 导入上级模块</span><br><span class="line">from a import b</span><br></pre>
+
+<p>同样要注意目录a下必须有一个<code>__init__.py</code>文件（可以为空文件）。</p>
+<h2 id="6-Python包管理工具：Anaconda"><a href="#6-Python包管理工具：Anaconda" class="headerlink" title="6.Python包管理工具：Anaconda"></a>6.Python包管理工具：Anaconda</h2><h3 id="一些错误"><a href="#一些错误" class="headerlink" title="一些错误"></a>一些错误</h3><p>1.最新版本的Conda（&gt;=4.7）在安装第三方模块时会出现很多奇怪的错误，把版本降到4.6就可以了。</p>
+<pre class="highlight"><span class="line">conda config --set allow_conda_downgrades true</span><br><span class="line">conda install conda=4.6.14</span><br></pre>
+
+<p>2.创建新的虚拟环境后，激活时遇到以下错误：</p>
+<pre class="highlight"><span class="line">CommandNotFoundError: Your shell has not been properly configured to use &#x27;conda activate&#x27;.</span><br></pre>
+
+<p>解决办法：依次输入以下命令：</p>
+<pre class="highlight"><span class="line">source activate  </span><br><span class="line">source deactivate  </span><br></pre>
+
+<p>就可以激活虚拟环境了。（原因不明……）</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>创建环境</p>
+<pre class="highlight"><span class="line">conda create -n env_name python=3.5 package1 package2 ...</span><br></pre>
+
+<p>激活环境</p>
+<pre class="highlight"><span class="line">conda activate env_name</span><br></pre>
+
+<p>关闭环境</p>
+<pre class="highlight"><span class="line">conda deactivate env_name</span><br></pre>
+
+<p>删除环境</p>
+<pre class="highlight"><span class="line">conda env remove -n env_name</span><br></pre>
+
+<p>列出所有环境</p>
+<pre class="highlight"><span class="line">conda env list</span><br></pre>
+
+
+
+<h2 id="7-动态创建实例"><a href="#7-动态创建实例" class="headerlink" title="7.动态创建实例"></a>7.动态创建实例</h2><p>如果创建实例时，类名要在运行时才会确定，此时就要采用动态创建实例的方法。</p>
+<pre class="highlight"><span class="line"># 类名运行时确定</span><br><span class="line">class_name = args.class_name</span><br><span class="line"># 根据类名动态创建实例</span><br><span class="line">ins = globals[class_name]()</span><br></pre>
+
+
+
+<h2 id="8-参数传递"><a href="#8-参数传递" class="headerlink" title="8.参数传递"></a>8.参数传递</h2><p><strong><code>Python参数传递原理</code></strong></p>
+<p>在Python中，一切皆对象，常数，列表，字典等都被作为对象处理。而要访问对象，则要通过该对象的一个引用。赋值操作符<code>var=obj</code>的含义，就是将对象<code>obj</code>与引用<code>var</code>绑定。</p>
+<p>例如，以下语句将引用<code>a</code>与对象<code>1</code>绑定，将引用<code>b</code>与对象<code>[]</code>绑定：</p>
+<pre class="highlight"><span class="line">a = <span class="number">1</span></span><br><span class="line">b = []</span><br></pre>
+
+<p>C++中给每一个变量都分配一块内存空间，修改一个变量的值，就是用新的值覆写这块内存空间。而Python是给每一个对象都分配一块内存空间。对引用进行赋值，其实是创建一个新对象，然后让这个引用指向新对象，并不会修改该引用本来指向的对象；而对引用进行修改操作，实际上是对引用所指向的对象进行修改，这会改变本来的对象。注意只能对可变对象（如列表，字典）进行修改，而不能对不可变对象（如常数，字符串）进行修改。</p>
+<p>在向函数传递参数时，本质上是进行浅拷贝，也就是将实参对象的引用赋值给形参。比如以下代码，将对象<code>1</code>的引用赋值给形参<code>arg</code>，这样在<code>test</code>函数内部，就可以用<code>arg</code>这个名字来访问对象<code>1</code>。在<code>test</code>函数内部执行<code>arg=2</code>，会创建一个新对象<code>2</code>，让<code>arg</code>这个引用指向新对象<code>2</code>，并不会更改原来的对象<code>1</code>，也不会更改引用<code>a</code>与对象<code>1</code>的绑定关系，所以再次访问<code>a</code>时，其值还是<code>1</code>：</p>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">arg</span>):</span><br><span class="line"><span class="meta">... </span>    arg = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    <span class="built_in">print</span>(arg)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test(a)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">1</span></span><br></pre>
+
+<p>而在函数中，可以通过形参来对它所指向的对象进行操作。以下代码中，<code>b</code>实参指向一个列表对象，在调用<code>test(b)</code>时，这个对象的名字被复制给了形参<code>arg</code>， 所以<code>arg</code>也指向该列表对象，通过<code>arg</code>对该列表进行的操作会直接更改该列表。</p>
+<pre class="highlight"><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">arg</span>):</span><br><span class="line"><span class="meta">... </span>    arg.append(<span class="number">1</span>)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = []</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>]</span><br></pre>
+
+<p>要想避免通过可变对象的新引用改变原对象的值，可以使用深拷贝来复制一个与原对象完全相同的对象，并让新引用指向该新对象。</p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">b = copy.deepcopy(a)</span><br><span class="line">b.append(<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(a) <span class="comment"># [1, 2, 3]</span></span><br></pre>
+
+<p><strong><code>Python命令行参数</code></strong></p>
+<p>获取Python脚本的命令行参数，有以下几种方式：</p>
+<ul>
+<li><code>sys.argv</code>, 这是参数列表，其中<code>sys.argv[0]</code>是脚本名，而<code>sys.argv[i]</code>是第i个参数。</li>
+<li><code>argparse</code></li>
+<li><code>getopt</code></li>
+</ul>
+<h2 id="9-机器学习相关第三方库"><a href="#9-机器学习相关第三方库" class="headerlink" title="9.机器学习相关第三方库"></a>9.机器学习相关第三方库</h2><h3 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h3><p><strong>sklearn.preprocessing</strong></p>
+<p>这个模块中提供了很多数据预处理的方法。</p>
+<p><code>class LabelEncoder</code>():这个类中包含了许多用于处理标签的方法.</p>
+<blockquote>
+<p><code>fit_transform</code>(labels-list or array of size(n))</p>
+<p>将标签向量labels进行正则化，即把所有出现过的label值（可以是数字，也可以是字符串），按照出现的先后次序，编码为<code>[0, n_classes-1]</code>这n个数字之一，其中<code>n_classes</code>是总的标签种数.</p>
+</blockquote>
+<pre class="highlight"><span class="line">&gt;&gt;&gt; from sklearn.preprocessing import LabelEncoder</span><br><span class="line">&gt;&gt;&gt; labels = [0,1,3,2,1,2,1,0]</span><br><span class="line">&gt;&gt;&gt; le = LabelEncoder()</span><br><span class="line">&gt;&gt;&gt; fitted_labels = le.fit_transform(labels)</span><br><span class="line">&gt;&gt;&gt; fitted_labels</span><br><span class="line">array([0, 1, 3, 2, 1, 2, 1, 0])</span><br><span class="line">&gt;&gt;&gt; labels = [0,1,3,8,1,2,1,9]</span><br><span class="line">&gt;&gt;&gt; fitted_labels = le.fit_transform(labels)</span><br><span class="line">&gt;&gt;&gt; fitted_labels</span><br><span class="line">array([0, 1, 3, 4, 1, 2, 1, 5])</span><br><span class="line">&gt;&gt;&gt; labels = [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;]</span><br><span class="line">&gt;&gt;&gt; fitted_labels = le.fit_transform(labels)</span><br><span class="line">&gt;&gt;&gt; fitted_labels</span><br><span class="line">array([0, 1, 2])</span><br></pre>
+
+<p><code>class OneHotEncoder</code>():这个类包含了将特征向量转换为one-hot向量的方法.</p>
+<blockquote>
+<p><code>fit_transform</code>()</p>
+<p><code>input</code>:features  -  array of size (n*m)</p>
+<p><code>output</code>:features - array of size (n*$\sum\limits_{i=1}^{m}a_i$)</p>
+<p>假设每个样本都用一个m维特征来表示，共有n个样本。此函数首先统计每个特征的无重复值的数目，假设第<code>i</code>维特征共有 $a_i$种不同的值，那么每个样本的第i维特征都能用一个 $a_i$维的one-hot向量来表示，将m个one-hot向量拼接起来，就得到了一个长度为 $\sum\limits_{i=1}^{m}a_i$ 的特征向量，这就是样本的0-1向量表示。因为这是一个稀疏矩阵，所以默认情况下，该矩阵以压缩矩阵的形式返回。要将它还原为普通矩阵形式，使用<code>todense()</code>方法。</p>
+</blockquote>
+<pre class="highlight"><span class="line">&gt;&gt;&gt; from sklearn.preprocessing import OneHotEncoder</span><br><span class="line">&gt;&gt;&gt; oe = OneHotEncoder()</span><br><span class="line">&gt;&gt;&gt; X = [[&#x27;a&#x27;,1],[&#x27;b&#x27;,2],[&#x27;b&#x27;,6],[&#x27;c&#x27;,4],[&#x27;d&#x27;,2]]</span><br><span class="line">&gt;&gt;&gt; fitted_X = oe.fit_transform(X)</span><br><span class="line">&gt;&gt;&gt; fitted_X.todense()</span><br><span class="line">matrix([[1., 0., 0., 0., 1., 0., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0., 0., 1., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0., 0., 0., 0., 1.],</span><br><span class="line">        [0., 0., 1., 0., 0., 0., 1., 0.],</span><br><span class="line">        [0., 0., 0., 1., 0., 1., 0., 0.]])</span><br></pre>
+
+<p><code>class StandardScaler</code>()这个类用于对数据进行归一化。</p>
+<blockquote>
+<p><code>fit_transform</code>(features)</p>
+<p>将所有样本进行归一化处理。计算每个特征的均值和方差，然后将所有特征值减掉均值再除以方差。</p>
+</blockquote>
+<h3 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h3><p><em>pandas</em> is an open source, BSD-licensed library providing high-performance, easy-to-use data structures and data analysis tools for the <a target="_blank" rel="noopener" href="https://www.python.org/">Python</a> programming language.</p>
+<p><a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html">https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html</a></p>
+<p><em><strong><code>Data structures</code></strong></em></p>
+<ul>
+<li><strong><code>Series</code></strong>: 1D labeled homogeneously-typed array</li>
+<li><strong><code>DataFrame</code></strong>: General 2D labeled, size-mutable tabular structure with potentially heterogeneously-typed column</li>
+</ul>
+<p><em><strong><code>DataFrame</code></strong></em></p>
+<ul>
+<li><strong><code>Create a DataFrame</code></strong><ul>
+<li><strong>create new dataframe</strong>: <code>pd.DataFrame</code><em>(data=None, index=None, columns=None, dtype=None)</em><ul>
+<li><strong>Paramaters</strong><ul>
+<li><code>data</code>: a 2-d data structure such as <code>ndarray, list or dict</code></li>
+<li><code>index</code>: the row labels</li>
+<li><code>columns</code>: the column labels</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>create from existing data</strong>: <code>pd.read_csv</code><em>(csv_file)</em></li>
+</ul>
+</li>
+<li><strong><code>Attributes</code></strong><ul>
+<li><code>index</code> : <em>List</em> -&gt; list of row names </li>
+<li><code>columns</code> : <em>List</em> -&gt; list of column names</li>
+<li><code>T</code>: <em>DataFrame</em> -&gt; transpose of the <code>DataFrame</code></li>
+</ul>
+</li>
+<li><strong><code>Methods</code></strong><ul>
+<li><em><strong>Be aware that most methods are not in-place. They return a copy of original <code>DataFrame</code>.</strong></em></li>
+<li><code>[&#39;column_name&#39;]</code>: <em>Series</em> -&gt; get a specific column</li>
+<li><code>[start:end]</code>: <em>DataFrame</em> -&gt; get rows in [start, end). <code>start</code> and <code>end</code> can be index or row name.</li>
+<li><code>[condition]</code>: <em>Series</em> -&gt; get values that meet <code>condition</code>.</li>
+<li><code>loc[slice, columns]</code>: get a cross section. <code>slice</code> and <code>columns</code> are labels.</li>
+<li><code>iloc[slice, columns]</code>: get a cross section. <code>slice</code> and <code>columns</code> are indexes.</li>
+<li><code>at[row, col]</code>: get a single value. <code>row</code> and <code>col</code> are labels.</li>
+<li><code>iat[row, col]</code>: get a single value. <code>row</code> and <code>col</code> are indexes.</li>
+<li><code>head</code><em>(num)</em>: <em>DataFrame</em> -&gt; view first <code>num</code> rows</li>
+<li><code>tail</code><em>(num)</em>: <em>DataFrame</em> -&gt; view last <code>num</code> rows</li>
+<li><code>to_numpy</code><em>()</em>: <em>Numpy array</em> -&gt; cast <code>DataFrame</code> to <code>ndarray</code></li>
+<li><code>describe</code><em>()</em>: shows a quick statistic summary of your data</li>
+<li><code>sort_values</code><em>(by)</em>: sort rows according to the value in column specified by <code>by</code>.</li>
+<li><code>copy</code><em>()</em>: get a copy of original <code>DataFrame</code></li>
+<li><code>isin</code><em>(values)</em>: True if a value is in <code>values</code>. Return a bool <code>DataFrame</code> that has same size with original <code>DataFrame</code>.</li>
+<li><code>to_csv</code><em>(csv_file, index=True)</em>: save as <code>.csv</code> file. <code>index</code>: whether save row names or not.</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-常见问题"><a href="#10-常见问题" class="headerlink" title="10.常见问题"></a>10.常见问题</h2><p><em><strong><code>scipy.misc</code> module has no attribute <code>imread</code></strong></em></p>
+<p><code>imread()</code> is deprecated in SciPy 1.0.0, and will be removed in 1.2.0. </p>
+<p>Anyway, try not to use this library.</p>
+<hr>
+<p><em><strong><code>imread()</code> and <code>imsave()</code> in <code>matplotlib.pyplot</code></strong></em></p>
+<p>Don’t use them, because there seems to be some bugs.</p>
+<p>Use <code>open()</code> and <code>save()</code> in <code>PIL.Image</code> module instead.</p>
+<hr>
+<p><em><strong>relative path</strong></em></p>
+<p>Python允许使用相对路径访问文件，格式为<code>./relative_path</code>。注意，此相对是相对于**<code>当前工作目录</code><strong>，即运行当前程序时所在的路径，而不是</strong><code>当前要执行的脚本文件所在的目录</code>**。</p>
+<hr>
+<p><em><strong>cannot import name ‘PILLOW_VERSION’ from ‘PIL’</strong></em></p>
+<p>This problem will appear in pillow&gt;=6.2. Downgrading pillow to 6.1 will solve this problem.</p>
+<h2 id="11-命名规范"><a href="#11-命名规范" class="headerlink" title="11.命名规范"></a>11.命名规范</h2><p><strong><code>下划线的含义</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>下划线种类</th>
+<th>示例</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单左侧下划线</td>
+<td>_var</td>
+<td>一种约定，表示仅在类或模块内部使用的变量和方法</td>
+</tr>
+<tr>
+<td>单右侧下划线</td>
+<td>var_</td>
+<td>一种约定，用于与Python中的保留字作区分</td>
+</tr>
+<tr>
+<td>双左侧下划线</td>
+<td>__var</td>
+<td>通过在一个类中的某个变量或方法名前加__，使得继承自该类的子类能够复用该名称。</td>
+</tr>
+<tr>
+<td>双两侧下划线</td>
+<td>__var</td>
+<td>通过在一个类中的某个变量或方法名前加__，使得继承自该类的子类能够复用该名称。</td>
+</tr>
+</tbody></table>
+<p><strong><code>双左侧下划线的原理</code></strong></p>
+<p>Python解释器会在有双左侧下划线的变量或方法名前自动加上类名，从而使子类中的该变量与父类的不会相互混淆。例如：</p>
+<pre class="highlight"><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>:</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="built_in">super</span>().__init__()</span><br><span class="line">       self.__baz = <span class="number">1</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">    	 <span class="comment"># 在类内，看到__baz这个名字时，解释器会自动将它替换为_Test__baz</span></span><br><span class="line">       <span class="comment"># 在类外则不会</span></span><br><span class="line">   		 <span class="built_in">print</span>(self.__baz)</span><br><span class="line">      </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = Test()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a.__baz)</span><br><span class="line">AttributeError: <span class="string">&quot;&#x27;Test&#x27; object has no attribute &#x27;__baz&#x27;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a._Test__baz)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.func()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExtendedTest</span>(<span class="title class_ inherited__">Test</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="built_in">super</span>().__init__()</span><br><span class="line">       self.__baz = <span class="number">2</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">func1</span>(<span class="params">self</span>):</span><br><span class="line">   		 <span class="built_in">print</span>(self.__baz)</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">func2</span>(<span class="params">self</span>):</span><br><span class="line">   		 <span class="built_in">print</span>(self._Test__baz)</span><br><span class="line">      </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = ExtendedTest()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b.__baz)</span><br><span class="line">AttributeError: <span class="string">&quot;&#x27;ExtendedTest&#x27; object has no attribute &#x27;__baz&#x27;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b._ExtendedTest__baz)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.func1()</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.func2()</span><br><span class="line"><span class="number">1</span></span><br></pre>
+
+<p><strong><code>一些Python中的特殊变量和方法</code></strong></p>
+<p><code>__init__</code>*(self, **args)*：初始化方法</p>
+<p><code>__call__</code>*(self, input)*：提供一个将对象当做方法调用的接口</p>
+<p><code>__name__</code>：类的名字</p>
+<p><code>__all__</code>：模块的一个属性，它是一个列表，定义了当有外部模块用通配符导入本模块时，实际导入的是哪些类和方法。</p>
+<h2 id="12-内存管理"><a href="#12-内存管理" class="headerlink" title="12.内存管理"></a>12.内存管理</h2><p>在Python中，一切皆对象。赋值表达式的本质，是将对象的内存地址赋值给一个名字。</p>
+<p>每个对象都有一块属于自己的内存，可以通过<code>id</code>*(object)*来查询对象的内存地址。</p>
+<p>Python中的对象可分为两大类：可变对象与不可变对象。</p>
+<ul>
+<li>可变对象：列表、字典、浮点数等等</li>
+<li>不可变对象：整数</li>
+</ul>
+<p>对于可变对象，Python编译器会记录当前指向每个对象的名字的个数。在用赋值表达式申请新对象时，首先会检查内存中有没有相同的对象，如果有且它的名字个数为0，那么就会将它与这个名字绑定起来，而不会重新分配一块内存；否则，重新分配一块内存。之所以这样做，是因为可变对象是可以通过名字修改的，如果有多个名字指向同一对象，那么会因修改和访问操作发生冲突。举例如下：</p>
+<pre class="highlight"><span class="line"><span class="comment"># 新对象[1]，其内存为4516712264，有一个名字a与之绑定</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(a)</span><br><span class="line"><span class="number">4516712264</span></span><br><span class="line"><span class="comment"># 新对象[2]，其内存为4869866824，a与它绑定的同时与对象[1]解绑，对象[1]现在没有名字</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(a)</span><br><span class="line"><span class="number">4869866824</span></span><br><span class="line"><span class="comment"># 申请新对象[1]时发现内存中已经有了该对象，而且没有名字，所以把a与它绑定</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(a)</span><br><span class="line"><span class="number">4516712264</span></span><br><span class="line"><span class="comment"># 申请新对象[1]时，尽管内存中已经有了该对象，但它已经有名字了，所以要新申请一块内存</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(b)</span><br><span class="line"><span class="number">4869866824</span></span><br><span class="line"><span class="comment"># 浅拷贝，此时没有申请新对象，而是让b和a指向的对象绑定</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(b)</span><br><span class="line"><span class="number">4516712264</span></span><br></pre>
+
+<p>对于不可变对象，因为它们是不可修改的，所以Python编译器允许多个名字指向同一个对象。举例如下：</p>
+<pre class="highlight"><span class="line"><span class="comment"># 申请新对象1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(a)</span><br><span class="line"><span class="number">4514305440</span></span><br><span class="line"><span class="comment"># b也指向1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(b)</span><br><span class="line"><span class="number">4514305440</span></span><br><span class="line"><span class="comment"># b改为指向2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">id</span>(b)</span><br><span class="line"><span class="number">4514305472</span></span><br></pre>
+
+<h2 id="13-异常处理"><a href="#13-异常处理" class="headerlink" title="13.异常处理"></a>13.<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-exceptions.html">异常处理</a></h2><p>Python程序在执行过程中，如果遭遇异常，则会抛出一个异常对象给上层程序去处理。默认情况下，异常会被抛给程序顶层，而默认的处理方法是打印错误信息并退出程序。</p>
+<p>有时我们希望出现异常时，不是直接退出，而是按照我们自定义的处理方式继续执行下去。这时就需要在程序中显式地捕获异常对象，并把它交给我们自己编写的程序来处理。这一点可以通过<code>try/expect/else</code>语句来实现。基本用法为：</p>
+<pre class="highlight"><span class="line"><span class="keyword">try</span>:</span><br><span class="line"><span class="comment"># 可能出现异常的语句</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line"><span class="comment"># 异常处理语句</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line"><span class="comment"># 无异常发生时执行，可以省略</span></span><br></pre>
+
+<p>有时我们希望对不同的异常分开处理，这样就需要在捕获异常时判断异常的种类。Python中所有异常对象都继承自一个共同父类<code>BaseException</code>.每一种异常都对应于该类的一个子类，比如<code>SystemExit</code>(解释器请求退出)、<code>KeyboardInterrupt</code>(用户中断执行)等等。可通过<code>try...except ExceptClassName...</code>语句来捕获并处理特定种类的异常。</p>
+<pre class="highlight"><span class="line"><span class="keyword">try</span>:</span><br><span class="line"><span class="comment"># 可能出现异常的语句</span></span><br><span class="line"><span class="keyword">except</span> Error1:</span><br><span class="line"><span class="comment"># 异常1处理语句</span></span><br><span class="line"><span class="keyword">except</span> Error2:</span><br><span class="line"><span class="comment"># 异常2处理语句</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line"><span class="comment"># 无异常发生时执行，可以省略  </span></span><br></pre>
+
+
+
+<h2 id="14-可视化"><a href="#14-可视化" class="headerlink" title="14.可视化"></a>14.可视化</h2><p>Python的<code>matplotlib</code>库提供了多种可视化工具，包括绘图、显示图像等等。</p>
+<p><strong>打开并显示图像</strong></p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt <span class="comment"># plt 用于显示图片</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mpimg <span class="comment"># mpimg 用于读取图片</span></span><br><span class="line">img = mpimg.imread(<span class="string">&#x27;x.jpg&#x27;</span>) <span class="comment"># 读取图像</span></span><br><span class="line">plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>) <span class="comment"># 显示图像为灰度图</span></span><br></pre>
+
+<h2 id="15-I-O"><a href="#15-I-O" class="headerlink" title="15.I/O"></a>15.I/O</h2><p>Python程序从标准输入流中读取数据，向标准输出流中输出数据，默认的标准输入/输出流都是控制台。通过<code>sys</code>模块可以访问标准输入/输出流对象。</p>
+<p>从标准输入流读入输入数据：</p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">instream = sys.stdin</span><br><span class="line">lines = instream.readlines() <span class="comment"># 一次读入所有输入数据</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:	<span class="comment"># 一行一行读取数据</span></span><br><span class="line">  <span class="keyword">try</span>:</span><br><span class="line">    line = <span class="built_in">input</span>()</span><br><span class="line">    ....</span><br><span class="line">  <span class="keyword">except</span>:</span><br><span class="line">    <span class="keyword">break</span></span><br></pre>
+
+<p>修改标准输入流，使其重定向至其他输入源：</p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">instream = sys.stdin</span><br><span class="line">sys.sdtin = <span class="built_in">open</span>(<span class="string">&#x27;input.txt&#x27;</span>)	<span class="comment"># 将标准输入流重定向到文件input.txt</span></span><br><span class="line">lines = instream.readlines() <span class="comment"># 从文件读入所有输入数据</span></span><br><span class="line">sys.stdin = instream	<span class="comment"># 恢复</span></span><br></pre>
+
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/about">theme-kaze</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://example.com/2022/02/20/python_manual/">http://example.com/2022/02/20/python_manual/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/02/20/image_processing/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">image_processing.md </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/02/20/pytorch_manual/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">pytorch_manual.md </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">1.基本用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">进阶数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Numpy"><span class="toc-text">2.Numpy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F"><span class="toc-text">张量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">常用函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PIL"><span class="toc-text">3.PIL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PIL-Image"><span class="toc-text">PIL.Image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PIL-ImageEnhance"><span class="toc-text">PIL.ImageEnhance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-text">4.文件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mat"><span class="toc-text">.mat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#csv"><span class="toc-text">.csv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xml"><span class="toc-text">.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json"><span class="toc-text">.json</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-text">5.导入模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">同级模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-text">第三方库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">下级模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">上级模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Python%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9AAnaconda"><span class="toc-text">6.Python包管理工具：Anaconda</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF"><span class="toc-text">一些错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B"><span class="toc-text">7.动态创建实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-text">8.参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-text">9.机器学习相关第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sklearn"><span class="toc-text">sklearn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">10.常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-text">11.命名规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-text">12.内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">13.异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-text">14.可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-I-O"><span class="toc-text">15.I&#x2F;O</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/Kaze.png" class="author-img">
+
+<p class="author-name">theme-kaze</p>
+<p class="author-description">designed by theme-kaze</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>26</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>3</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">1.基本用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">进阶数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Numpy"><span class="toc-text">2.Numpy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F"><span class="toc-text">张量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">常用函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PIL"><span class="toc-text">3.PIL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PIL-Image"><span class="toc-text">PIL.Image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PIL-ImageEnhance"><span class="toc-text">PIL.ImageEnhance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-text">4.文件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mat"><span class="toc-text">.mat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#csv"><span class="toc-text">.csv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xml"><span class="toc-text">.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json"><span class="toc-text">.json</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-text">5.导入模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">同级模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-text">第三方库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">下级模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">上级模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Python%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9AAnaconda"><span class="toc-text">6.Python包管理工具：Anaconda</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF"><span class="toc-text">一些错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B"><span class="toc-text">7.动态创建实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-text">8.参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-text">9.机器学习相关第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sklearn"><span class="toc-text">sklearn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">10.常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-text">11.命名规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-text">12.内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">13.异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-text">14.可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-I-O"><span class="toc-text">15.I&#x2F;O</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\Programming" title="Programming"><div class="tags-list-item">Programming</div></a>
+    
+    <a href="\tags\Deep learning, Programming" title="Deep learning, Programming"><div class="tags-list-item">Deep learning, Programming</div></a>
+    
+    <a href="\tags\Computer vision" title="Computer vision"><div class="tags-list-item">Computer vision</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">1.基本用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">进阶数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="toc-text">自定义函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Numpy"><span class="toc-text">2.Numpy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F"><span class="toc-text">张量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">常用函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PIL"><span class="toc-text">3.PIL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PIL-Image"><span class="toc-text">PIL.Image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PIL-ImageEnhance"><span class="toc-text">PIL.ImageEnhance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-text">4.文件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mat"><span class="toc-text">.mat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#csv"><span class="toc-text">.csv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xml"><span class="toc-text">.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#json"><span class="toc-text">.json</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-text">5.导入模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">同级模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-text">第三方库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">下级模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E7%BA%A7%E6%A8%A1%E5%9D%97"><span class="toc-text">上级模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Python%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9AAnaconda"><span class="toc-text">6.Python包管理工具：Anaconda</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF"><span class="toc-text">一些错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B"><span class="toc-text">7.动态创建实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-text">8.参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-text">9.机器学习相关第三方库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sklearn"><span class="toc-text">sklearn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">10.常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-text">11.命名规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-text">12.内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">13.异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-text">14.可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-I-O"><span class="toc-text">15.I&#x2F;O</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/Linux命令大全/"><div class="recent-posts-item-content">linux_manual.md</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/image_processing/"><div class="recent-posts-item-content">image_processing.md</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/python_manual/"><div class="recent-posts-item-content">python_manual.md</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-02-20</div>
+        <a href="/2022/02/20/pytorch_manual/"><div class="recent-posts-item-content">pytorch_manual.md</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">theme-kaze demo </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
